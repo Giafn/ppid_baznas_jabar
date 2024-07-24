@@ -2,7 +2,7 @@
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="/">
         <img class="navbar-brand" src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="60">
-        <h4 class="fw-bolder text-green-primary d-md-block d-none ms-1">
+        <h4 class="fw-bolder text-green-primary d-sm-block d-none ms-1">
             PPID BAZNAS JABAR
         </h4>
       </a>
