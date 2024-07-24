@@ -1,10 +1,6 @@
 @extends('layouts.guest')
 
 @section('content')
-{{-- buat agar gambar full dan maximal tinggo 400 px overflow hide dan gambarnya di tengah dan mengcover --}}
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-green-primary">
-  </div>
-
 <div class="container my-3 w-100">
     <div class="row justify-content-center my-5 px-2">
         <div class="col-md-10">

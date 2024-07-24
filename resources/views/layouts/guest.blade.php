@@ -58,6 +58,11 @@
             height: 300px !important;
             border-radius: 10px;
         }
+
+        /* set zoom page */
+        body {
+            zoom: 120%;
+        }
     </style>
     @stack('css')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
