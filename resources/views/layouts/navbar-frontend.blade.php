@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md shadow fixed-top px-3 bg-white">
+<nav class="navbar navbar-expand-xl shadow fixed-top px-3 bg-white">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="/">
         <img class="navbar-brand" src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="60">
