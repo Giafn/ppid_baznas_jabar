@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-xl shadow fixed-top px-3 bg-white">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="/">
-        <img class="navbar-brand" src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" height="60">
+        <img class="navbar-brand" src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" style="height: 50px;">
         <h4 class="fw-bolder text-green-primary d-sm-block d-none ms-1">
             PPID BAZNAS JABAR
         </h4>
