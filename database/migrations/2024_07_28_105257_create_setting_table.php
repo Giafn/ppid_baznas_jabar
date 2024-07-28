@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('setting', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title');
-            $table->text('content');
-            $table->timestamp('posting_at');
+            $table->string('key')->unique();
+            $table->text('value');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('setting');
     }
 };

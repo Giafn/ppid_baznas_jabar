@@ -8,6 +8,12 @@ return [
         'code' => 'dashboard',
     ],
     [
+        'name' => 'Landing Page',
+        'url' => 'landing-page-setting',
+        'icon' => 'fas fa-columns',
+        'code' => 'landing-page',
+    ],
+    [
         'name' => 'Setting Page',
         'url' => '',
         'icon' => 'fa fa-archive',

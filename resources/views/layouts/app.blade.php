@@ -55,6 +55,7 @@
             color: #0d6e09 !important;
         }
     </style>
+    @stack('styles')
 </head>
 
 <body id="page-top">
@@ -76,7 +77,7 @@
                     <div class="col-md-10">
                         <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
                         @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Whoops!</strong> There were some problems with your input.
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -90,7 +91,7 @@
                         @endif
         
                         @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Success!</strong> {{ session('success') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">×</span>
@@ -99,7 +100,7 @@
                         @endif
         
                         @if (session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Error!</strong> {{ session('error') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">×</span>

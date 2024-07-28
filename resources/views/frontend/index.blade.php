@@ -4,15 +4,11 @@
 
 <div id="bigCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" style="max-height: 700px; overflow: hidden; object-fit: cover; object-position: center; width: 100%; height: 100%; display: block; transition: transform 0.6s;">
-        <a class="carousel-item active" href="https://baznasjabar.org/">
-            <img src="https://baznasjabar.org/images/banner/1720532247_668d3d17dd275.jpg" class="d-block w-100" alt="...">
+        @foreach ($sliders as $key => $slider)
+        <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" href="{{ $slider->url }}" target="_blank">
+            <img src="{{ $slider->image_url }}" class="d-block w-100" alt="...">
         </a>
-        <div class="carousel-item">
-            <img src="https://baznasjabar.org/images/banner/1717169433_6659ed198210b.jpeg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="https://baznasjabar.org/images/banner/1717168908_6659eb0c79fc8.jpg" class="d-block w-100" alt="...">
-        </div>
+        @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#bigCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
