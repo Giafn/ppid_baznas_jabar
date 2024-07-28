@@ -25,3 +25,12 @@ Route::get('/struktur-organisasi', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// testpage
+Route::get('/test', function () {
+    return view('frontend.test');
+});
+
+use App\Http\Controllers\UploadController;
+
+Route::post('/upload', [UploadController::class, 'store'])->name('upload');
