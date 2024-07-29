@@ -114,4 +114,9 @@ class LandingPageController extends Controller
         }
         return back()->with('error', 'Data tidak ditemukan');
     }
+
+    public function aksesCepatSetting()
+    {
+        return view('setting-page.landing-page.akses-cepat-setting');
+    }
 }
