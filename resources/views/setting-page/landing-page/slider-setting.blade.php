@@ -6,7 +6,7 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <button class="btn bg-green-primary" data-toggle="modal" data-target="#modalAdd">
+                <button class="btn bg-green-primary" data-bs-toggle="modal" data-bs-target="#modalAdd">
                     Add New Slider
                 </button>
             </div>
@@ -49,104 +49,92 @@
 
 {{-- modal add --}}
 <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAddLabel">
-                    Add New Slider
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalAddLabel">Add New Slide</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalAddForm">
+            @csrf
+            <div class="mb-3">
+                <label for="url" class="form-label">Url</label>
+                <input type="text" class="form-control" id="url" name="url">
             </div>
-            <div class="modal-body">
-                <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalAddForm">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="url" class="form-label">Url</label>
-                        <input type="text" class="form-control" id="url" name="url">
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="posting" class="form-label">Posting On</label>
-                        <input type="date" class="form-control" id="posting" name="posting" value="{{ date('Y-m-d') }}">
-                    </div>
-                </form>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-green-primary" onclick="$('#modalAddForm').submit()">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="mb-3">
+                <label for="posting" class="form-label">Posting On</label>
+                <input type="date" class="form-control" id="posting" name="posting" value="{{ date('Y-m-d') }}">
             </div>
-        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-green-primary" onclick="$('#modalAddForm').submit()">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
 {{-- modal edit --}}
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEditLabel">
-                    Edit Slider
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalEditLabel">Edit Slide</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalEditForm">
+            @csrf
+            @method('put')
+            <div class="mb-3">
+                <label for="url" class="form-label">Url</label>
+                <input type="text" class="form-control" id="url_edit" name="url">
             </div>
-            <div class="modal-body">
-                <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalEditForm">
-                    @csrf
-                    @method('put')
-                    <div class="mb-3">
-                        <label for="url" class="form-label">Url</label>
-                        <input type="text" class="form-control" id="url_edit" name="url">
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="image_edit" name="image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="posting" class="form-label">Posting On</label>
-                        <input type="date" class="form-control" id="posting_edit" name="posting">
-                    </div>
-                </form>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image_edit" name="image">
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-green-primary" onclick="$('#modalEditForm').submit()">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="mb-3">
+                <label for="posting" class="form-label">Posting On</label>
+                <input type="date" class="form-control" id="posting_edit" name="posting">
             </div>
-        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-green-primary" onclick="$('#modalEditForm').submit()">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
 {{-- modal delete --}}
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalDeleteLabel">
-                    Delete Slider
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure want to delete this slider?</p>
-                <form action="" method="post" id="modalDeleteForm" style="display: none;" id="modalDeleteForm">
-                    @csrf
-                    @method('delete')
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" onclick="$('#modalDeleteForm').submit()">Delete</button>
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalDeleteLabel">Delete Slide</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete this slider?</p>
+        <form action="" method="post" id="modalDeleteForm" style="display: none;" id="modalDeleteForm">
+            @csrf
+            @method('delete')
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-green-primary" onclick="$('#modalDeleteForm').submit()">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 @endsection
 
