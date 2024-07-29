@@ -80,19 +80,24 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
-                        @if ($errors->any())
-                        <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Whoops!</strong> There were some problems with your input.
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li><span>{{ $error }}</span></li>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                @foreach ($itemBc as $key => $bc)
+                                <li class="breadcrumb-item {{ $key === count($itemBc) - 1 ? 'active' : '' }}">
+                                    @if ($key === count($itemBc) - 1)
+                                    <b class="text-green-primary fw-bolder">
+                                        {{ ucfirst($bc['name']) }}
+                                    </b>
+                                    @else
+                                    <a href="{{ $bc['url'] }}" class="text-dark">
+                                        {{ ucfirst($bc['name']) }}
+                                    </a>
+                                    @endif
+                                </li>
                                 @endforeach
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div> -->
-
+                            </ol>
+                        </nav>
+                        @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible" role="alert">
                            <div>
                                 <strong>Whoops!</strong> There were some problems with your input.
@@ -107,13 +112,6 @@
                         @endif
         
                         @if (session('success'))
-                        <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div> -->
-
                         <div class="alert alert-success alert-dismissible" role="alert">
                            <div><strong>Success!</strong> {{ session('success') }}</div>
                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -121,12 +119,6 @@
                         @endif
         
                         @if (session('error'))
-                        <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Error!</strong> {{ session('error') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div> -->
                         <div class="alert alert-danger alert-dismissible" role="alert">
                            <div><strong>Error!</strong> {{ session('error') }}</div>
                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

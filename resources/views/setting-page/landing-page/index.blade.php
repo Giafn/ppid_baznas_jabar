@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('title', 'Landing Page Settings')
+
+@php
+    $itemBc = [
+        [
+            'name' =>'Setting - Landing Page',
+            'url' => '/admin/landing-page-setting',
+        ]
+    ];
+@endphp
+
 @section('content')
 <div class="p-3 shadow rounded bg-white mb-5">
     <div class="card-body">
@@ -9,10 +19,9 @@
                 <h3 class="text-green-primary fw-bold text-center">
                     Slider Utama
                 </h3>
-                <a href="/landing-page-setting/slider-setting" class="btn bg-green-primary">Edit Items</a>
+                <a href="/admin/landing-page-setting/slider-setting" class="btn bg-green-primary">Edit Items</a>
             </div>
             <div id="bigCarousel" class="carousel slide" data-bs-ride="carousel">
-                <!-- <div class="carousel-inner" style="max-height: 700px; overflow: hidden; object-fit: cover; object-position: center; width: 100%; height: 100%; display: block; transition: transform 0.6s;"> -->
                 <div class="carousel-inner">
                     @foreach ($sliders as $key => $slider)
                         <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" 
@@ -43,7 +52,7 @@
                 <h3 class="text-green-primary fw-bold text-center">
                     Akses Cepat 
                 </h3>
-                <a href="" class="btn bg-green-primary">Edit Items</a>
+                <a href="/admin/landing-page-setting/akses-cepat-setting" class="btn bg-green-primary">Edit Items</a>
             </div>
             <div class="p-md-3 mb-2 d-flex align-items-center justify-content-center gap-2 flex-wrap">
                 <a href="https://baznas.go.id/" class="btn bg-green-primary" role="button" aria-pressed="true">Webiste Baznas Pusat</a>

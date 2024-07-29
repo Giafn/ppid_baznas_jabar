@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('title', 'Landing Page Settings')
+
+@php
+    $itemBc = [
+        [
+            'name' =>'Setting - Landing Page',
+            'url' => '/admin/landing-page-setting',
+        ],
+        [
+            'name' =>'Slider Setting',
+            'url' => '/admin/landing-page-setting/slider-setting',
+        ]
+    ];
+@endphp
+
 @section('content')
 <div class="p-3 shadow rounded bg-white mb-5">
     <div class="card-body">
@@ -56,7 +70,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalAddForm">
+        <form action="/admin/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalAddForm">
             @csrf
             <div class="mb-3">
                 <label for="url" class="form-label">Url</label>
@@ -89,7 +103,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalEditForm">
+        <form action="/admin/landing-page-setting/slider-setting" method="post" enctype="multipart/form-data" id="modalEditForm">
             @csrf
             @method('put')
             <div class="mb-3">
@@ -146,7 +160,7 @@
     function openModalEdit(id, url, posting) {
         console.log(id, url, posting);
         $('#modalEdit').modal('show');
-        $('#modalEditForm').attr('action', '/landing-page-setting/slider-setting/' + id);
+        $('#modalEditForm').attr('action', '/admin/landing-page-setting/slider-setting/' + id);
         $('#url_edit').val(url);
         
         // convert date to yyyy-mm-dd
@@ -157,7 +171,7 @@
 
     function openModalDelete(id) {
         $('#modalDelete').modal('show');
-        $('#modalDeleteForm').attr('action', '/landing-page-setting/slider-setting/' + id);
+        $('#modalDeleteForm').attr('action', '/admin/landing-page-setting/slider-setting/' + id);
     }
 </script>
 @endpush

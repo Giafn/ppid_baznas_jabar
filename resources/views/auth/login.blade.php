@@ -1,10 +1,14 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="card">
-    <div class="card-header">{{ __('Login') }}</div>
-
+<div class="p-5 shadow">
     <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-center mb-3">
+                <img src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="w-50">
+            </div>
+            <h3 class="fw-bolder text-center">{{ __('Login') }}</h3>
+        </div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -50,7 +54,7 @@
 
             <div class="row mb-0">
                 <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn bg-green-primary">
                         {{ __('Login') }}
                     </button>
 
