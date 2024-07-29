@@ -11,21 +11,21 @@
                 </h3>
                 <a href="/landing-page-setting/slider-setting" class="btn bg-green-primary">Edit Items</a>
             </div>
-            <div id="slideBig" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" style="max-height: 500px; overflow: hidden; object-fit: cover; object-position: center; width: 100%; height: 100%; display: block; transition: transform 0.6s;">
+            <div id="bigCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" style="max-height: 700px; overflow: hidden; object-fit: cover; object-position: center; width: 100%; height: 100%; display: block; transition: transform 0.6s;">
                     @foreach ($sliders as $key => $slider)
-                    <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" href="{{ $slider->url }}">
+                    <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" href="{{ $slider->url }}" target="_blank">
                         <img src="{{ $slider->image_url }}" class="d-block w-100" alt="...">
                     </a>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-target="#slideBig" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
+                <button class="carousel-control-prev" type="button" data-bs-target="#bigCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-target="#slideBig" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
+                <button class="carousel-control-next" type="button" data-bs-target="#bigCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
@@ -137,4 +137,14 @@
         border-radius: 10px;
     }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.carousel').carousel({
+            interval: 2000
+        });
+    });
+</script>
 @endpush
