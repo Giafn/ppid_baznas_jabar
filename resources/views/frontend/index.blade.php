@@ -3,11 +3,17 @@
 @section('content')
 
 <div id="bigCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner" style="max-height: 700px; overflow: hidden; object-fit: cover; object-position: center; width: 100%; height: 100%; display: block; transition: transform 0.6s;">
+    <div class="carousel-inner">
         @foreach ($sliders as $key => $slider)
-        <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" href="{{ $slider->url }}" target="_blank">
-            <img src="{{ $slider->image_url }}" class="d-block w-100" alt="...">
-        </a>
+            <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" 
+            href="{{ $slider->url }}" 
+            target="_blank">
+            <div style="width: 100%; height: 700px; overflow: hidden;">
+                <img src="{{ $slider->image_url }}" 
+                    alt="{{ $slider->title ?? 'Slider Image' }}"
+                    style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+            </div>
+            </a>
         @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#bigCarousel" data-bs-slide="prev">

@@ -12,7 +12,8 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-        $sliders = SlideLanding::orderBy('posting_at', 'desc')
+        $sliders = SlideLanding::orderBy('created_at', 'desc')
+            ->orderBy('posting_at', 'desc')
             ->where('posting_at', '<=', now())
             ->get();
         return view('setting-page.landing-page.index', compact('sliders'));
