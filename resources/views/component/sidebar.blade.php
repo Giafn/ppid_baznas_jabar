@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center my-3" href="/home">
         <div class="sidebar-brand-text mx-2 bg-white d-flex align-items-center justify-content-center p-1 rounded shadow" style="max-width: 80px;">
-            <img src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" style="height: 100%;">
+            <img src="{{ asset('image/icon.png') }}" alt="{{ config('app.name', 'Laravel') }}" style="width: 100%;">
         </div>
     </a>
 
