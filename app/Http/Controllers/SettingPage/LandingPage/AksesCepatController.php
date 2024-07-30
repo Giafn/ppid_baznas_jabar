@@ -12,6 +12,6 @@ class AksesCepatController extends Controller
 {
     public function index()
     {
-        return view('setting-page.landing-page.akses-cepat-setting');
+        return view('setting-page.landing-page.akses-cepat.index');
     }
 }

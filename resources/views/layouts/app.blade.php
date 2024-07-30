@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
 
     {{-- how to check @yeild('title') --}}
     @if(View::hasSection('title'))
@@ -100,12 +101,14 @@
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible" role="alert">
                            <div>
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
+                                <strong>Mohon Maaf!</strong> Terdapat kesalahan dalam inputan anda.
+                                <ol style="margin-bottom: 0px;">
                                     @foreach ($errors->all() as $error)
-                                        <li><span>{{ $error }}</span></li>
+                                        <li style="list-style-type: disc; margin-left: 0px;">
+                                            {{ ucfirst($error) }}
+                                        </li>
                                     @endforeach
-                                </ul>
+                                </ol>
                            </div>
                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -113,7 +116,7 @@
         
                         @if (session('success'))
                         <div class="alert alert-success alert-dismissible" role="alert">
-                           <div><strong>Success!</strong> {{ session('success') }}</div>
+                           <div><strong>Berhasil!</strong> {{ session('success') }}</div>
                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
@@ -170,7 +173,7 @@
     {{-- <script src="/js/jquery.easing.min.js"></script> --}}
 
     <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+    {{-- <script src="/js/sb-admin-2.min.js"></script> --}}
 
     <!-- Page level plugins -->
     {{-- <script src="/js/Chart.min.js"></script> --}}

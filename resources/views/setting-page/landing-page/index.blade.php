@@ -69,7 +69,7 @@
                 <h3 class="text-green-primary fw-bold text-center">
                     Informasi Terbaru
                 </h3>
-                <a href="" class="btn bg-green-primary">Edit</a>
+                <a href="/admin/landing-page-setting/informasi-setting" class="btn bg-green-primary">Edit</a>
             </div>
             <div class="p-3 mb-2 d-flex align-items-center justify-content-center gap-3 flex-wrap">
                 <div class="card border-0 shadow" style="width: 30rem;">

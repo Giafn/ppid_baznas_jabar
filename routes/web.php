@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
+use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPageController;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +66,14 @@ Route::group(['middleware' => 'auth'], function () {
     
             // route akses cepat setting
             Route::get('/akses-cepat-setting', [AksesCepatController::class, 'index']);
+
+            // route informasi setting
+            Route::get('/informasi-setting', [InformasiController::class, 'index']);
+            Route::get('/informasi-setting/create', [InformasiController::class, 'create']);
+            Route::post('/informasi-setting', [InformasiController::class, 'store']);
+            Route::get('/informasi-setting/{id}/edit', [InformasiController::class, 'edit']);
+            Route::put('/informasi-setting/{id}', [InformasiController::class, 'update']);
+            Route::delete('/informasi-setting/{id}', [InformasiController::class, 'delete']);
         });
     });
 

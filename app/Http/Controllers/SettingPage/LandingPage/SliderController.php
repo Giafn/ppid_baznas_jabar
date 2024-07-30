@@ -14,7 +14,7 @@ class SliderController extends Controller
     {
         $sliders = SlideLanding::orderBy('posting_at', 'desc')->
             paginate(10);
-        return view('setting-page.landing-page.slider-setting', compact('sliders'));
+        return view('setting-page.landing-page.slider.index', compact('sliders'));
     }
 
     public function store(Request $request)
