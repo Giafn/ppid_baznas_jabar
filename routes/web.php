@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
+use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
+use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadController;
+
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
 
@@ -40,7 +43,6 @@ Route::get('/test', function () {
     return view('frontend.test');
 });
 
-use App\Http\Controllers\UploadController;
 
 Route::post('/upload', [UploadController::class, 'store'])->name('upload');
 
@@ -52,16 +54,17 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::prefix('landing-page-setting')->group(function () {
-            // route slider setting
+            
             Route::get('/', [LandingPageController::class, 'index']);
-            Route::get('/slider-setting', [LandingPageController::class, 'sliderSetting']);
-            Route::post('/slider-setting', [LandingPageController::class, 'sliderSettingStore']);
-            Route::delete('/slider-setting/{id}', [LandingPageController::class, 'sliderSettingDelete']);
-            Route::put('/slider-setting/{id}', [LandingPageController::class, 'sliderSettingUpdate']);
+            
+            // route slider setting
+            Route::get('/slider-setting', [SliderController::class, 'index']);
+            Route::post('/slider-setting', [SliderController::class, 'store']);
+            Route::delete('/slider-setting/{id}', [SliderController::class, 'delete']);
+            Route::put('/slider-setting/{id}', [SliderController::class, 'update']);
     
             // route akses cepat setting
-            Route::get('/akses-cepat-setting', [LandingPageController::class, 'aksesCepatSetting']);
-            Route::post('/akses-cepat-setting', [LandingPageController::class, 'aksesCepatSettingStore']);
+            Route::get('/akses-cepat-setting', [AksesCepatController::class, 'index']);
         });
     });
 
