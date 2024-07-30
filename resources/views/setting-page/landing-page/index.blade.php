@@ -72,33 +72,21 @@
                 <a href="/admin/landing-page-setting/informasi-setting" class="btn bg-green-primary">Edit</a>
             </div>
             <div class="p-3 mb-2 d-flex align-items-center justify-content-center gap-3 flex-wrap">
+                @forelse ($informasi as $item)
                 <div class="card border-0 shadow" style="width: 30rem;">
-                    <img src="https://baznasjabar.org/images/banner/1720532247_668d3d17dd275.jpg" class="card-img-top" alt="...">
+                    <img src="{{ $item->image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover; object-position: center; width: 100%; height: 200px;">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="https://baznasjabar.org/">Berita 1</a>
+                            <a href="https://baznasjabar.org/">{{ $item->title }}</a>
                         </h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">{{ $item->slug }}</p>
                     </div>
                 </div>
-                <div class="card border-0 shadow" style="width: 30rem;">
-                    <img src="https://baznasjabar.org/images/banner/1720532247_668d3d17dd275.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="https://baznasjabar.org/">Berita 1</a>
-                        </h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card border-0 shadow" style="width: 30rem;">
-                    <img src="https://baznasjabar.org/images/banner/1720532247_668d3d17dd275.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="https://baznasjabar.org/">Berita 1</a>
-                        </h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
+                @empty
+                <p>
+                    No data
+                </p>
+                @endforelse
             </div>
         </div>
         <hr>
