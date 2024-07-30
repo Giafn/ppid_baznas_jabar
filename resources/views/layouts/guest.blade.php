@@ -31,7 +31,7 @@
 
         #wrapper {
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
         }
 
         .bg-gradient-primary {
@@ -51,7 +51,7 @@
     </style>
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-green-primary">
     <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
