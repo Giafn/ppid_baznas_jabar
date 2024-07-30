@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageCo
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
+use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
@@ -76,6 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/informasi-setting/{id}/edit', [InformasiController::class, 'edit']);
             Route::put('/informasi-setting/{id}', [InformasiController::class, 'update']);
             Route::delete('/informasi-setting/{id}', [InformasiController::class, 'delete']);
+
+            // route video setting
+            Route::get('/video-setting', [VideoController::class, 'index']);
         });
     });
 

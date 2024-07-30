@@ -97,7 +97,7 @@
                 <h3 class="text-green-primary fw-bold text-center">
                     Video Baznas Jabar
                 </h3>
-                <a href="" class="btn bg-green-primary">Edit Items</a>
+                <a href="/admin/landing-page-setting/video-setting" class="btn bg-green-primary">Edit Items</a>
             </div>
             <div class="row justify-content-center p-3 mb-2" id="videoShow">
                 <div class="col-md-6">
