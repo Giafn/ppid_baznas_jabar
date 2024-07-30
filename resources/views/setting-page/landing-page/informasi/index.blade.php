@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-2 d-flex justify-content-center">
+        <div class="mt-2 d-flex justify-content-end">
             {{ $data->links() }}
         </div>
     </div>

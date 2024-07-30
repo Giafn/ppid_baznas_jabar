@@ -21,7 +21,7 @@ class InformasiController extends Controller
             ->when($validate['search'], function ($query) use ($validate) {
                 $query->where('title', 'like', '%' . $validate['search'] . '%');
             })
-            ->paginate(10);
+            ->paginate(15);
         return view('setting-page.landing-page.informasi.index', compact('data'));
     }
 
