@@ -35,6 +35,10 @@ Route::prefix('admin')->group(function () {
       ]);
 });
 
+// informasi frontend
+Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage']);
+
+
 Route::get('/home', function () {
     return redirect('/admin/home');
 });
@@ -44,11 +48,9 @@ Route::get('/test', function () {
     return view('frontend.test');
 });
 
-
-Route::post('/upload', [UploadController::class, 'store'])->name('upload');
-
 // group auth
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/upload', [UploadController::class, 'store'])->name('upload');
     // landig page setting
     // admin prefix
     Route::prefix('admin')->group(function () {

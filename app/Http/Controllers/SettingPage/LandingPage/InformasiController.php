@@ -22,6 +22,11 @@ class InformasiController extends Controller
                 $query->where('title', 'like', '%' . $validate['search'] . '%');
             })
             ->paginate(15);
+        // mapping url
+        $data->map(function ($item) {
+            $item->url = InformasiController::getUrlShow($item->id, $item->title);
+            return $item;
+        });
         return view('setting-page.landing-page.informasi.index', compact('data'));
     }
 
@@ -143,4 +148,19 @@ class InformasiController extends Controller
 
         return redirect('/admin/landing-page-setting/informasi-setting')->with('success', 'Data berhasil dihapus');
     }
+
+    public function showpage($id, $title)
+    {
+        $data = Berita::where('id', $id)->firstOrFail();
+        if ($data->title != str_replace('-', ' ', $title)) {
+            abort(404);
+        }
+        return view('frontend.informasi.show', compact('data'));
+    }
+
+    public static function getUrlShow($id, $title)
+    {
+        return url('/informasi/' . $id . '/' . str_replace(' ', '-', $title));
+    }
+    
 }

@@ -53,7 +53,9 @@
                     <img src="{{ $item->image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover; object-position: center; width: 100%; height: 200px;">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="https://baznasjabar.org/">{{ $item->title }}</a>
+                            <a href="{{ $item->url }}" class="text-decoration-none text-green-primary fw-bold">
+                                {{ $item->title }}
+                            </a>
                         </h5>
                         <p class="card-text">{{ $item->slug }}</p>
                     </div>
