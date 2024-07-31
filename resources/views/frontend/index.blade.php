@@ -76,12 +76,17 @@
                 Video Baznas Jabar
             </h3>
             <div class="row justify-content-center p-3 mb-2" id="videoShow">
-                <div class="col-md-6">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lOUr57wqz1M?si=JpTzlt6ulbOkt41Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="col-md-6">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/P8Ht9h3ocU0?si=6ZBB4PHi8erO3Yeg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
+                @forelse ($videos as $video)
+                  <div class="col-md-6">
+                    {!! $video->video_url !!}
+                  </div>
+                @empty
+                  <div class="col-12">
+                      <div class="alert alert-warning" role="alert">
+                          No video found
+                      </div>
+                  </div>
+                @endforelse
             </div>
         </div>
     </div>

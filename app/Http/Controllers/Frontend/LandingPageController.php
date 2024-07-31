@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Models\Berita;
 use App\Models\SlideLanding;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -24,6 +25,8 @@ class LandingPageController extends Controller
             $item->url = InformasiController::getUrlShow($item->id, $item->title);
             return $item;
         });
-        return view('frontend.index', compact('sliders', 'informasi'));
+        $videos = Video::orderBy('created_at', 'desc')->limit(4)->get();
+
+        return view('frontend.index', compact('sliders', 'informasi', 'videos'));
     }
 }
