@@ -101,11 +101,11 @@
             </div>
             <div class="row justify-content-center p-3 mb-2" id="videoShow">
                 @forelse ($videos as $video)
-                  <div class="col-md-6">
-                    <h3>
+                  <div class="col-md-6 p-2">
+                    {!! $video->video_url !!}
+                    <h3 class="mb-2">
                       {{ $video->title }} - <small class="text-muted">{{ $video->description }}</small>
                     </h3>
-                    {!! $video->video_url !!}
                     @if (!$video->video_url)
                     <div class="w-100 d-flex align-items-center justify-content-center m-2" style="height: 315px; border-radius: 10px; background-color: #f0f0f0">
                         <p>Url Tidak Valid</p>

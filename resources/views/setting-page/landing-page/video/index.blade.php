@@ -27,7 +27,7 @@
             <div class="col-md-12 py-2 my-1">
               <div class="row justify-content-center p-3 mb-2" id="videoShow">
                   @forelse ($videos as $video)
-                  <div class="col-md-6">
+                  <div class="col-md-6 p-2">
                     <h3>
                       {{ $video->title }} - <small class="text-muted">{{ $video->description }}</small>
                     </h3>
