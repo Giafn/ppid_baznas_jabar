@@ -22,5 +22,16 @@ class Video extends Model
         if ($embed) {
             return $embed->html();
         }
+
+        return `
+            <div class="w-100 d-flex align-items-center justify-content-center" style="width: 315px">
+                <p>Asuuu</p>
+            </div>
+        `;
+    }
+
+    public function getOriginalVideoUrlAttribute()
+    {
+        return $this->attributes['video_url'];
     }
 }

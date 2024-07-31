@@ -28,7 +28,23 @@
               <div class="row justify-content-center p-3 mb-2" id="videoShow">
                   @forelse ($videos as $video)
                   <div class="col-md-6">
+                    <h3>
+                      {{ $video->title }} - <small class="text-muted">{{ $video->description }}</small>
+                    </h3>
                     {!! $video->video_url !!}
+                    @if (!$video->video_url)
+                    <div class="w-100 d-flex align-items-center justify-content-center m-2" style="height: 315px; border-radius: 10px; background-color: #f0f0f0">
+                        <p>Url Tidak Valid</p>
+                    </div>
+                    @endif
+                    <div class="d-flex justify-content-end gap-2">
+                      <button class="btn bg-green-primary" onclick="openModalEdit('{{$video->id}}', '{{$video->title}}', '{{$video->description}}', '{{$video->original_video_url}}')">
+                        Edit
+                      </button>
+                      <button class="btn bg-red-danger" onclick="openModalDelete('{{$video->id}}')">
+                        Delete
+                      </button>
+                    </div>
                   </div>
                   @empty
                   <div class="col-12">
@@ -92,16 +108,16 @@
             @csrf
             @method('put')
             <div class="mb-3">
-                <label for="url" class="form-label">Url</label>
+              <label for="title" class="form-label">Judul Video</label>
+              <input type="text" class="form-control" id="title_edit" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" id="description_edit" name="description">
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">Url Video</label>
                 <input type="text" class="form-control" id="url_edit" name="url">
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image_edit" name="image">
-            </div>
-            <div class="mb-3">
-                <label for="posting" class="form-label">Posting On</label>
-                <input type="date" class="form-control" id="posting_edit" name="posting">
             </div>
         </form>
       </div>
@@ -148,16 +164,12 @@
 
 @push('scripts')
 <script>
-    function openModalEdit(id, url, posting) {
-        console.log(id, url, posting);
+    function openModalEdit(id, title, description, original_url) {
         $('#modalEdit').modal('show');
         $('#modalEditForm').attr('action', '/admin/landing-page-setting/video-setting/' + id);
-        $('#url_edit').val(url);
-        
-        // convert date to yyyy-mm-dd
-        posting = new Date(posting);
-        posting = posting.toISOString().split('T')[0];
-        $('#posting_edit').val(posting);
+        $('#title_edit').val(title);
+        $('#description_edit').val(description);
+        $('#url_edit').val(original_url);
     }
 
     function openModalDelete(id) {

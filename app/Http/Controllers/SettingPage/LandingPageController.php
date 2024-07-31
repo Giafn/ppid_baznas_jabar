@@ -30,7 +30,7 @@ class LandingPageController extends Controller
             return $item;
         });
 
-        $videos = Video::orderBy('created_at', 'desc')->limit(2)->get();
+        $videos = Video::orderBy('created_at', 'desc')->limit(4)->get();
 
         return view('setting-page.landing-page.index', compact('sliders', 'informasi', 'videos'));
     }

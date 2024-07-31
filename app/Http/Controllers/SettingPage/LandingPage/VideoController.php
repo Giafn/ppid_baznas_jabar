@@ -45,17 +45,17 @@ class VideoController extends Controller
 
     public function delete($id)
     {
-        $slide = SlideLanding::find($id);
-        if ($slide) {
+        $video = Video::find($id);
+        if ($video) {
             try {
                 DB::beginTransaction();
-                $slide->delete();
+                $video->delete();
                 DB::commit();
             } catch (\Throwable $th) {
                 DB::rollBack();
                 return back()->with('error', 'Gagal menghapus data');
             }
-            Storage::disk('public')->delete('slider/' . basename($slide->image_url));
+
             return back()->with('success', 'Berhasil menghapus data');
         }
         return back()->with('error', 'Data tidak ditemukan');
@@ -64,38 +64,26 @@ class VideoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'url' => 'required|url',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'posting' => 'required|date',
         ]);
-
-        $slide = SlideLanding::find($id);
-        if ($slide) {
-            $imageName = $slide->image_url;
-            if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->extension();
-                try {
-                    Storage::disk('public')->putFileAs('slider', $request->file('image'), $imageName);
-                } catch (\Throwable $th) {
-                    return back()->with('error', 'Gagal upload gambar');
-                }
-                Storage::disk('public')->delete('slider/' . basename($slide->image_url));
-                $imageName = '/storage/slider/' . $imageName;
-            }
-
+        $video = Video::find($id);
+        if ($video) {
             try {
                 DB::beginTransaction();
-                $slide->url = $request->url;
-                $slide->image_url = $imageName;
-                $slide->posting_at = $request->posting;
-                $slide->save();
+                $video->title = $request->title;
+                $video->description = $request->description ??  '-';
+                $video->video_url = $request->url;
+
+                $video->save();
                 DB::commit();
             } catch (\Throwable $th) {
                 DB::rollBack();
                 return back()->with('error', 'Gagal menyimpan data');
             }
 
-            return back()->with('success', 'Berhasil update data');
+            return back()->with('success', 'Berhasil menyimpan data');
         }
         return back()->with('error', 'Data tidak ditemukan');
     }
