@@ -16,41 +16,27 @@ class VideoController extends Controller
     {
         $videos = Video::orderBy('created_at', 'desc')->
             paginate(10);
-
-        $videos->getCollection()->transform(function ($value) {
-            $value->embed = self::getEmbedHtml($value->url);
-            return $value;
-        });
         return view('setting-page.landing-page.video.index', compact('videos'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'url' => 'required|url',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'posting' => 'required|date',
         ]);
-
-        $imageName = time() . '.' . $request->image->extension();
-
-        try {
-            Storage::disk('public')->putFileAs('slider', $request->file('image'), $imageName);
-        } catch (\Throwable $th) {
-            return back()->with('error', 'Gagal upload gambar');
-        }
 
         try {
             DB::beginTransaction();
-            $slide = new SlideLanding();
-            $slide->url = $request->url;
-            $slide->image_url = '/storage/slider/' . $imageName;
-            $slide->posting_at = $request->posting;
-            $slide->save();
+            Video::create([
+                'title' => $request->title,
+                'description' => $request->description ??  '-',
+                'video_url' => $request->url,
+            ]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            Storage::disk('public')->delete('slider/' . $imageName);
             return back()->with('error', 'Gagal menyimpan data');
         }
 
@@ -112,11 +98,5 @@ class VideoController extends Controller
             return back()->with('success', 'Berhasil update data');
         }
         return back()->with('error', 'Data tidak ditemukan');
-    }
-
-    public static function getEmbedHtml($url)
-    {
-        $embed = OEmbed::get($url);
-        return $embed->html;
     }
 }

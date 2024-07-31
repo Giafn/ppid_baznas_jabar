@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cohensive\OEmbed\Facades\OEmbed;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,4 +14,13 @@ class Video extends Model
     protected $table = 'videos';
 
     protected $guarded = [];
+
+    // buat aksessor untuk merubah video_url menjadi embed
+    public function getVideoUrlAttribute($value)
+    {
+        $embed = OEmbed::get($value);
+        if ($embed) {
+            return $embed->html();
+        }
+    }
 }

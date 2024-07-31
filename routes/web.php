@@ -80,6 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
 
             // route video setting
             Route::get('/video-setting', [VideoController::class, 'index']);
+            Route::post('/video-setting', [VideoController::class, 'store']);
+            Route::delete('/video-setting/{id}', [VideoController::class, 'delete']);
+            Route::put('/video-setting/{id}', [VideoController::class, 'update']);
+
         });
     });
 

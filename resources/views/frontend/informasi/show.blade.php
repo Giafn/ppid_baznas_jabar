@@ -14,7 +14,7 @@
                 </p>
             </small>
             <p class="text-center my-5">
-                <img src="{{ $data->image }}" alt="baznas jabar" class="mx-auto">
+                <img src="{{ $data->image }}" alt="baznas jabar" class="mx-auto" style="max-width: 80%">
             </p>
             {!! $data->content !!}
         </div>

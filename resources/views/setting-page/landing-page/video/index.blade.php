@@ -25,19 +25,19 @@
                 </button>
             </div>
             <div class="col-md-12 py-2 my-1">
-              @forelse ($videos as $video)
               <div class="row justify-content-center p-3 mb-2" id="videoShow">
+                @forelse ($videos as $video)
                   <div class="col-md-6">
-                    {!! $video->embed !!}
+                    {!! $video->video_url !!}
                   </div>
-              </div>
-              @empty
-              <div class="col-12">
-                  <div class="alert alert-warning" role="alert">
-                      No video found
+                  @empty
+                  <div class="col-12">
+                      <div class="alert alert-warning" role="alert">
+                          No video found
+                      </div>
                   </div>
+                  @endforelse
               </div>
-              @endforelse
             </div>
         </div>
         <div class="mt-2 d-flex justify-content-center">
@@ -51,23 +51,23 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalAddLabel">Add New Slide</h1>
+        <h1 class="modal-title fs-5" id="modalAddLabel">Add Video</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/admin/landing-page-setting/video-setting" method="post" enctype="multipart/form-data" id="modalAddForm">
+        <form action="/admin/landing-page-setting/video-setting" method="post" id="modalAddForm">
             @csrf
             <div class="mb-3">
-                <label for="url" class="form-label">Url</label>
+              <label for="title" class="form-label">Judul Video</label>
+              <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">Url Video</label>
                 <input type="text" class="form-control" id="url" name="url">
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image" name="image">
-            </div>
-            <div class="mb-3">
-                <label for="posting" class="form-label">Posting On</label>
-                <input type="date" class="form-control" id="posting" name="posting" value="{{ date('Y-m-d') }}">
             </div>
         </form>
       </div>
@@ -137,7 +137,7 @@
 </div>
 @endsection
 
-@push('css')
+@push('styles')
     <style>
         #videoShow .col-md-6 > iframe {
             width: 100%;
