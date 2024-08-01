@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile Setting')
+@section('title', 'Visi Misi Setting')
 
 @php
     $itemBc = [
@@ -9,8 +9,8 @@
             'url' => '/admin/home',
         ],
         [
-            'name' =>'General - Profile',
-            'url' => '/admin/general/profile',
+            'name' =>'General - Visi Misi',
+            'url' => '/admin/general/visi-misi',
         ]
     ];
 @endphp
@@ -20,17 +20,17 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/general/profile" method="POST" id="formWithEditor">
+                <form action="/admin/general/visi-misi" method="POST" id="formWithEditor">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') ?? $profile->page->title }}">
+                        <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') ?? $visiMisi->page->title }}">
                     </div>
                     <div class="mb-3">
                         <label for="content" class="form-label">Konten</label>
                         <div id="editor"></div>
-                        <input name="content" id="contentTarget" style="display: none;" value="{{ old('content') ?? $profile->page->content }}">
+                        <input name="content" id="contentTarget" style="display: none;" value="{{ old('content') ?? $visiMisi->page->content }}">
                     </div>
                     <button type="submit" class="btn bg-green-primary">Submit</button>
                 </form>

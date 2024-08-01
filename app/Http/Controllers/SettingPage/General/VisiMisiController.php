@@ -8,30 +8,30 @@ use App\Models\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProfileController extends Controller
+class VisiMisiController extends Controller
 {
     public function index()
     {
-        $profile = GeneralContentList::where('nama', 'profile')->with('page')->first();
-        if (!$profile) {
-            return redirect('/admin/home')->with('error', 'Terjadi Kesalahan');
-        }
+        $visiMisi = GeneralContentList::where('nama', 'visi_misi')->with('page')->first();
+        // if (!$visiMisi) {
+        //     return redirect('/admin/home')->with('error', 'Terjadi Kesalahan');
+        // }
 
-        return view('setting-page.general.profile.index', compact('profile'));
+        return view('setting-page.general.visi-misi.index', compact('visiMisi'));
     }
 
     public function update(Request $request)
     {
-        dd('eits');
+        // dd($request->all());
         $validate = $request->validate([
             'title' => 'required|max:255|string',
             'content' => 'required|min:10|string',
         ]);
 
-        $profile = GeneralContentList::where('nama', 'profile')->with('page')->first();
+        $visiMisi = GeneralContentList::where('nama', 'visi_misi')->with('page')->first();
 
         try {
-            if (!$profile) {
+            if (!$visiMisi) {
                 // Start transaction
                 DB::beginTransaction();
 
@@ -42,19 +42,19 @@ class ProfileController extends Controller
                     'posting_at' => now(), // Use Laravel's now() helper for current datetime
                 ]);
 
-                // Create the profile
-                $profile = GeneralContentList::create([
-                    'nama' => 'profile',
+                // Create the visi_misi
+                $visiMisi = GeneralContentList::create([
+                    'nama' => 'visi_misi',
                     'page_id' => $page->id,
                 ]);
 
                 // Commit the transaction
                 DB::commit();
             } else {
-                // Update existing profile page
+                // Update existing visi_misi page
                 DB::beginTransaction();
 
-                $page = $profile->page;
+                $page = $visiMisi->page;
                 $page->title = $validate['title'];
                 $page->content = $validate['content'];
                 $page->save();
@@ -64,10 +64,10 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             // Rollback the transaction if something went wrong
             DB::rollBack();
-            return redirect()->back()->with('error', 'Data gagal ditambahkan atau diperbarui: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
         }
 
 
-        return redirect('/admin/general/profile')->with('success', 'Data berhasil diubah');
+        return redirect('/admin/general/visi-misi')->with('success', 'Data berhasil diubah');
     }
 }
