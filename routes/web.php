@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
+use App\Http\Controllers\SettingPage\General\ProfileController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
@@ -85,6 +86,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('/video-setting/{id}', [VideoController::class, 'update']);
 
         });
+
+        Route::prefix('general')->group(function () {
+            Route::get('profile', [ProfileController::class, 'index']);
+            Route::put('profile', [ProfileController::class, 'update']);
+        });
+
     });
 
 });

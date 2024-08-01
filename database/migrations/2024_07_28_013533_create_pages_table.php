@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('content');
+            $table->boolean('show_on_setting')->default(false);
             $table->timestamp('posting_at');
             $table->timestamps();
         });

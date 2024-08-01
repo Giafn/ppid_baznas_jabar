@@ -361,20 +361,23 @@ if (document.querySelector('#formWithEditor')) {
 		};
 	}
 	
-	document.querySelector('#image').addEventListener('change', function () {
-		const reader = new FileReader();
-		reader.onload = function (e) {
-			document.querySelector('#imagePreview').src = e.target.result;
-		};
-		reader.readAsDataURL(this.files[0]);
-	});
-	
 	document.getElementById('formWithEditor').addEventListener('submit', function(event) {
 		event.preventDefault();
 		const content = ckeditorobj.getData();
 		const contentTargetField = document.getElementById('contentTarget');
 		contentTargetField.setAttribute('value', content);
 		this.submit();
+	});
+}
+
+// cek if #image exists
+if (document.querySelector('#image')) {
+	document.querySelector('#image').addEventListener('change', function () {
+		const reader = new FileReader();
+		reader.onload = function (e) {
+			document.querySelector('#imagePreview').src = e.target.result;
+		};
+		reader.readAsDataURL(this.files[0]);
 	});
 }
 

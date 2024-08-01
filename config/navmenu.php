@@ -3,7 +3,7 @@
 return [
     [
         'name' => 'Dashboard',
-        'url' => 'home',
+        'url' => 'admin/home',
         'icon' => 'fas fa-home',
         'code' => 'dashboard',
     ],
@@ -13,28 +13,32 @@ return [
         'icon' => 'fas fa-columns',
         'code' => 'landing-page',
     ],
-    // [
-    //     'name' => 'Setting Page',
-    //     'url' => '',
-    //     'icon' => 'fa fa-archive',
-    //     'code' => 'master',
-    //     'child' => [
-    //         [
-    //             'name' => 'Landing page',
-    //             'url' => 'setting-page/landing',
-    //             'code' => ''
-    //         ],
-    //         [
-    //             'name' => 'Eskul',
-    //             'url' => 'master/eskul',
-    //             'code' => 'eskul'
-    //         ],
-    //         [
-    //             'name' => 'Jadwal',
-    //             'url' => 'master/jadwal',
-    //             'code' => 'jadwal'
-    //         ],
-    //     ]
-
-    // ]
+    [
+        'name' => 'General Page',
+        'url' => '',
+        'icon' => 'fa fa-archive',
+        'code' => 'admin.general',
+        'child' => [
+            [
+                'name' => 'Profil',
+                'url' => 'admin/general/profile',
+                'code' => 'admin.general.profile'
+            ],
+            [
+                'name' => 'Visi Misi',
+                'url' => 'admin/general/visi-misi',
+                'code' => 'admin.general.visi-misi'
+            ],
+            [
+                'name' => 'Tugas Dan Fungsi',
+                'url' => 'admin/general/tugas-dan-fungsi',
+                'code' => 'admin.general.tugas-dan-fungsi'
+            ],
+            [
+                'name' => 'Struktur Organisasi PPID',
+                'url' => 'admin/general/struktur-organisasi',
+                'code' => 'admin.general.struktur-organisasi'
+            ],
+        ]
+    ]
 ];

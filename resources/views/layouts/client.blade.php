@@ -9,7 +9,7 @@
 
     <title>PPID BAZNAS Jawa Barat</title>
     {{-- icon --}}
-    <link rel="icon" href="{{ asset('image/icon.png') }}" type="image/x-icon" />
+    <link rel="icon" href="/image/icon.png" type="image/x-icon" />
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

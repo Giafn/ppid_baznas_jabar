@@ -12,13 +12,13 @@
     @foreach (config('navmenu') as $menu)
             @if (array_key_exists('child', $menu))
                 <li class="nav-item {{ Request::is($menu['code'] . '*') ? 'active' : '' }}">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                        data-target="#{{ $menu['code'] }}" aria-expanded="true" aria-controls="{{ $menu['code'] }}">
+                    <a class="nav-link collapsed dropdown-toggle active" href="#" data-bs-toggle="collapse"
+                        data-bs-target="#{{ $menu['code'] }}" aria-expanded="true" aria-controls="{{ $menu['code'] }}">
                         <i class="{{ $menu['icon'] }}"></i>
                         <span>{{ $menu['name'] }}</span>
                     </a>
                     <div id="{{ $menu['code'] }}" class="collapse {{ Request::is($menu['code'] . '*') ? 'show' : '' }}">
-                        <div class="bg-white py-2 collapse-inner rounded collapse-item">
+                        <div class="bg-warning py-2 collapse-inner rounded">
                             @foreach ($menu['child'] as $child)
                                 <a class="collapse-item {{ Request::url() == url($child['url']) ? 'active' : '' }}"
                                     href="{{ url($child['url']) }}">{{ $child['name'] }}</a>
@@ -35,8 +35,4 @@
                 </li>
             @endif
     @endforeach
-    <!-- Sidebar Toggler (Sidebar) -->
-    {{-- <div class="text-center d-none d-md-inline mt-auto">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div> --}}
 </ul>

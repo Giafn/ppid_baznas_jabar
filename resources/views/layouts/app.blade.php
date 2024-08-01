@@ -18,6 +18,8 @@
         <title>Admin PPID Baznas Jabar</title>
     @endif
 
+    <link rel="icon" href="/image/icon.png" type="image/x-icon" />
+
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <link
@@ -165,18 +167,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Bootstrap core JavaScript-->
-    {{-- <script src="/js/jquery.min.js"></script> --}}
-    <script src="/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    {{-- <script src="/js/jquery.easing.min.js"></script> --}}
-
-    <!-- Custom scripts for all pages-->
-    {{-- <script src="/js/sb-admin-2.min.js"></script> --}}
-
-    <!-- Page level plugins -->
-    {{-- <script src="/js/Chart.min.js"></script> --}}
+    <script src="/js/sb-admin-2.min.js"></script>
     @stack('scripts')
 </body>
 
