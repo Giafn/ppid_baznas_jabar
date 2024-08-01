@@ -8,16 +8,16 @@ use App\Models\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class VisiMisiController extends Controller
+class TugasFungsiController extends Controller
 {
     public function index()
     {
-        $visiMisi = GeneralContentList::where('nama', 'visi_misi')->with('page')->first();
-        if (!$visiMisi) {
+        $tugasFungsi = GeneralContentList::where('nama', 'tugas_fungsi')->with('page')->first();
+        if (!$tugasFungsi) {
             return redirect('/admin/home')->with('error', 'Terjadi Kesalahan');
         }
 
-        return view('setting-page.general.visi-misi.index', compact('visiMisi'));
+        return view('setting-page.general.tugas-fungsi.index', compact('tugasFungsi'));
     }
 
     public function update(Request $request)
@@ -27,10 +27,10 @@ class VisiMisiController extends Controller
             'content' => 'required|min:10|string',
         ]);
 
-        $visiMisi = GeneralContentList::where('nama', 'visi_misi')->with('page')->first();
+        $tugasFungsi = GeneralContentList::where('nama', 'tugas_fungsi')->with('page')->first();
 
         try {
-            if (!$visiMisi) {
+            if (!$tugasFungsi) {
                 // Start transaction
                 DB::beginTransaction();
 
@@ -41,19 +41,19 @@ class VisiMisiController extends Controller
                     'posting_at' => now(), // Use Laravel's now() helper for current datetime
                 ]);
 
-                // Create the visi_misi
-                $visiMisi = GeneralContentList::create([
-                    'nama' => 'visi_misi',
+                // Create the tugas_fungsi
+                $tugasFungsi = GeneralContentList::create([
+                    'nama' => 'tugas_fungsi',
                     'page_id' => $page->id,
                 ]);
 
                 // Commit the transaction
                 DB::commit();
             } else {
-                // Update existing visi_misi page
+                // Update existing tugas_fungsi page
                 DB::beginTransaction();
 
-                $page = $visiMisi->page;
+                $page = $tugasFungsi->page;
                 $page->title = $validate['title'];
                 $page->content = $validate['content'];
                 $page->save();
@@ -67,6 +67,6 @@ class VisiMisiController extends Controller
         }
 
 
-        return redirect('/admin/general/visi-misi')->with('success', 'Data berhasil diubah');
+        return redirect('/admin/general/tugas-fungsi')->with('success', 'Data berhasil diubah');
     }
 }

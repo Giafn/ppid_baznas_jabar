@@ -22,7 +22,6 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        dd('eits');
         $validate = $request->validate([
             'title' => 'required|max:255|string',
             'content' => 'required|min:10|string',

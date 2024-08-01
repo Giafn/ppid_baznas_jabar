@@ -31,8 +31,8 @@ return [
             ],
             [
                 'name' => 'Tugas Dan Fungsi',
-                'url' => 'admin/general/tugas-dan-fungsi',
-                'code' => 'admin.general.tugas-dan-fungsi'
+                'url' => 'admin/general/tugas-fungsi',
+                'code' => 'admin.general.tugas-fungsi'
             ],
             [
                 'name' => 'Struktur Organisasi PPID',
