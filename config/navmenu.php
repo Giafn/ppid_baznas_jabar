@@ -35,7 +35,7 @@ return [
                 'code' => 'admin.general.tugas-fungsi'
             ],
             [
-                'name' => 'Struktur Organisasi PPID',
+                'name' => 'Struktur Organisasi',
                 'url' => 'admin/general/struktur-organisasi',
                 'code' => 'admin.general.struktur-organisasi'
             ],

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
+use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
 use App\Http\Controllers\SettingPage\General\VisiMisiController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
@@ -98,6 +99,9 @@ Route::group(['middleware' => 'auth'], function () {
             
             Route::get('tugas-fungsi', [TugasFungsiController::class, 'index']);
             Route::put('tugas-fungsi', [TugasFungsiController::class, 'update']);
+
+            Route::get('struktur-organisasi', [StrukturController::class, 'index']);
+            Route::put('struktur-organisasi', [StrukturController::class, 'update']);
         });
 
     });

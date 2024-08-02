@@ -20,5 +20,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@baznasjabar.org',
             'password' => bcrypt('ppidbaznasjabar@2024'),
         ]);
+
+        $this->call(
+            [
+                GeneralDataSeeder::class,
+            ]
+        );
     }
 }
