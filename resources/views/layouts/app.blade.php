@@ -61,6 +61,13 @@
         .text-green-primary {
             color: #0d6e09 !important;
         }
+
+        /* buat class collapse-item active menjadi bold dan warna putih */
+        .collapse-item.active {
+            font-weight: bold !important;
+            color: black !important;
+            background-color: rgba(255, 255, 255, 0.5) !important;
+        }
     </style>
     @stack('styles')
 </head>

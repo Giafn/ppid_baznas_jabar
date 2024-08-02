@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('formulirs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama');
+            $table->string('deskripsi')->nullable();
             $table->string('google_form_url');
             $table->string('form_file_url');
             $table->timestamps();

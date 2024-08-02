@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Visi Misi Setting')
+@section('title', 'Struktur Organisasi Setting')
 
 @php
     $itemBc = [

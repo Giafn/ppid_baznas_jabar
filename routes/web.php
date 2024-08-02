@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
+use App\Http\Controllers\SettingPage\LayananInformasi\FormulirController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 
@@ -102,6 +103,15 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('struktur-organisasi', [StrukturController::class, 'index']);
             Route::put('struktur-organisasi', [StrukturController::class, 'update']);
+        });
+
+        Route::prefix('layanan-informasi')->group(function () {
+            Route::get('formulir', [FormulirController::class, 'index']);
+            Route::get('formulir/create', [FormulirController::class, 'create']);
+            Route::post('formulir', [FormulirController::class, 'store']);
+            Route::get('formulir/{id}/edit', [FormulirController::class, 'edit']);
+            Route::put('formulir/{id}', [FormulirController::class, 'update']);
+            Route::delete('formulir/{id}', [FormulirController::class, 'destroy']);
         });
 
     });

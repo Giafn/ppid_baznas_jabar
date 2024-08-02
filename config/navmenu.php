@@ -40,5 +40,19 @@ return [
                 'code' => 'admin.general.struktur-organisasi'
             ],
         ]
-    ]
+    ],
+    [
+        'name' => 'Layanan Informasi',
+        'url' => '',
+        'icon' => 'fas fa-sitemap',
+        'code' => 'admin.layanan-informasi',
+        'child' => [
+            [
+                'name' => 'Formulir',
+                'url' => 'admin/layanan-informasi/formulir',
+                'code' => 'admin.layanan-informasi.formulir'
+            ],
+        ]
+    ],
+
 ];

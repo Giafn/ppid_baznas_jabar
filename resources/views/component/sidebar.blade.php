@@ -11,13 +11,18 @@
     <hr class="sidebar-divider my-0">
     @foreach (config('navmenu') as $menu)
             @if (array_key_exists('child', $menu))
-                <li class="nav-item {{ Request::is($menu['code'] . '*') ? 'active' : '' }}">
-                    <a class="nav-link collapsed dropdown-toggle active" href="#" data-bs-toggle="collapse"
+                @php
+                    $childUrls = array_map(function ($child) {
+                        return url($child['url']);
+                    }, $menu['child']);
+                @endphp
+                <li class="nav-item {{ in_array(Request::url(), $childUrls) ? 'active' : '' }}">
+                    <a class="nav-link collapsed dropdown-toggle" href="#" data-bs-toggle="collapse"
                         data-bs-target="#{{ $menu['code'] }}" aria-expanded="true" aria-controls="{{ $menu['code'] }}">
                         <i class="{{ $menu['icon'] }}"></i>
                         <span>{{ $menu['name'] }}</span>
                     </a>
-                    <div id="{{ $menu['code'] }}" class="collapse {{ Request::is($menu['code'] . '*') ? 'show' : '' }}">
+                    <div id="{{ $menu['code'] }}" class="collapse {{ in_array(Request::url(), $childUrls) ? 'show' : '' }}">
                         <div class="bg-warning py-2 collapse-inner rounded">
                             @foreach ($menu['child'] as $child)
                                 <a class="collapse-item {{ Request::url() == url($child['url']) ? 'active' : '' }}"
