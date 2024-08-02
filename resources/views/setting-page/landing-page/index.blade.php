@@ -5,7 +5,11 @@
 @php
     $itemBc = [
         [
-            'name' =>'Setting - Landing Page',
+            'name' =>'Dashboard',
+            'url' => '/admin/home',
+        ],
+        [
+            'name' =>'Landing Page',
             'url' => '/admin/landing-page-setting',
         ]
     ];

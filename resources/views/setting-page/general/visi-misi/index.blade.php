@@ -5,7 +5,7 @@
 @php
     $itemBc = [
         [
-            'name' =>'Home',
+            'name' =>'Dashboard',
             'url' => '/admin/home',
         ],
         [
