@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nama');
             $table->enum('type', ['page', 'url']);
-            $table->string('url');
-            $table->foreignUuid('page_id')->constrained('pages', 'id');
+            $table->string('url')->nullable();
+            $table->foreignUuid('page_id')->nullable();
             $table->timestamps();
         });
     }

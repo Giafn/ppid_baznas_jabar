@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
 use App\Http\Controllers\SettingPage\LayananInformasi\FormulirController;
+use App\Http\Controllers\SettingPage\LayananInformasi\ItemsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 
@@ -112,6 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('formulir/{id}/edit', [FormulirController::class, 'edit']);
             Route::put('formulir/{id}', [FormulirController::class, 'update']);
             Route::delete('formulir/{id}', [FormulirController::class, 'destroy']);
+
+            Route::get('list', [ItemsController::class, 'index']);
+            Route::get('list/create', [ItemsController::class, 'create']);
+            Route::post('list', [ItemsController::class, 'store']);
+            Route::get('list/{id}/edit', [ItemsController::class, 'edit']);
+            Route::put('list/{id}', [ItemsController::class, 'update']);
+            Route::delete('list/{id}', [ItemsController::class, 'destroy']);
         });
 
     });

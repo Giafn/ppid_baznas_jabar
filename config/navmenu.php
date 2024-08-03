@@ -52,6 +52,11 @@ return [
                 'url' => 'admin/layanan-informasi/formulir',
                 'code' => 'admin.layanan-informasi.formulir'
             ],
+            [
+                'name' => 'List Items',
+                'url' => 'admin/layanan-informasi/list',
+                'code' => 'admin.layanan-informasi.list'
+            ]
         ]
     ],
 
