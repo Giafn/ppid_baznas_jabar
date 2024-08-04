@@ -59,5 +59,49 @@ return [
             ]
         ]
     ],
+    [
+        'name' => 'Informasi Publik',
+        'url' => '',
+        'icon' => 'fas fa-info-circle',
+        'code' => 'admin.informasi-publik',
+        'child' => [
+            [
+                'name' => 'Berkala',
+                'url' => 'admin/informasi-publik/berkala',
+                'code' => 'admin.informasi-publik.berkala'
+            ],
+            [
+                'name' => 'Serta Merta',
+                'url' => 'admin/informasi-publik/serta-merta',
+                'code' => 'admin.informasi-publik.serta-merta'
+            ],
+            [
+                'name' => 'Setiap Saat',
+                'url' => 'admin/informasi-publik/setiap-saat',
+                'code' => 'admin.informasi-publik.setiap-saat'
+            ]
+        ]
+    ],
+    // regulasi
+    [
+        'name' => 'Regulasi',
+        'url' => 'admin/regulasi',
+        'icon' => 'fas fa-book',
+        'code' => 'admin.regulasi',
+    ],
+    // laporan
+    [
+        'name' => 'Laporan',
+        'url' => 'admin/laporan',
+        'icon' => 'fas fa-file-alt',
+        'code' => 'admin.laporan',
+    ],
+    // faq
+    [
+        'name' => 'FAQ',
+        'url' => 'admin/faq',
+        'icon' => 'fas fa-question-circle',
+        'code' => 'admin.faq',
+    ],
 
 ];

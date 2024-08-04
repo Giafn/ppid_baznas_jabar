@@ -368,6 +368,10 @@ if (document.querySelector('#formWithEditor')) {
 		contentTargetField.setAttribute('value', content);
 		this.submit();
 	});
+
+	window.resetEditor = function () {
+		ckeditorobj.setData('');
+	}
 }
 
 // cek if #image exists

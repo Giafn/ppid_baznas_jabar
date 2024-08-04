@@ -60,6 +60,8 @@
 @push('scripts')
 <script>
     $('#type').on('change', function() {
+        $('#url').val('');
+        resetEditor()
         if ($(this).val() == 'content') {
             $('#contentInput').removeClass('d-none');
             $('#urlInput').addClass('d-none');
@@ -69,6 +71,13 @@
             $('#urlInput').removeClass('d-none');
             $('#previewForm').removeClass('d-none');
         }
-    });
+    }); 
+    @if (old('type') == 'url' || $item->type == 'url')
+        $('#contentInput').addClass('d-none');
+        $('#urlInput').removeClass('d-none');
+    @else
+        $('#contentInput').removeClass('d-none');
+        $('#urlInput').addClass('d-none');
+    @endif
 </script>
 @endpush

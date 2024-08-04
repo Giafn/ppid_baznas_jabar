@@ -1,40 +1,45 @@
 <?php
 
-namespace App\Http\Controllers\SettingPage\LayananInformasi;
+namespace App\Http\Controllers\SettingPage\InformasiPublik;
 
 use App\Http\Controllers\Controller;
-use App\Models\LayananInformasiList;
+use App\Models\InformasiPublikItems;
 use App\Models\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ItemsController extends Controller
+class BerkalaController extends Controller
 {
     public function index(Request $request)
-    {
-        $validate = $request->validate([
-            'search' => 'nullable|string|max:255',
-        ]);
+        {
+            $validate = $request->validate([
+                'search' => 'nullable|string|max:255',
+            ]);
+    
+            $search = $request->search;
+            $items = InformasiPublikItems::when($search, function ($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%')
+                    ->orWhere('group', 'like', '%' . $search . '%');
+            })
+            ->where('golongan', 'berkala')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('group', 'asc')
+            ->paginate(10);
 
-        $search = $request->search;
-        $items = LayananInformasiList::when($search, function ($query) use ($search) {
-            $query->where('nama', 'like', '%' . $search . '%');
-        })->orderBy('created_at', 'desc')->paginate(10);
-
-        // TODO: remap url to page_id
-
-        return view('setting-page.layanan-informasi.item.index', compact('items'));
+        return view('setting-page.informasi-publik.berkala.index', compact('items'));
     }
 
     public function create()
     {
-        return view('setting-page.layanan-informasi.item.create');
+        $groups = InformasiPublikItems::where('golongan', 'berkala')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.berkala.create', compact('groups'));
     }
 
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'nama' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'group' => 'required|string|max:255',
             'type' => 'required|in:content,url',
             'url' => 'nullable|url|required_if:type,url',
             'content' => 'nullable|string|required_if:type,content',
@@ -46,7 +51,7 @@ class ItemsController extends Controller
             $pageId = null;
             if ($validate['type'] == 'content') {
                 $page = Pages::create([
-                    'title' => $validate['nama'],
+                    'title' => $validate['title'],
                     'content' => $validate['content'],
                     'posting_at' => now(),
                 ]);
@@ -55,8 +60,9 @@ class ItemsController extends Controller
                 $url = null;
             }
 
-            $list = LayananInformasiList::create([
-                'nama' => $validate['nama'],
+            $list = InformasiPublikItems::create([
+                'nama' => $validate['title'],
+                'group' => $request->group,
                 'type' => $validate['type'] == 'content' ? 'page' : 'url',
                 'url' => $url ?? null,
                 'page_id' => $pageId,
@@ -69,20 +75,21 @@ class ItemsController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/layanan-informasi/list')->with('success', 'Data berhasil ditambahkan');
+        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $item = LayananInformasiList::where('id', $id)->with('page')->first();
-
-        return view('setting-page.layanan-informasi.item.edit', compact('item'));
+        $item = InformasiPublikItems::where('id', $id)->with('page')->first();
+        $groups = InformasiPublikItems::where('golongan', 'berkala')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.berkala.edit', compact('item', 'groups'));
     }
 
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'nama' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'group' => 'required|string|max:255',
             'type' => 'required|in:content,url',
             'url' => 'nullable|url|required_if:type,url',
             'content' => 'nullable|string|required_if:type,content',
@@ -96,13 +103,13 @@ class ItemsController extends Controller
                 $page = Pages::where('id', $id)->first();
                 if (!$page) {
                     $page = Pages::create([
-                        'title' => $validate['nama'],
+                        'title' => $validate['title'],
                         'content' => $validate['content'],
                         'posting_at' => now(),
                     ]);
                 } else {
                     $page->update([
-                        'title' => $validate['nama'],
+                        'title' => $validate['title'],
                         'content' => $validate['content'],
                     ]);
                 }
@@ -111,9 +118,10 @@ class ItemsController extends Controller
                 $url = null;
             }
 
-            $list = LayananInformasiList::findOrFail($id);
+            $list = InformasiPublikItems::findOrFail($id);
             $list->update([
-                'nama' => $validate['nama'],
+                'nama' => $validate['title'],
+                'group' => $request->group,
                 'type' => $validate['type'] == 'content' ? 'page' : 'url',
                 'url' => $url ?? null,
                 'page_id' => $pageId,
@@ -126,14 +134,14 @@ class ItemsController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/layanan-informasi/list')->with('success', 'Data berhasil diubah');
+        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil diubah');
     }
 
     public function destroy($id)
     {
-        try {
+        try {   
             DB::beginTransaction();
-            $item = LayananInformasiList::findOrFail($id);
+            $item = InformasiPublikItems::findOrFail($id);
             $item->delete();
             DB::commit();
         } catch (\Exception $e) {
@@ -141,6 +149,6 @@ class ItemsController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/layanan-informasi/list')->with('success', 'Data berhasil dihapus');
+        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil dihapus');
     }
 }

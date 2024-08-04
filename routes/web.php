@@ -5,6 +5,7 @@ use App\Http\Controllers\SettingPage\General\ProfileController;
 use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
 use App\Http\Controllers\SettingPage\General\VisiMisiController;
+use App\Http\Controllers\SettingPage\InformasiPublik\BerkalaController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
@@ -120,6 +121,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('list/{id}/edit', [ItemsController::class, 'edit']);
             Route::put('list/{id}', [ItemsController::class, 'update']);
             Route::delete('list/{id}', [ItemsController::class, 'destroy']);
+        });
+
+        Route::prefix('informasi-publik')->group(function () {
+            Route::get('berkala', [BerkalaController::class, 'index']);
+            Route::get('berkala/create', [BerkalaController::class, 'create']);
+            Route::post('berkala', [BerkalaController::class, 'store']);
+            Route::get('berkala/{id}/edit', [BerkalaController::class, 'edit']);
+            Route::put('berkala/{id}', [BerkalaController::class, 'update']);
+            Route::delete('berkala/{id}', [BerkalaController::class, 'destroy']);
         });
 
     });

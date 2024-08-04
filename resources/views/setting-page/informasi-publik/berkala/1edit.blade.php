@@ -38,12 +38,12 @@
                             <option value="url" {{ old('type') == 'url' || $item->type == 'url' ? 'selected' : '' }}>Url</option>
                         </select>
                     </div>
-                    <div class="mb-3" id="contentInput">
+                    <div class="mb-3 {{ old('type') == 'content' || $item->type == 'page' ? '' : 'd-none' }}" id="contentInput">
                         <label for="content" class="form-label">Konten</label>
                         <div id="editor"></div>
                         <input name="content" id="contentTarget" style="display: none;" value="{{ old('content') ?? ($item->page ? $item->page->content : '') }}">
                     </div>
-                    <div class="mb-3" id="urlInput">
+                    <div class="mb-3 {{ old('type') == 'url' || $item->type == 'url' ? '' : 'd-none' }}" id="urlInput">
                         <label for="url" class="form-label">Url</label>
                         <input type="text" class="form-control" id="url" name="url" value="{{ old('url') ?? $item->url }}">
                     </div>
@@ -73,7 +73,7 @@
             $('#previewForm').removeClass('d-none');
         }
     }); 
-    @if (old('type') == 'url' || $item->type == 'url')
+@if (old('type') == 'url' || $item->type == 'url')
         $('#contentInput').addClass('d-none');
         $('#urlInput').removeClass('d-none');
     @else

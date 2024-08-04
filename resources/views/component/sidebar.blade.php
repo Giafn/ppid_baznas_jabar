@@ -20,7 +20,7 @@
                     <a class="nav-link collapsed dropdown-toggle" href="#" data-bs-toggle="collapse"
                         data-bs-target="#{{ $menu['code'] }}" aria-expanded="true" aria-controls="{{ $menu['code'] }}">
                         <i class="{{ $menu['icon'] }}"></i>
-                        <span>{{ $menu['name'] }}</span>
+                        <span class="text-truncate">{{ $menu['name'] }}</span>
                     </a>
                     <div id="{{ $menu['code'] }}" class="collapse {{ in_array(Request::url(), $childUrls) ? 'show' : '' }}">
                         <div class="bg-warning py-2 collapse-inner rounded">

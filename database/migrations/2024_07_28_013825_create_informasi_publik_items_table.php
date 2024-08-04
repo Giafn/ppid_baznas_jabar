@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('informasi_publik_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->enum('golongan', ['berkala', 'setiap_saat', 'serta_merta']);
-            $table->foreignUuid('berkala_type_id')->nullable()->constrained('informasi_publik_berkala_tipes', 'id');
+            $table->string('group')->nullable();
             $table->string('nama');
             $table->enum('type', ['page', 'url']);
-            $table->string('url');
-            $table->foreignUuid('page_id')->constrained('pages', 'id');
+            $table->string('url')->nullable();
+            $table->foreignUuid('page_id')->nullable();
             $table->timestamps();
         });
     }
