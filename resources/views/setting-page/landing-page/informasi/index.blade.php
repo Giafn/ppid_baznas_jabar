@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $item)
+                            @forelse ($data as $item)
                             <tr>
                                 <td>
                                     <img src="{{ $item->image }}" alt="{{ $item->title }}" style="max-width: 100px;">
@@ -69,7 +69,10 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Data tidak ditemukan</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

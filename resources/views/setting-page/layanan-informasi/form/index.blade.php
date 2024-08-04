@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($formulirs as $item)
+                            @forelse ($formulirs as $item)
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
@@ -62,7 +62,11 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -4,7 +4,7 @@
 
 <div id="bigCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach ($sliders as $key => $slider)
+        @forelse ($sliders as $key => $slider)
             <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" 
             href="{{ $slider->url }}" 
             target="_blank">
@@ -14,7 +14,15 @@
                     style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
             </div>
             </a>
-        @endforeach
+        @empty
+            <div class="carousel-item active">
+                <div style="width: 100%; height: 700px; overflow: hidden;">
+                    <img src="{{ asset('image/no-image.png') }}" 
+                        alt="No Image"
+                        style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                </div>
+            </div>
+        @endforelse
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#bigCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
