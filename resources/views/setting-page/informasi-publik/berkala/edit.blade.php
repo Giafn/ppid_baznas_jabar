@@ -31,7 +31,6 @@
                         <label for="title" class="form-label">Judul Informasi</label>
                         <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') ?? $item->nama }}">
                     </div>
-                    @if ($groups->count() > 0)
                     <div class="mb-3">
                         <label for="group" class="form-label">Group</label>
                         <select class="form-select" id="group" name="group" required>
@@ -45,12 +44,6 @@
                         <input type="checkbox" id="newGroup" name="newGroup" value="1" {{ old('newGroup') ? 'checked' : '' }}>
                         <label for="newGroup">Buat Group Baru</label>
                     </div>
-                    @else
-                    <div class="mb-3">
-                        <label for="group" class="form-label">Group</label>
-                        <input type="text" class="form-control" id="group" name="group" required value="{{ old('group') }}">
-                    </div>
-                    @endif
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
                         <select class="form-select" id="type" name="type" required>
@@ -111,6 +104,11 @@
             $('#newGroupInput').removeClass('d-none');
             $('#group').addClass('d-none');
         }
+    });
+
+    // onchange group isi input group
+    $('#group').on('change', function() {
+        $('#newGroupInput').val($(this).val());
     });
     
     @if (old('type') == 'url' || $item->type == 'url')

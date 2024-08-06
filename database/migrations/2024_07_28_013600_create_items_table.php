@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('sub_title');
             $table->text('mini_content');
-            $table->enum('type', ['image', 'pdf']);
-            $table->string('url');
+            $table->string('type_list')->nullable();
+            $table->enum('type', ['image', 'pdf'])->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

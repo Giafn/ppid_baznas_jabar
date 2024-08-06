@@ -6,6 +6,8 @@ use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
 use App\Http\Controllers\SettingPage\General\VisiMisiController;
 use App\Http\Controllers\SettingPage\InformasiPublik\BerkalaController;
+use App\Http\Controllers\SettingPage\InformasiPublik\SertaMertaController;
+use App\Http\Controllers\SettingPage\InformasiPublik\SetiapSaatController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
@@ -130,6 +132,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('berkala/{id}/edit', [BerkalaController::class, 'edit']);
             Route::put('berkala/{id}', [BerkalaController::class, 'update']);
             Route::delete('berkala/{id}', [BerkalaController::class, 'destroy']);
+
+            // serta merta
+            Route::get('setiap-saat', [SetiapSaatController::class, 'index']);
+            Route::get('setiap-saat/create', [SetiapSaatController::class, 'create']);
+            Route::post('setiap-saat', [SetiapSaatController::class, 'store']);
+            Route::get('setiap-saat/{id}/edit', [SetiapSaatController::class, 'edit']);
+            Route::put('setiap-saat/{id}', [SetiapSaatController::class, 'update']);
+            Route::delete('setiap-saat/{id}', [SetiapSaatController::class, 'destroy']);
         });
 
     });

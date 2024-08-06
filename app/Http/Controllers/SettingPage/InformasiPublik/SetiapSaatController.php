@@ -8,7 +8,7 @@ use App\Models\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BerkalaController extends Controller
+class SetiapSaatController extends Controller
 {
     public function index(Request $request)
         {
@@ -21,18 +21,18 @@ class BerkalaController extends Controller
                 $query->where('nama', 'like', '%' . $search . '%')
                     ->orWhere('group', 'like', '%' . $search . '%');
             })
-            ->where('golongan', 'berkala')
+            ->where('golongan', 'setiap_saat')
             ->orderBy('created_at', 'desc')
             ->orderBy('group', 'asc')
             ->paginate(10);
 
-        return view('setting-page.informasi-publik.berkala.index', compact('items'));
+        return view('setting-page.informasi-publik.setiap-saat.index', compact('items'));
     }
 
     public function create()
     {
-        $groups = InformasiPublikItems::where('golongan', 'berkala')->pluck('group')->unique();
-        return view('setting-page.informasi-publik.berkala.create', compact('groups'));
+        $groups = InformasiPublikItems::where('golongan', 'setiap_saat')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.setiap-saat.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -66,7 +66,7 @@ class BerkalaController extends Controller
                 'type' => $validate['type'] == 'content' ? 'page' : 'url',
                 'url' => $url ?? null,
                 'page_id' => $pageId,
-                'golongan' => 'berkala',
+                'golongan' => 'setiap_saat',
             ]);
 
             DB::commit();
@@ -76,14 +76,14 @@ class BerkalaController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil ditambahkan');
+        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $item = InformasiPublikItems::where('id', $id)->with('page')->first();
-        $groups = InformasiPublikItems::where('golongan', 'berkala')->pluck('group')->unique();
-        return view('setting-page.informasi-publik.berkala.edit', compact('item', 'groups'));
+        $groups = InformasiPublikItems::where('golongan', 'setiap_saat')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.setiap-saat.edit', compact('item', 'groups'));
     }
 
     public function update(Request $request, $id)
@@ -135,7 +135,7 @@ class BerkalaController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil diubah');
+        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil diubah');
     }
 
     public function destroy($id)
@@ -150,6 +150,6 @@ class BerkalaController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/berkala')->with('success', 'Data berhasil dihapus');
+        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil dihapus');
     }
 }

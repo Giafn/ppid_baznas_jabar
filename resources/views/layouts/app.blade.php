@@ -87,8 +87,8 @@
             <!-- Main Content -->
             <div id="content">
                 @include('component.navbar')
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
+                <div class="row justify-content-center px-md-0 px-3">
+                    <div class="col-md-11">
                         <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
