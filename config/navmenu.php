@@ -82,6 +82,25 @@ return [
             ]
         ]
     ],
+    // custom page
+    [
+        'name' => 'Halaman',
+        'url' => '',
+        'icon' => 'fas fa-file-alt',
+        'code' => 'admin.custom-page',
+        'child' => [
+            [
+                'name' => 'Katagori Halaman',
+                'url' => 'admin/custom-page/kategori',
+                'code' => 'admin.custom-page.kategori'
+            ],
+            [
+                'name' => 'List Halaman',
+                'url' => 'admin/custom-page',
+                'code' => 'admin.custom-page.page'
+            ]
+        ]
+    ],
     // regulasi
     [
         'name' => 'Regulasi',

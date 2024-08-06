@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
+use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
 use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
@@ -140,6 +141,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('setiap-saat/{id}/edit', [SetiapSaatController::class, 'edit']);
             Route::put('setiap-saat/{id}', [SetiapSaatController::class, 'update']);
             Route::delete('setiap-saat/{id}', [SetiapSaatController::class, 'destroy']);
+        });
+
+        Route::prefix('custom-page')->group(function () {
+            // kategori
+            Route::get('kategori', [KategoriPagesController::class, 'index']);
+            Route::post('kategori', [KategoriPagesController::class, 'store']);
+            Route::put('kategori/{id}', [KategoriPagesController::class, 'update']);
+            Route::delete('kategori/{id}', [KategoriPagesController::class, 'destroy']);
         });
 
     });
