@@ -20,10 +20,6 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                {{-- <a class="btn bg-green-primary" href="/admin/custom-page/create">
-                    Tambah Page
-                </a> --}}
-                {{-- dropdown tambah page --}}
                 <div class="dropdown">
                     <button class="btn bg-green-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Tambah Page
@@ -36,10 +32,39 @@
                         <li><a class="dropdown-item" href="/admin/custom-page/create/list-content">Tampilan List Konten</a></li>
                     </ul>
                 </div>
-                <form action="/admin/custom-page" method="GET">
-                    <div class="input-group mt-2">
-                        <input type="text" class="form-control" placeholder="Cari halaman" name="search" value="{{ request()->get('search') }}">
-                        <button class="btn bg-green-primary" type="submit">Cari</button>
+                <form action="/admin/custom-page" method="GET" id="formSearch">
+                    <div class="row">
+                        <div class="col-xl-6 mt-2">
+                            <div class="input-group">
+                                <select class="form-select" name="category_id">
+                                    <option value="">Semua Kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 mt-2">
+                            <div class="input-group">
+                                <select class="form-select" name="type">
+                                    <option value="">Semua Type</option>
+                                    @foreach ($typePages as $key => $typePage)
+                                        <option value="{{ $key }}" {{ request()->get('type') == $key ? 'selected' : '' }}>
+                                            {{ $typePage }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 mt-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari halaman" name="search" value="{{ request()->get('search') }}">
+                                <button class="btn bg-green-primary" type="submit">Cari</button>
+                                <a href="/admin/custom-page" class="btn btn-secondary">Reset</a>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -70,15 +95,19 @@
                                     {{ $item->type }}
                                 </td>
                                 <td>
-                                    {{ $item->url }}
+                                    <a href="{{ $item->url }}" target="_blank">
+                                        {{ $item->url }}
+                                    </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/custom-page/{{ $item->id }}/edit" class="btn bg-green-primary">
-                                        Edit
-                                    </a>
-                                    <button class="btn bg-green-primary" onclick="openModalDelete('{{ $item->id }}')">
-                                        Delete
-                                    </button>
+                                    <div class="d-flex gap-1">
+                                        <a href="/admin/custom-page/{{ $item->id }}/edit" class="btn bg-green-primary">
+                                            Edit
+                                        </a>
+                                        <button class="btn bg-green-primary" onclick="openModalDelete('{{ $item->id }}')">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                             @empty
@@ -131,5 +160,10 @@
         $('#modalDelete').modal('show');
         $('#modalDeleteForm').attr('action', '/admin/custom-page/' + id);
     }
+
+    // on change category dan type
+    $('select[name="category_id"], select[name="type"]').on('change', function() {
+        $('#formSearch').submit();
+    });
 </script>
 @endpush

@@ -24,22 +24,42 @@ class CustomPagesController extends Controller
 
     public function index(Request $request)
     {
+        // dd($request->all());
         $validate = $request->validate([
             'search' => 'nullable|string|max:255',
+            'category_id' => 'nullable|exists:category_page,id',
+            'type' => 'nullable|string|max:255',
         ]);
+        $type = $request->type;
+        $category = $request->category_id;
         $search = $request->search;
+        if ($type && !array_key_exists($type, $this->translateTypePage)) {
+            return redirect()->back()->with('error', 'Tipe halaman tidak ditemukan');
+        }
         $pages = CustomPage::when($search, function ($query) use ($search) {
             $query->where('title', 'like', '%' . $search . '%');
-        })->with('category')
+        })
+        ->when($category, function ($query) use ($category) {
+            $query->where('category_page_id', $category);
+        })
+        ->when($type, function ($query) use ($type) {
+            $query->where('type_pages', $type);
+        })
+        ->with('category')
         ->orderBy('created_at', 'desc')->paginate(10);
 
         // mapping type
         $pages->map(function ($item) {
             $item->type = $this->translateTypePage[$item->type_pages];
+            $item->url = route('custom-page.show', [$item->id, Str::slug($item->title, '-')]);
             return $item;
         });
 
-        return view('setting-page.custom-page.index', compact('pages'));
+        $categories = CategoryPage::all();
+
+        $typePages = $this->translateTypePage;
+
+        return view('setting-page.custom-page.index', compact('pages', 'categories', 'typePages'));
     }
 
     public function create($type)
@@ -494,10 +514,10 @@ class CustomPagesController extends Controller
     public function show($id, $dashedTitle)
     {
         $page = CustomPage::findOrFail($id);
-        // $title = Str::slug($page->title, '-');
-        // if ($title != $dashedTitle) {
-        //     abort(404);
-        // }
+        $title = Str::slug($page->title, '-');
+        if ($title != $dashedTitle) {
+            abort(404);
+        }
 
         if ($page->type_pages == 'single-file-or-image') {
             return view('custom-page.show-single-file-or-image', compact('page'));
@@ -517,5 +537,14 @@ class CustomPagesController extends Controller
             $items = ItemsCustom::where('custom_page_id', $page->id)->orderBy('parent_group', 'asc')->get();
             return view('custom-page.show-list-content', compact('page', 'items'));
         }
+    }
+
+    // get url
+    public static function getUrl($id)
+    {
+        $page = CustomPage::findOrFail($id);
+        return response()->json([
+            'url' => route('custom-page.show', [$page->id, Str::slug($page->title, '-')]),
+        ]);
     }
 }
