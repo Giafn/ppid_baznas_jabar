@@ -416,10 +416,24 @@ class CustomPagesController extends Controller
 
     public function destroy($id)
     {
-        $formulir = Formulir::findOrFail($id);
-        $formulir->delete();
+        $page = CustomPage::findOrFail($id);
+        if ($page->type_pages == 'single-file-or-image') {
+            if ($page->file_url) {
+                $file = str_replace('/storage/', '', $page->file_url);
+                Storage::disk('public')->delete($file);
+            }
+        } elseif ($page->type_pages == 'list-file-or-image') {
+            $items = ItemsCustom::where('custom_page_id', $page->id)->get();
+            foreach ($items as $key => $value) {
+                if ($value->type == 'file' || $value->type == 'image') {
+                    $file = str_replace('/storage/', '', $value->url);
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        }
 
-        return redirect('/admin/layanan-informasi/formulir')->with('success', 'Berhasil menghapus data');
+        $page->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
 
     private function additionalValidate($validate, $type)
