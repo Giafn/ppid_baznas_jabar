@@ -4,11 +4,11 @@
 <div class="container my-3 w-100">
     <div class="row justify-content-center my-5 px-2">
         <div class="col-md-10">
-            <h3 class="text-center fw-bolder mb-3 text-green-primary">
+            <h2 class="text-center fw-bolder mb-3 text-green-primary">
                 {{ $page->title }}
-            </h3>
+            </h2>
             <small>
-                <div class="text-center fw-bold">{{ $page->sub_title }}</div>
+                <div class="text-center fw-bold mb-3">{{ $page->sub_title }}</div>
             </small>
             <div class="row justify-content-center">
                 @php
