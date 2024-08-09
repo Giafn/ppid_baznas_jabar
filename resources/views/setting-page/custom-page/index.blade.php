@@ -10,7 +10,7 @@
         ],
         [
             'name' =>'Custom Page Setting',
-            'url' => '/admin/layanan-informasi/formulir',
+            'url' => '/admin/custom-page',
         ]
     ];
 @endphp
@@ -20,12 +20,25 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <a class="btn bg-green-primary" href="/admin/layanan-informasi/formulir/create">
+                {{-- <a class="btn bg-green-primary" href="/admin/custom-page/create">
                     Tambah Page
-                </a>
-                <form action="/admin/layanan-informasi/formulir" method="GET">
+                </a> --}}
+                {{-- dropdown tambah page --}}
+                <div class="dropdown">
+                    <button class="btn bg-green-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tambah Page
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="/admin/custom-page/create/single-file-or-image">Tampilan File/Gambar</a></li>
+                        <li><a class="dropdown-item" href="/admin/custom-page/create/single-video">Tampilan Video</a></li>
+                        <li><a class="dropdown-item" href="/admin/custom-page/create/list-file-or-image">Tampilan List File/Gambar</a></li>
+                        <li><a class="dropdown-item" href="/admin/custom-page/create/single-content">Tampilan Konten</a></li>
+                        <li><a class="dropdown-item" href="/admin/custom-page/create/list-content">Tampilan List Konten</a></li>
+                    </ul>
+                </div>
+                <form action="/admin/custom-page" method="GET">
                     <div class="input-group mt-2">
-                        <input type="text" class="form-control" placeholder="Cari Form" name="search" value="{{ request()->get('search') }}">
+                        <input type="text" class="form-control" placeholder="Cari halaman" name="search" value="{{ request()->get('search') }}">
                         <button class="btn bg-green-primary" type="submit">Cari</button>
                     </div>
                 </form>
@@ -36,25 +49,31 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Url Google Form</th>
-                                <th>Form File</th>
+                                <th>Kategori</th>
+                                <th>Title</th>
+                                <th>Type Page</th>
+                                <th>Url</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($formulirs as $item)
+                            @forelse ($pages as $item)
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
                                 </td>
-                                <td>{{ $item->nama }}</td>
-                                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    <a href="{{ $item->google_form_url }}" target="_blank">{{ $item->google_form_url }}</a>
-                                </td>
-                                <td><a href="{{ $item->form_file_url }}" target="_blank">Lihat</a></td>
+                                <td>{{ $item->category->nama }}</td>
                                 <td>
-                                    <a href="/admin/layanan-informasi/formulir/{{ $item->id }}/edit" class="btn bg-green-primary">
+                                    {{ $item->title }}
+                                </td>
+                                <td>
+                                    {{ $item->type }}
+                                </td>
+                                <td>
+                                    {{ $item->url }}
+                                </td>
+                                <td>
+                                    <a href="/admin/custom-page/{{ $item->id }}/edit" class="btn bg-green-primary">
                                         Edit
                                     </a>
                                     <button class="btn bg-green-primary" onclick="openModalDelete('{{ $item->id }}')">
@@ -64,7 +83,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
+                                <td colspan="6" class="text-center">Data tidak ditemukan</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -73,7 +92,7 @@
             </div>
         </div>
         <div class="mt-2 d-flex justify-content-end">
-            {{ $formulirs->links() }}
+            {{ $pages->links() }}
         </div>
     </div>
 </div>
@@ -110,7 +129,7 @@
 <script>
     function openModalDelete(id) {
         $('#modalDelete').modal('show');
-        $('#modalDeleteForm').attr('action', '/admin/layanan-informasi/formulir/' + id);
+        $('#modalDeleteForm').attr('action', '/admin/custom-page/' + id);
     }
 </script>
 @endpush

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
+use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
 use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
 use App\Http\Controllers\SettingPage\General\StrukturController;
@@ -62,6 +63,7 @@ Route::get('/test', function () {
 // group auth
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload', [UploadController::class, 'store'])->name('upload');
+    Route::post('/temp-upload', [UploadController::class, 'tempUpload'])->name('temp-upload');
     // landig page setting
     // admin prefix
     Route::prefix('admin')->group(function () {
@@ -149,6 +151,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('kategori', [KategoriPagesController::class, 'store']);
             Route::put('kategori/{id}', [KategoriPagesController::class, 'update']);
             Route::delete('kategori/{id}', [KategoriPagesController::class, 'destroy']);
+
+            // list
+            Route::get('', [CustomPagesController::class, 'index']);
+            Route::get('create/{tipe}', [CustomPagesController::class, 'create']);
+            Route::post('', [CustomPagesController::class, 'store']);
+            Route::get('{id}/edit', [CustomPagesController::class, 'edit']);
+            Route::put('{id}', [CustomPagesController::class, 'update']);
+            Route::delete('{id}', [CustomPagesController::class, 'destroy']);
         });
 
     });

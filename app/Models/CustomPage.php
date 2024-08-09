@@ -12,4 +12,9 @@ class CustomPage extends Model
 
     protected $table = 'custom_page';
     protected $guarded = [];
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryPage::class, 'category_page_id');
+    }
 }
