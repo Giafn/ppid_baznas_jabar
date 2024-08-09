@@ -80,7 +80,6 @@ class CustomPagesController extends Controller
         ];
         $fullValidate = $this->additionalValidate($validate, $request->type);
         $request->validate($fullValidate);
-        // dd($request->all());
         
         try {
             DB::beginTransaction();
@@ -137,7 +136,6 @@ class CustomPagesController extends Controller
                     }
                 } catch (\Exception $e) {
                     DB::rollBack();
-                    dd($e);
                     if (isset($storage)) {
                         Storage::delete($storage);
                     }
@@ -175,7 +173,6 @@ class CustomPagesController extends Controller
                     }
                 } catch (\Exception $e) {
                     DB::rollBack();
-                    dd($e);
                     return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
                 }
 
@@ -188,7 +185,6 @@ class CustomPagesController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
             if (Storage::exists($storage)) {
                 Storage::delete($storage);
             }
@@ -201,8 +197,20 @@ class CustomPagesController extends Controller
 
     public function edit($id)
     {
-        $formulir = Formulir::findOrFail($id);
-        return view('setting-page.layanan-informasi.form.edit', compact('formulir'));
+        $page = CustomPage::findOrFail($id);
+        $kategori = CategoryPage::all();
+
+        if ($page->type_pages == 'single-file-or-image') {
+            return view('setting-page.custom-page.edit-single-file-or-image', compact('page', 'kategori'));
+        } elseif ($page->type_pages == 'single-video') {
+            return view('setting-page.custom-page.edit-single-video', compact('page', 'kategori'));
+        } elseif ($page->type_pages == 'list-file-or-image') {
+            return view('setting-page.custom-page.edit-list-file-or-image', compact('page', 'kategori'));
+        } elseif ($page->type_pages == 'single-content') {
+            return view('setting-page.custom-page.edit-single-content', compact('page', 'kategori'));
+        } elseif ($page->type_pages == 'list-content') {
+            return view('setting-page.custom-page.edit-list-content', compact('page', 'kategori'));
+        }
     }
 
     public function update(Request $request, $id)

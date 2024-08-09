@@ -659,7 +659,6 @@
 
         let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
         let groups = JSON.parse(sessionStorage.getItem('groups-'+pageId)) || [];
-        console.log('wkwkwk');
 
         let form = document.getElementById('formWithEditor');
 

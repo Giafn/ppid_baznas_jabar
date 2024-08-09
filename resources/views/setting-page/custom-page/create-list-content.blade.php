@@ -221,7 +221,6 @@
         $('#labelEdit').val(label);
         let kontenElement = $(`#konten-${id}`).html();
         konten = kontenElement;
-        console.log(konten);
         $('#contentListEdit').val(konten);
         $('#contentListEdit').summernote("code", konten);
         $('#modalEditItem').modal('show');
@@ -548,7 +547,6 @@
 
         let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
         let groups = JSON.parse(sessionStorage.getItem('groups-'+pageId)) || [];
-        console.log('wkwkwk');
 
         let form = document.getElementById('formWithEditor');
 
