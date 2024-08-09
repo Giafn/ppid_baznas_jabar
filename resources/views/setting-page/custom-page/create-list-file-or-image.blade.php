@@ -172,7 +172,7 @@
         min-height: 150px;
         border: 2px dashed #cccccc;
     }
-    .col-4.draggable {
+    .col-3.draggable {
         cursor: move;
     }
 </style>
@@ -280,7 +280,7 @@
     }
 
     function deleteItem(element) {
-        $(element).closest('.col-4').remove();
+        $(element).closest('.col-3').remove();
         checkItem();
         deleteItemData($(element).closest('.card').attr('id'));
     }
@@ -289,9 +289,9 @@
         let randomIdWithUUID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         if (type == 'file') {
             var element = `
-                <div class="col-4 draggable" draggable="true">
+                <div class="col-3 draggable" draggable="true">
                     <div class="card" id="${randomIdWithUUID}" data-url="${url}">
-                        <embed src="${url}" type="application/pdf" width="100%" class="card-img-top" alt="${label}" style="height: 200px;">
+                        <embed src="${url}" type="application/pdf" width="100%" class="card-img-top" alt="${label}" style="height: 300px;">
                         <div class="position-absolute top-0 end-0 p-2">
                             <a href="${url}" target="_blank" class="btn bg-green-primary">
                                 <i class="fas fa-external-link-alt"></i>
@@ -316,9 +316,11 @@
             `;
         } else {
             var element = `
-                <div class="col-4 draggable" draggable="true">
+                <div class="col-3 draggable" draggable="true">
                     <div class="card" id="${randomIdWithUUID}" data-url="${url}">
-                        <img src="${url}" class="card-img-top" alt="${label}" style="height: 200px;">
+                        <div class="" style="height: 300px; overflow: hidden;">
+                        <img src="${url}" class="card-img-top" alt="${label}" style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">${label}</h5>
@@ -338,7 +340,7 @@
             `;
         }
         checkItem();
-        saveItem(randomIdWithUUID, label, keterangan, type, url);
+        saveItem(randomIdWithUUID, label, keterangan, type, url, idWrapper);
         $(`#${idWrapper}`).append(element);
     }
 
@@ -348,7 +350,7 @@
         if (type == 'file') {
             var element = `
                 <div class="card" id="${idBaru}" data-url="${url}">
-                    <embed src="${url}" type="application/pdf" width="100%" class="card-img-top" alt="${label}" style="height: 200px;">
+                    <embed src="${url}" type="application/pdf" width="100%" class="card-img-top" alt="${label}" style="height: 300px;">
                     <div class="position-absolute top-0 end-0 p-2">
                         <a href="${url}" target="_blank" class="btn bg-green-primary">
                             <i class="fas fa-external-link-alt"></i>
@@ -373,7 +375,9 @@
         } else {
             var element = `
                 <div class="card" id="${idBaru}" data-url="${url}">
-                    <img src="${url}" class="card-img-top" alt="${label}" style="height: 200px;">
+                    <div class="" style="height: 300px; overflow: hidden;">
+                        <img src="${url}" class="card-img-top" alt="${label}" style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title">${label}</h5>
@@ -424,23 +428,23 @@
     }
 
     // save item to session storage
-    async function saveItem(id, label, keterangan, type, url) {
-        let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
+    async function saveItem(id, label, keterangan, type, url, group = null) {
+        let items = JSON.parse(sessionStorage.getItem('items-create')) || [];
         items.push({
             id: id,
             label: label,
             keterangan: keterangan,
             type: type,
             url: url,
-            group: null
+            group: group === 'list-item' ? null : group
         });
-        await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
+        await sessionStorage.setItem('items-create', JSON.stringify(items));
         await updateItemAndGroupInput();
     }
 
     // update item to session storage
     async function updateItem(id, idBaru, label, keterangan, type, url) {
-        let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
+        let items = JSON.parse(sessionStorage.getItem('items-create')) || [];
         let index = items.findIndex(item => item.id == id);
         items[index] = {
             id: idBaru,
@@ -448,19 +452,19 @@
             keterangan: keterangan,
             type: type,
             url: url,
-            group: null
+            group: items[index].group
         };
-        await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
+        await sessionStorage.setItem('items-create', JSON.stringify(items));
         await updateItemAndGroupInput();
     }
 
     async function saveGroup(id, label) {
-        let groups = JSON.parse(sessionStorage.getItem('groups-'+pageId)) || [];
+        let groups = JSON.parse(sessionStorage.getItem('groups-create')) || [];
         groups.push({
             id: id,
             label: label
         });
-        await sessionStorage.setItem('groups-'+pageId, JSON.stringify(groups));
+        await sessionStorage.setItem('groups-create', JSON.stringify(groups));
         await updateItemAndGroupInput();
     }
 
@@ -472,7 +476,7 @@
         }
 
         // Retrieve the items from session storage
-        let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
+        let items = JSON.parse(sessionStorage.getItem('items-create')) || [];
         
         // Find the index of the item with the given id
         let index = items.findIndex(item => item.id == id);
@@ -483,7 +487,7 @@
             items[index].group = group;
             
             // Save the updated items back to session storage
-            await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
+            await sessionStorage.setItem('items-create', JSON.stringify(items));
         }
         await updateItemAndGroupInput();
     }
@@ -491,16 +495,16 @@
 
     // delete item from session storage
     async function deleteItemData(id) {
-        let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
+        let items = JSON.parse(sessionStorage.getItem('items-create')) || [];
         let index = items.findIndex(item => item.id == id);
         items.splice(index, 1);
-        await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
+        await sessionStorage.setItem('items-create', JSON.stringify(items));
         await updateItemAndGroupInput();
     }
 
     $(document).ready(function() {
-        sessionStorage.removeItem('items-' + pageId);
-        sessionStorage.removeItem('groups-'+pageId);
+        sessionStorage.removeItem('items-create');
+        sessionStorage.removeItem('groups-create');
         
         $(document).on('dragstart', '.draggable', function(e) {
             draggedCard = this;
@@ -575,10 +579,10 @@
         $(`#${id}`).children().appendTo('#list-item');
         $(`#title-group-${id}`).remove();
         $(`#${id}`).remove();
-        let groups = JSON.parse(sessionStorage.getItem('groups-'+pageId)) || [];
+        let groups = JSON.parse(sessionStorage.getItem('groups-create')) || [];
         let index = groups.findIndex(group => group.id == id);
         groups.splice(index, 1);
-        sessionStorage.setItem('groups-'+pageId, JSON.stringify(groups));
+        sessionStorage.setItem('groups-create', JSON.stringify(groups));
 
         checkItem();
     }
@@ -634,6 +638,9 @@
                 `;
                 let parentList = $('#list-item').parent();
                 parentList.append(element);
+
+                // save group to session storage
+                saveGroup(idGroupLama, labelGroupLama);
             @endforeach
         @endif
 
@@ -657,8 +664,8 @@
         $('.item-input').remove();
         $('.group-input').remove();
 
-        let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
-        let groups = JSON.parse(sessionStorage.getItem('groups-'+pageId)) || [];
+        let items = JSON.parse(sessionStorage.getItem('items-create')) || [];
+        let groups = JSON.parse(sessionStorage.getItem('groups-create')) || [];
 
         let form = document.getElementById('formWithEditor');
 

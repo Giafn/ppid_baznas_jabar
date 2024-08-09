@@ -350,7 +350,7 @@ class CustomPagesController extends Controller
                         } else {
                             $itemInsert[$key]['url'] = $itemsArray[$key]['url'];
                         }
-
+                        
                     }
                 } catch (\Exception $e) {
                     DB::rollBack();
@@ -405,9 +405,12 @@ class CustomPagesController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            if (Storage::exists($storage)) {
-                Storage::delete($storage);
+            if (isset($storage)) {
+                if (Storage::exists($storage)) {
+                    Storage::delete($storage);
+                }
             }
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
         }
 
@@ -417,6 +420,7 @@ class CustomPagesController extends Controller
     public function destroy($id)
     {
         $page = CustomPage::findOrFail($id);
+        // TODO: Check if page is used in other page
         if ($page->type_pages == 'single-file-or-image') {
             if ($page->file_url) {
                 $file = str_replace('/storage/', '', $page->file_url);
@@ -484,5 +488,34 @@ class CustomPagesController extends Controller
         }
 
         return $validate;
+    }
+
+    // show page
+    public function show($id, $dashedTitle)
+    {
+        $page = CustomPage::findOrFail($id);
+        // $title = Str::slug($page->title, '-');
+        // if ($title != $dashedTitle) {
+        //     abort(404);
+        // }
+
+        if ($page->type_pages == 'single-file-or-image') {
+            return view('custom-page.show-single-file-or-image', compact('page'));
+        } elseif ($page->type_pages == 'single-video') {
+            $embed = OEmbed::get($page->file_url);
+            $embedHtml = '';
+            if ($embed) {
+                $embedHtml = $embed->html();
+            }
+            return view('custom-page.show-single-video', compact('page', 'embedHtml'));
+        } elseif ($page->type_pages == 'list-file-or-image') {
+            $items = ItemsCustom::where('custom_page_id', $page->id)->orderBy('parent_group', 'asc')->get();
+            return view('custom-page.show-list-file-or-image', compact('page', 'items'));
+        } elseif ($page->type_pages == 'single-content') {
+            return view('custom-page.show-single-content', compact('page'));
+        } elseif ($page->type_pages == 'list-content') {
+            $items = ItemsCustom::where('custom_page_id', $page->id)->orderBy('parent_group', 'asc')->get();
+            return view('custom-page.show-list-content', compact('page', 'items'));
+        }
     }
 }

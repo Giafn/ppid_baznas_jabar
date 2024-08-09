@@ -23,6 +23,8 @@ use App\Http\Controllers\UploadController;
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
 
+Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show']);
+
 Route::get('/profile', function () {
     return view('frontend.ppid.profile');
 });

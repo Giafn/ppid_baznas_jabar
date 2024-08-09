@@ -17,4 +17,9 @@ class CustomPage extends Model
     {
         return $this->belongsTo(CategoryPage::class, 'category_page_id');
     }
+
+    public function items()
+    {
+        return $this->hasMany(ItemsCustom::class, 'custom_page_id');
+    }
 }

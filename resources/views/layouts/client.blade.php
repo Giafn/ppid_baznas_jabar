@@ -10,6 +10,7 @@
     <title>PPID BAZNAS Jawa Barat</title>
     {{-- icon --}}
     <link rel="icon" href="/image/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -31,12 +32,11 @@
             padding: 0;
         }
 
-        html {
+        /* html {
             height: 100%;
-        }
+        } */
 
         body {
-            height: 100%;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
@@ -45,6 +45,8 @@
 
         main {
             flex: 1;
+            margin-top: 85px;
+            min-height: 80vh;
         }
 
         footer {
@@ -69,7 +71,7 @@
 </head>
 <body>
     @include('layouts.navbar-frontend')
-    <main style="margin-top: 85px;">
+    <main>
         @yield('content')
     </main>
     <footer class="bg-green-primary">

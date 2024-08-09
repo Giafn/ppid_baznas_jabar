@@ -203,7 +203,32 @@
     $(document).ready(function() {
         $('.content-list').summernote({
             height: 150,
+            callbacks: {
+                onImageUpload: function (image) {
+                    let idEditor = $(this).attr('id');
+                    sendFile(image[0], idEditor);
+                }
+            },
         });
+
+        function sendFile(image, idEditor) {
+            let data = new FormData();
+            data.append('upload', image);
+            data.append('_token', '{{ csrf_token() }}');
+            $.ajax({
+                url: '/temp-upload',
+                method: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    url = response.url;
+                    $('#' + idEditor).summernote('insertImage', url);
+                    console.log(url);
+                }
+            });
+        }
     });
 </script>
 <script>
@@ -273,7 +298,7 @@
         </div>`;
 
         checkItem();
-        saveItem(randomIdWithUUID, label, konten);
+        saveItem(randomIdWithUUID, label, konten, idWrapper);
         $(`#${idWrapper}`).append(element);
     }
 
@@ -322,13 +347,13 @@
     }
 
     // save item to session storage
-    async function saveItem(id, label, konten) {
+    async function saveItem(id, label, konten, group) {
         let items = JSON.parse(sessionStorage.getItem('items-' + pageId)) || [];
         items.push({
             id: id,
             label: label,
             konten: konten,
-            group: null
+            group: group === 'list-item' ? null : group
         });
         await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
         await updateItemAndGroupInput();
@@ -342,7 +367,7 @@
             id: idBaru,
             label: label,
             konten: konten,
-            group: null
+            group: items[index].group
         };
         await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
         await updateItemAndGroupInput();
@@ -550,6 +575,9 @@
                 `;
                 parentList = $('#list-item').parent();
                 parentList.append(element);
+
+                // save group to session storage
+                saveGroup(idGroupLama, labelGroupLama);
             @endforeach
         @endif
 
@@ -566,7 +594,7 @@
             @foreach ($existingItems as $item)
                 idItemLama = '{{ $item["id"] }}';
                 labelItemLama = '{{ $item["label"] }}';
-                kontenItemLama = `{!! $item["konten"] !!}`;
+                kontenItemLama = `{!! str_replace('`', "'", $item["konten"]) !!}`;
                 groupItemLama = '{{ $item["group"] ?? 'list-item' }}';
                 createItemElement(labelItemLama, kontenItemLama, groupItemLama);
             @endforeach

@@ -339,7 +339,7 @@
             id: idBaru,
             label: label,
             konten: konten,
-            group: null
+            group: items[index].group
         };
         await sessionStorage.setItem('items-' + pageId, JSON.stringify(items));
         await updateItemAndGroupInput();
