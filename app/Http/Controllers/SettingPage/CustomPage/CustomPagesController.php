@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CategoryPage;
 use App\Models\CustomPage;
 use App\Models\ItemsCustom;
+use Cohensive\OEmbed\Facades\OEmbed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,9 +17,9 @@ class CustomPagesController extends Controller
     public $translateTypePage = [
         'single-file-or-image' => 'Tampilan File atau Gambar',
         'single-video' => 'Tampilan Video',
-        'list-file-or-image' => 'Tampilan Daftar File atau Gambar',
+        'list-file-or-image' => 'Tampilan List File atau Gambar',
         'single-content' => 'Tampilan Konten',
-        'list-content' => 'Tampilan Daftar Konten',
+        'list-content' => 'Tampilan List Konten',
     ];
 
     public function index(Request $request)
@@ -96,9 +97,11 @@ class CustomPagesController extends Controller
                 $storage = Storage::disk('public')->putFileAs('custom-page', $file, $file_name);
                 $fileUrl = Storage::url($storage);
                 $pages->file_url = $fileUrl;
+                $pages->content = $request->content;
                 $pages->save();
             } elseif ($request->type == 'single-video') {
                 $pages->file_url = $request->url;
+                $pages->content = $request->content;
                 $pages->save();
             } elseif ($request->type == 'list-file-or-image') {
                 $pages->content = $request->content;
@@ -203,13 +206,70 @@ class CustomPagesController extends Controller
         if ($page->type_pages == 'single-file-or-image') {
             return view('setting-page.custom-page.edit-single-file-or-image', compact('page', 'kategori'));
         } elseif ($page->type_pages == 'single-video') {
-            return view('setting-page.custom-page.edit-single-video', compact('page', 'kategori'));
+            $urlOriginal = $page->file_url;
+            $embed = OEmbed::get($page->file_url);
+            $embedHtml = '';
+            if ($embed) {
+                $embedHtml = $embed->html();
+            }
+            $page->original_url = $page->file_url;
+            return view('setting-page.custom-page.edit-single-video', compact('page', 'kategori', 'embedHtml'));
         } elseif ($page->type_pages == 'list-file-or-image') {
-            return view('setting-page.custom-page.edit-list-file-or-image', compact('page', 'kategori'));
+            $item = ItemsCustom::where('custom_page_id', $page->id)->get();
+            $existingItems = [];
+            $existingGroups = [];
+            $groups = ItemsCustom::where('custom_page_id', $page->id)->whereNotNull('parent_group')->get()->pluck('parent_group')->toArray();
+            foreach ($groups as $key => $group) {
+                $idGroup = str_replace(' ', '_', $group);
+                $existingGroups[$idGroup] = [
+                    'label' => $group,
+                    'id' => $idGroup
+                ];
+            }
+
+            foreach ($item as $key => $value) {
+                $existingItems[$key]['label'] = $value->title;
+                $existingItems[$key]['keterangan'] = $value->desc;
+                $existingItems[$key]['type'] = $value->type;
+                $existingItems[$key]['url'] = $value->url;
+                $existingItems[$key]['id'] = $value->id;
+                if ($value->parent_group) {
+                    $existingItems[$key]['group'] = $existingGroups[str_replace(' ', '_', $value->parent_group)]['id'];
+                } else {
+                    $existingItems[$key]['group'] = null;
+                }
+
+            }
+            $existingGroups = array_unique($existingGroups);
+            return view('setting-page.custom-page.edit-list-file-or-image', compact('page', 'kategori', 'existingItems', 'existingGroups'));
         } elseif ($page->type_pages == 'single-content') {
             return view('setting-page.custom-page.edit-single-content', compact('page', 'kategori'));
         } elseif ($page->type_pages == 'list-content') {
-            return view('setting-page.custom-page.edit-list-content', compact('page', 'kategori'));
+            $item = ItemsCustom::where('custom_page_id', $page->id)->get();
+            $existingItems = [];
+            $existingGroups = [];
+            $groups = ItemsCustom::where('custom_page_id', $page->id)->whereNotNull('parent_group')->get()->pluck('parent_group')->toArray();
+            foreach ($groups as $key => $group) {
+                $idGroup = str_replace(' ', '_', $group);
+                $existingGroups[$idGroup] = [
+                    'label' => $group,
+                    'id' => $idGroup
+                ];
+            }
+
+            foreach ($item as $key => $value) {
+                $existingItems[$key]['label'] = $value->title;
+                $existingItems[$key]['konten'] = $value->content;
+                $existingItems[$key]['id'] = $value->id;
+                if ($value->parent_group) {
+                    $existingItems[$key]['group'] = $existingGroups[str_replace(' ', '_', $value->parent_group)]['id'];
+                } else {
+                    $existingItems[$key]['group'] = null;
+                }
+
+            }
+            $existingGroups = array_unique($existingGroups);
+            return view('setting-page.custom-page.edit-list-content', compact('page', 'kategori', 'existingItems', 'existingGroups'));
         }
     }
 
