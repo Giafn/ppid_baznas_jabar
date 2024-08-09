@@ -24,8 +24,9 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/custom-page" method="POST" id="formWithEditor">
+                <form action="/admin/custom-page/{{ $page->id }}" method="POST" id="formWithEditor">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="type" value="single-content">
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul Halaman</label>

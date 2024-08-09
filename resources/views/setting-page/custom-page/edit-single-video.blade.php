@@ -24,8 +24,9 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/custom-page" method="POST" id="formWithEditor">
+                <form action="/admin/custom-page/{{ $page->id }}" method="POST" id="formWithEditor">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="type" value="single-video">
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul Halaman</label>
@@ -45,7 +46,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- url video --}}
                     <div class="mb-3">
                         <label for="url" class="form-label">URL Video</label>
                         <input type="text" class="form-control" id="url" name="url" required value="{{ old('url') ?? $page->original_url }}">

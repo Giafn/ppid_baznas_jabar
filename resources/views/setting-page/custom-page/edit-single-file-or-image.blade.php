@@ -24,8 +24,9 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/custom-page" method="POST" enctype="multipart/form-data" id="formWithEditor">
+                <form action="/admin/custom-page/{{ $page->id }}" method="POST" enctype="multipart/form-data" id="formWithEditor">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="type" value="single-file-or-image">
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul Halaman</label>
@@ -48,7 +49,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="file" class="form-label">File / Gambar</label>
-                        <input type="file" class="form-control" id="file" name="file" required accept=".pdf,.jpg,.jpeg,.png">
+                        <input type="file" class="form-control" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png">
                         @php
                             $file = $page->file_url;
                             // cek apakah file gambar atau bukan

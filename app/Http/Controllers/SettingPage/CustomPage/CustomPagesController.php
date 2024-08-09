@@ -100,6 +100,11 @@ class CustomPagesController extends Controller
                 $pages->content = $request->content;
                 $pages->save();
             } elseif ($request->type == 'single-video') {
+                $embed = OEmbed::get($request->url);
+                if (!$embed) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'URL video tidak valid')->withInput();
+                }
                 $pages->file_url = $request->url;
                 $pages->content = $request->content;
                 $pages->save();
@@ -275,30 +280,127 @@ class CustomPagesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string|max:255',
-            'google_form_url' => 'required|string|max:255',
-            'form_file' => 'nullable|file|max:10240',
-        ]);
+        $validate = [
+            'type' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'sub_title' => 'nullable|string|max:255',
+            'kategori' => 'required|exists:category_page,id',
+
+        ];
+
+        $fullValidate = $this->additionalValidateUpdate($validate, $request->type);
+        $request->validate($fullValidate);
 
         try {
             DB::beginTransaction();
 
-            $formulir = Formulir::findOrFail($id);
-            $formulir->nama = $request->nama;
-            $formulir->deskripsi = $request->deskripsi;
-            $formulir->google_form_url = $request->google_form_url;
+            $pages = CustomPage::findOrFail($id);
+            $pages->category_page_id = $request->kategori;
+            $pages->title = $request->title;
+            $pages->sub_title = $request->sub_title;
+            $pages->type_pages = $request->type;
 
-            if ($request->hasFile('form_file')) {
-                $file = $request->file('form_file');
-                $file_name = time() . '.' . $file->extension();
-                $storage = Storage::disk('public')->putFileAs('informasi', $file, $file_name);
-                $fileUrl = Storage::url($storage);
-                $formulir->form_file_url = $fileUrl;
+            if ($request->type == 'single-file-or-image') {
+                if ($request->file('file')) {
+                    $file = $request->file('file');
+                    $file_name = time() . '.' . $file->extension();
+                    $storage = Storage::disk('public')->putFileAs('custom-page', $file, $file_name);
+                    $fileUrl = Storage::url($storage);
+                    $pages->file_url = $fileUrl;
+                }
+                $pages->content = $request->content;
+                $pages->save();
+            } elseif ($request->type == 'single-video') {
+                $embed = OEmbed::get($request->url);
+                if (!$embed) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'URL video tidak valid')->withInput();
+                }
+                $pages->file_url = $request->url;
+                $pages->content = $request->content;
+                $pages->save();
+            } elseif ($request->type == 'list-file-or-image') {
+                $pages->content = $request->content;
+                $pages->save();
+                try {
+                    $groups = $request->groups ?? [];
+                    $items = $request->items ?? [];
+                    $groupsArray = [];
+                    $itemsArray = [];
+                    $itemInsert = [];
+                    foreach ($groups as $key => $group) {
+                        $groupsArray[$key] = json_decode($group, true)['label'];
+                    }
+                    foreach ($items as $key => $jsonString) {
+                        $itemsArray[$key] = json_decode($jsonString, true);
+                        $itemInsert[$key]['id'] = (string) Str::uuid();
+                        $itemInsert[$key]['custom_page_id'] = $pages->id;
+                        $itemInsert[$key]['title'] = $itemsArray[$key]['label'];
+                        $itemInsert[$key]['parent_group'] = $itemsArray[$key]['group'] ? $groupsArray[$itemsArray[$key]['group']] : null;
+                        $itemInsert[$key]['desc'] = $itemsArray[$key]['keterangan'];
+                        $itemInsert[$key]['type'] = $itemsArray[$key]['type'];
+
+                        // copy file from temp folder to custom-page folder
+                        if ($itemsArray[$key]['type'] == 'file' || $itemsArray[$key]['type'] == 'image') {
+                            $file = $itemsArray[$key]['url'];
+                            $sourcePath = str_replace('/storage/', '', $file);
+                            $destinationPath = str_replace('temp/', 'custom-page/', $sourcePath);
+                            Storage::disk('public')->copy($sourcePath, $destinationPath);
+                            $itemInsert[$key]['url'] = Storage::url($destinationPath);
+                        } else {
+                            $itemInsert[$key]['url'] = $itemsArray[$key]['url'];
+                        }
+
+                    }
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    if (isset($storage)) {
+                        Storage::delete($storage);
+                    }
+
+                    return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
+                }
+            
+                ItemsCustom::where('custom_page_id', $pages->id)->delete();
+                ItemsCustom::insert($itemInsert);
+
+            } elseif ($request->type == 'single-content') {
+                $pages->content = $request->content;
+                $pages->save();
+            } elseif ($request->type == 'list-content') {
+                $pages->content = $request->content;
+                $pages->save();
+                
+                try {
+                    $groups = $request->groups ?? [];
+                    $items = $request->items ?? [];
+                    $groupsArray = [];
+                    $itemsArray = [];
+                    $itemInsert = [];
+                    foreach ($groups as $key => $group) {
+                        $groupsArray[$key] = json_decode($group, true)['label'];
+                    }
+                    foreach ($items as $key => $jsonString) {
+                        $itemsArray[$key] = json_decode($jsonString, true);
+                        $itemInsert[$key]['id'] = (string) Str::uuid();
+                        $itemInsert[$key]['custom_page_id'] = $pages->id;
+                        $itemInsert[$key]['title'] = $itemsArray[$key]['label'];
+                        $itemInsert[$key]['parent_group'] = $itemsArray[$key]['group'] ? $groupsArray[$itemsArray[$key]['group']] : null;
+                        $itemInsert[$key]['type'] = "content";
+                        $itemInsert[$key]['content'] = $itemsArray[$key]['konten'];
+
+                    }
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
+                }
+
+                ItemsCustom::where('custom_page_id', $pages->id)->delete();
+                ItemsCustom::insert($itemInsert);
+            } else {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Tipe halaman tidak ditemukan')->withInput();
             }
-
-            $formulir->save();
 
             DB::commit();
         } catch (\Exception $e) {
@@ -324,6 +426,31 @@ class CustomPagesController extends Controller
     {
         if ($type == 'single-file-or-image') {
             $validate['file'] = 'required|file|mimes:pdf,png,jpg,jpeg|max:10240';
+        } elseif ($type == 'single-video') {
+            $validate['url'] = 'required|url';
+        } elseif ($type == 'list-file-or-image') {
+            $validate['content'] = 'nullable|string';
+            $validate['items'] = 'required|array';
+            $validate['items.*'] = 'required';
+            $validate['groups'] = 'nullable|array';
+            $validate['groups.*'] = 'nullable|string';
+        } elseif ($type == 'single-content') {
+            $validate['content'] = 'required|string';
+        } elseif ($type == 'list-content') {
+            $validate['content'] = 'nullable|string';
+            $validate['items'] = 'required|array';
+            $validate['items.*'] = 'required';
+            $validate['groups'] = 'nullable|array';
+            $validate['groups.*'] = 'nullable|string';
+        }
+
+        return $validate;
+    }
+
+    private function additionalValidateUpdate($validate, $type)
+    {
+        if ($type == 'single-file-or-image') {
+            $validate['file'] = 'nullable|file|mimes:pdf,png,jpg,jpeg|max:10240';
         } elseif ($type == 'single-video') {
             $validate['url'] = 'required|url';
         } elseif ($type == 'list-file-or-image') {
