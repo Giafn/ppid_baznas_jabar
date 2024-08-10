@@ -526,9 +526,14 @@
         let element = `
             <div class="d-flex justify-content-between mt-3" id="title-group-${id}">
                 <h5>${label}</h5>
-                <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
-                    <i class="fas fa-trash"></i>
-                </a>
+                <div class="d-flex gap-1">
+                    <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <a href="#" class="text-muted" onclick="editNamaGroup('${id}')">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
             </div>
             <div class="row g-2 mt-1 drag-here px-3 py-4" id="${id}">
                 <div class="col-12 text-center">
@@ -543,6 +548,23 @@
         // save group to session storage
         await saveGroup(id, label);
     });
+
+    async function editNamaGroup(id) {
+        let label = $(`#title-group-${id}`).children('h5').text();
+        let newLabel = prompt('Masukkan nama group baru', label);
+        if (newLabel) {
+            $(`#title-group-${id}`).children('h5').text(newLabel);
+            await updateNamaGroupOnSessionStorage(id, newLabel);
+            await updateItemAndGroupInput();
+        }
+    }
+
+    function updateNamaGroupOnSessionStorage(id, label) {
+        let groups = JSON.parse(sessionStorage.getItem('groups-' + pageId)) || [];
+        let index = groups.findIndex(group => group.id == id);
+        groups[index].label = label;
+        sessionStorage.setItem('groups-' + pageId, JSON.stringify(groups));
+    }
 
     // fungsi hapus group
     function deleteGroup(id) {
@@ -610,11 +632,15 @@
                 labelGroupLama = '{{ $group->label }}';
                 element = `
                     <div class="d-flex justify-content-between mt-3" id="title-group-${idGroupLama}">
-                   $existingItems = $existingItems ?? null;
-            $existingGroups = $existingGroups ?? null;     <h5>${labelGroupLama}</h5>
-                        <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <h5>${labelGroupLama}</h5>
+                        <div class="d-flex gap-1">
+                            <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="#" class="text-muted" onclick="editNamaGroup('${idGroupLama}')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="row g-2 mt-1 drag-here px-3 py-4" id="${idGroupLama}">
                         <div class="col-12 text-center">
@@ -631,9 +657,14 @@
                 element = `
                     <div class="d-flex justify-content-between mt-3" id="title-group-${idGroupLama}">
                         <h5>${labelGroupLama}</h5>
-                        <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <div class="d-flex gap-1">
+                            <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="#" class="text-muted" onclick="editNamaGroup('${idGroupLama}')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="row g-2 mt-1 drag-here px-3 py-4" id="${idGroupLama}">
                         <div class="col-12 text-center">

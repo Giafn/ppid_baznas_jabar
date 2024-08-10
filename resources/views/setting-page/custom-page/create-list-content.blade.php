@@ -497,9 +497,14 @@
         let element = `
             <div class="d-flex justify-content-between mt-3" id="title-group-${id}">
                 <h5>${label}</h5>
-                <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
-                    <i class="fas fa-trash"></i>
-                </a>
+                <div class="d-flex gap-1">
+                    <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <a href="#" class="text-muted" onclick="editNamaGroup('${id}')">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
             </div>
             <div class="row g-2 mt-1 drag-here px-3 py-4" id="${id}">
                 <div class="col-12 text-center">
@@ -579,9 +584,14 @@
                 let element = `
                     <div class="d-flex justify-content-between mt-3" id="title-group-${idGroupLama}">
                         <h5>${labelGroupLama}</h5>
-                        <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <div class="d-flex gap-1">
+                            <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="#" class="text-muted" onclick="editNamaGroup('${idGroupLama}')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="row g-2 mt-1 drag-here px-3 py-4" id="${idGroupLama}">
                         <div class="col-12 text-center">
