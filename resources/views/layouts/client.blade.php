@@ -65,6 +65,12 @@
         body {
             zoom: 110%;
         }
+        .dropdown-item .active {
+            background-color: #0d6e09 !important;
+        }
+        .dropdown-item:active {
+            background-color: #0d6e09 !important;
+        }
     </style>
     @stack('css')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -110,20 +116,36 @@
                 type: 'GET',
                 success: function(response) {
                     console.log(response);
+                    let urlNow = window.location.href;
+                    let isActived = false;
+
                     let formulirnav = response.formulir;
                     let itemLayanan = response.item_layanans
+                    let regulasiNav = response.regulasi;
                     $.each(formulirnav, function(index, value) {
+                        isActived = urlNow.includes('formulir/' + value.id);
                         $('#formulirNavList').append(`
                             <li>
-                                <a class="dropdown-item" href="/formulir/${value.id}">${value.nama}</a>
+                                <a class="dropdown-item ${isActived ? 'bg-green-primary' : ''}" href="/formulir/${value.id}">${value.nama}</a>
                             </li>
                         `);
                     });
                     
                     $.each(itemLayanan, function(index, value) {
+                        isActived = urlNow.includes(value.url);
                         $('#ListLayananNavDivider').after(`
                             <li>
-                                <a class="dropdown-item" href="${value.url}">${value.nama}</a>
+                                <a class="dropdown-item ${isActived ? 'bg-green-primary' : ''}" href="${value.url}">${value.nama}</a>
+                            </li>
+                        `);
+                    });
+
+                    // regulasiNavList
+                    $.each(regulasiNav, function(index, value) {
+                        isActived = urlNow.includes(value.url);
+                        $('#regulasiNavList').append(`
+                            <li>
+                                <a class="dropdown-item ${isActived ? 'bg-green-primary' : ''}" href="${value.url}">${value.nama}</a>
                             </li>
                         `);
                     });

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Akses Cepat Setting - Create')
+@section('title', 'Regulasi Setting - Create')
 
 @php
     $itemBc = [
@@ -9,12 +9,8 @@
             'url' => '/admin/home',
         ],
         [
-            'name' =>'Landing Page',
-            'url' => '/admin/landing-page-setting',
-        ],
-        [
-            'name' =>'Akses Cepat Setting',
-            'url' => '/admin/landing-page-setting/akses-cepat-setting',
+            'name' =>'Regulasi Setting',
+            'url' => '/admin/regulasi',
         ],
         [
             'name' =>'Create',
@@ -28,10 +24,10 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/landing-page-setting/akses-cepat-setting" method="POST">
+                <form action="/admin/regulasi" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="title" class="form-label">Judul Informasi</label>
+                        <label for="title" class="form-label">Nama Regulasi</label>
                         <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') }}">
                     </div>
                     <div class="mb-3">
@@ -294,6 +290,8 @@
             }
         });
     }
+
+    
 
     // search page
 

@@ -54,9 +54,14 @@
                                     <button class="btn bg-green-primary" type="button" id="searchPageBtn">Cari</button>
                                 </div>
                             </div>
-                            <div class="col-xl-5 py-1">
+                            <div class="col-xl-3 py-1">
                                 <select class="form-select" id="typePage" name="typePage">
                                     {{-- disini type --}}
+                                </select>
+                            </div>
+                            <div class="col-xl-2 py-1">
+                                <select class="form-select" id="kategoriPage" name="kategoriPage">
+                                    {{-- disini kategori --}}
                                 </select>
                             </div>
                         </div>
@@ -111,9 +116,10 @@
     $(document).ready(function() {
         let search = '{{ old('searchPage') ?? '' }}'
         let typePage = '{{ old('typePage') ?? '' }}'
+        let kategori = '{{ old('kategoriPage') ?? '' }}'
 
         getTypes();
-        getPages(search, typePage);
+        getPages(search, typePage, kategori);
 
         if (search) {
             $('#searchPage').val(search ?? "");
@@ -128,10 +134,11 @@
     $('#searchPage').on('keypress', function(e) {
         let search = $(this).val();
         let typePage = $('#typePage').val();
+        let kategori = $('#kategoriPage').val();
         
         if (e.which == 13) {
             e.preventDefault();
-            getPages(search, typePage);
+            getPages(search, typePage, kategori);
         }
     });
 
@@ -139,14 +146,23 @@
     $(document).on('click', '#searchPageBtn', function() {
         let search = $('#searchPage').val();
         let typePage = $('#typePage').val();
-        getPages(search, typePage);
+        let kategori = $('#kategoriPage').val();
+        getPages(search, typePage, kategori);
     });
 
     // select page onchange
     $(document).on('change', '#typePage', function() {
         let search = $('#searchPage').val();
         let typePage = $(this).val();
-        getPages(search, typePage);
+        let kategori = $('#kategoriPage').val();
+        getPages(search, typePage, kategori);
+    });
+
+    $(document).on('change', '#kategoriPage', function() {
+        let search = $('#searchPage').val();
+        let typePage = $('#typePage').val();
+        let kategori = $(this).val();
+        getPages(search, typePage, kategori);
     });
 
     //  lihat button
@@ -187,7 +203,7 @@
         
     });
 
-    function getPages(search = null, typePage = null) {
+    function getPages(search = null, typePage = null, kategori = null) {
         sessionStorage.setItem('search-page-akses-cepat', search);
         sessionStorage.setItem('typePage-akses-cepat', typePage);
         $.ajax({
@@ -195,7 +211,8 @@
             type: 'GET',
             data: {
                 search: search,
-                type: typePage
+                type: typePage,
+                category_id: kategori
             },
             success: function(response) {
                 $('#halamanDiv').html('');
@@ -257,13 +274,23 @@
                 $('#typePage').html('');
                 data = response.data; //objek bukan array
                 $('#typePage').append(`
-                    <option value="">Semua</option>
+                    <option value="">Semua tipe</option>
                 `);
                 for (const key in data) {
                     $('#typePage').append(`
                         <option value="${key}">${data[key]}</option>
                     `);
                 }
+                let kategori = response.kategori;
+                $('#kategoriPage').html('');
+                $('#kategoriPage').append(`
+                    <option value="">Semua kategori</option>
+                `);
+                kategori.forEach(function(item) {
+                    $('#kategoriPage').append(`
+                        <option value="${item.id}">${item.nama}</option>
+                    `);
+                });
             }
         });
     }

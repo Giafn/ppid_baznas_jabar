@@ -22,6 +22,7 @@ use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
 use App\Http\Controllers\SettingPage\LayananInformasi\FormulirController;
 use App\Http\Controllers\SettingPage\LayananInformasi\ItemsController;
+use App\Http\Controllers\SettingPage\RegulasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 
@@ -179,6 +180,16 @@ Route::group(['middleware' => 'auth'], function () {
             // api
             Route::get('get', [CustomPagesController::class, 'getItems']);
             Route::get('get-types', [CustomPagesController::class, 'getTypes']);
+        });
+
+        // regulasi
+        Route::prefix('regulasi')->group(function () {
+            Route::get('/', [RegulasiController::class, 'index']);
+            Route::get('create', [RegulasiController::class, 'create']);
+            Route::post('/', [RegulasiController::class, 'store']);
+            Route::get('{id}/edit', [RegulasiController::class, 'edit']);
+            Route::put('{id}', [RegulasiController::class, 'update']);
+            Route::delete('{id}', [RegulasiController::class, 'destroy']);
         });
 
     });

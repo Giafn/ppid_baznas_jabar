@@ -17,9 +17,12 @@
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
           
         </ul>
+        @php
+            $nowUrl = Request::url();
+        @endphp
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link {{ Request::is('/') ? 'fw-bold' : '' }}" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -27,16 +30,16 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/profile">
+                    <a class="dropdown-item {{ Request::is('profile') ? 'bg-green-primary' : '' }}" href="/profile">
                         Profile
                     </a>
-                    <a class="dropdown-item" href="/visi-misi">
+                    <a class="dropdown-item {{ Request::is('visi-misi') ? 'bg-green-primary' : '' }}" href="/visi-misi">
                         Visi Misi
                     </a>
-                    <a class="dropdown-item" href="/tugas-fungsi">
+                    <a class="dropdown-item {{ Request::is('tugas-fungsi') ? 'bg-green-primary' : '' }}" href="/tugas-fungsi">
                         Tugas dan Fungsi
                     </a>
-                    <a class="dropdown-item" href="/struktur-organisasi">
+                    <a class="dropdown-item {{ Request::is('struktur-organisasi') ? 'bg-green-primary' : '' }}" href="/struktur-organisasi">
                         Struktur PPID
                     </a>
                 </div>
@@ -77,28 +80,7 @@
                     Regulasi
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="">
-                        Regulasi Informasi Publik
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Regulasi Pengelolaan Zakat
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Regulasi Baznas Jabar
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Regulasi LAZ
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Regulasi UPZ
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Hubungan Zakat dan Pajak
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Fatwa MUI
-                    </a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="regulasiNavList">
                 </div>
             </li>
 
