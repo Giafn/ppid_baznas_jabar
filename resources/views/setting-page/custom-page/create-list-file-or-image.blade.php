@@ -194,7 +194,7 @@
         min-height: 150px;
         border: 2px dashed #cccccc;
     }
-    .col-3.draggable {
+    .col-xxl-3.draggable {
         cursor: move;
     }
 </style>
@@ -302,7 +302,7 @@
     }
 
     function deleteItem(element) {
-        $(element).closest('.col-3').remove();
+        $(element).closest('.col-xxl-3').remove();
         checkItem();
         deleteItemData($(element).closest('.card').attr('id'));
     }
@@ -311,7 +311,7 @@
         let randomIdWithUUID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         if (type == 'file') {
             var element = `
-                <div class="col-3 draggable" draggable="true">
+                <div class="col-xxl-3 col-md-4 col-6 draggable" draggable="true">
                     <div class="card" id="${randomIdWithUUID}" data-url="${url}">
                         <embed src="${url}" type="application/pdf" width="100%" class="card-img-top" alt="${label}" style="height: 300px;">
                         <div class="position-absolute top-0 end-0 p-2">
@@ -350,7 +350,7 @@
             `;
         } else {
             var element = `
-                <div class="col-3 draggable" draggable="true">
+                <div class="col-xxl-3 col-md-4 col-6 draggable" draggable="true">
                     <div class="card" id="${randomIdWithUUID}" data-url="${url}">
                         <div class="" style="height: 300px; overflow: hidden;">
                         <img src="${url}" class="card-img-top" alt="${label}" style="object-fit: cover; width: 100%; height: 100%;">
@@ -656,9 +656,14 @@
         let element = `
             <div class="d-flex justify-content-between mt-3" id="title-group-${id}">
                 <h5>${label}</h5>
-                <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
-                    <i class="fas fa-trash"></i>
-                </a>
+                <div class="d-flex gap-1">
+                    <a href="#" class="text-muted" onclick="deleteGroup('${id}')">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <a href="#" class="text-muted" onclick="editNamaGroup('${id}')">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
             </div>
             <div class="row g-2 mt-1 drag-here px-3 py-4" id="${id}">
                 <div class="col-12 text-center">
@@ -673,6 +678,24 @@
         // save group to session storage
         await saveGroup(id, label);
     });
+
+       // fungsi edit nama group
+    async function editNamaGroup(id) {
+        let label = $(`#title-group-${id}`).children('h5').text();
+        let newLabel = prompt('Masukkan nama group baru', label);
+        if (newLabel) {
+            $(`#title-group-${id}`).children('h5').text(newLabel);
+            await updateNamaGroupOnSessionStorage(id, newLabel);
+            await updateItemAndGroupInput();
+        }
+    }
+
+    function updateNamaGroupOnSessionStorage(id, label) {
+        let groups = JSON.parse(sessionStorage.getItem('groups-create')) || [];
+        let index = groups.findIndex(group => group.id == id);
+        groups[index].label = label;
+        sessionStorage.setItem('groups-create', JSON.stringify(groups));
+    }
 
     // fungsi hapus group
     function deleteGroup(id) {
@@ -739,9 +762,14 @@
                 let element = `
                     <div class="d-flex justify-content-between mt-3" id="title-group-${idGroupLama}">
                         <h5>${labelGroupLama}</h5>
-                        <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <div class="d-flex gap-1">
+                            <a href="#" class="text-muted" onclick="deleteGroup('${idGroupLama}')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a href="#" class="text-muted" onclick="editNamaGroup('${idGroupLama}')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="row g-2 mt-1 drag-here px-3 py-4" id="${idGroupLama}">
                         <div class="col-12 text-center">
