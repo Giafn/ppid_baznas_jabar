@@ -24,16 +24,19 @@
                     @endif
                     @php
                         $tempGroup = $item->parent_group;
+                        $countItem = $items->where('parent_group', $item->parent_group)->count();
+                        $col = $countItem > 2 ? 4 : 6;
+                        $height = $countItem > 2 ? 400 : 600;
                     @endphp
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mb-3">
+                    <div class="col-xl-{{ $col }} col-md-6">
+                        <div class="mb-3 card border-0">
                             <div class="card-body">
                                 @if ($item->type == 'image')
-                                    <div class="" style="height: 300px; overflow: hidden;">
+                                    <div class="" style="height: {{ $height }}px; overflow: hidden;">
                                         <img src="{{ $item->url }}" class="img-fluid" alt="{{ $item->title }}" style="object-fit: cover; width: 100%; height: 100%;">
                                     </div>
                                 @else
-                                    <embed src="{{ $item->url }}" type="application/pdf" width="100%" height="300px" />
+                                    <embed src="{{ $item->url }}" type="application/pdf" width="100%" height="{{ $height }}px" />
                                 @endif
                                         <div class="position-absolute top-0 end-0 p-2">
                                             <button class="btn bg-green-primary" onclick="openModalPreview('{{ $item->url }}')">

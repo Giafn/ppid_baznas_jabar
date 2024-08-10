@@ -143,6 +143,27 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalPindahGroup" tabindex="-1" aria-labelledby="modalPindahGroupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPindahGroupLabel">Pindah Group</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-pindah-group">
+                    <div class="mb-3">
+                        <label for="group" class="form-label">Group</label>
+                        <select class="form-select" id="groupPindahSelect" name="group" required>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn bg-green-primary" id="btn-pindah-group">Pindah</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('styles')
@@ -288,6 +309,9 @@
                             <a href="#" class="text-muted" onclick="deleteItem('${randomIdWithUUID}')">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            <a href="#" class="text-muted" onclick="pindahGroup('${randomIdWithUUID}')">
+                                <i class="fas fa-exchange-alt"></i>
+                            </a>
                         </div>
                     </div>
                     <div style="max-height: 200px; overflow-y: auto;" id="konten-${randomIdWithUUID}">
@@ -319,6 +343,9 @@
                                 <a href="#" class="text-muted" onclick="deleteItem('${idBaru}')">
                                     <i class="fas fa-trash"></i>
                                 </a>
+                                <a href="#" class="text-muted" onclick="pindahGroup('${idBaru}')">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </a>
                             </div>
                         </div>
                         <div style="max-height: 200px; overflow-y: auto;" id="konten-${idBaru}">
@@ -336,6 +363,46 @@
         $(`#${id}`).remove();
 
     }
+
+    // pindah group
+    function pindahGroup(id) {
+        $('#btn-pindah-group').attr('data-id', id);
+
+        // get all group
+        let groups = JSON.parse(sessionStorage.getItem('groups-' + pageId)) || [];
+        let groupPindahSelect = $('#groupPindahSelect');
+        groupPindahSelect.html('');
+        // cek if item is in group
+        if ($(`#${id}`).parent().parent().attr('id') !== 'list-item') {
+            groupPindahSelect.append(`
+                <option value="list-item">Hapus dari group</option>
+            `);
+        } else {
+            groupPindahSelect.append(`
+                <option value="list-item" disabled>-- Tidak ada group --</option>
+            `);
+        }
+        groups.forEach(group => {
+            groupPindahSelect.append(`
+                <option value="${group.id}">${group.label}</option>
+            `);
+        });
+
+        $('#modalPindahGroup').modal('show');
+    }
+
+    // on submit pindah group
+    $('#form-pindah-group').on('submit', function(e) {
+        e.preventDefault();
+        let id = $('#btn-pindah-group').attr('data-id');
+        let groupId = $('#groupPindahSelect').val();
+        // draggableElement = parent dari element id di atas
+        let draggableElement = $(`#${id}`).parent();
+        // append element ke group yang dipilih
+        $(`#${groupId}`).append(draggableElement);
+        updateItemGroup(id, groupId);
+        $('#modalPindahGroup').modal('hide');
+    });
 
     // cek jumlah item
     function checkItem() {
@@ -503,7 +570,7 @@
     }
 
     $(document).ready(function() {
-        const scrollSpeed = 20; // Kecepatan scroll
+        const scrollSpeed = 100; // Kecepatan scroll
 
         $(document).on('dragover', function(e) {
             const windowHeight = $(window).height();

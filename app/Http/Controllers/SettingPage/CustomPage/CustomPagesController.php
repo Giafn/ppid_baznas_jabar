@@ -267,7 +267,7 @@ class CustomPagesController extends Controller
                 }
 
             }
-            $existingGroups = array_unique($existingGroups);
+            // $existingGroups = array_unique($existingGroups);
             return view('setting-page.custom-page.edit-list-file-or-image', compact('page', 'kategori', 'existingItems', 'existingGroups'));
         } elseif ($page->type_pages == 'single-content') {
             return view('setting-page.custom-page.edit-single-content', compact('page', 'kategori'));
@@ -295,7 +295,7 @@ class CustomPagesController extends Controller
                 }
 
             }
-            $existingGroups = array_unique($existingGroups);
+            // $existingGroups = array_unique($existingGroups);
             return view('setting-page.custom-page.edit-list-content', compact('page', 'kategori', 'existingItems', 'existingGroups'));
         }
     }
