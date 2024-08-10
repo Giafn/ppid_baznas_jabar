@@ -213,8 +213,10 @@ class CustomPagesController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            if (Storage::exists($storage)) {
-                Storage::delete($storage);
+            if (isset($storage)) {
+                if (Storage::exists($storage)) {
+                    Storage::delete($storage);
+                }
             }
             return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
         }

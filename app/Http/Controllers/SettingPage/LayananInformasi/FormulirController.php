@@ -57,9 +57,10 @@ class FormulirController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
-            if (Storage::exists($storage)) {
-                Storage::delete($storage);
+            if (isset($storage)) {
+                if (Storage::exists($storage)) {
+                    Storage::delete($storage);
+                }
             }
             return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
         }
@@ -104,8 +105,10 @@ class FormulirController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            if (Storage::exists($storage)) {
-                Storage::delete($storage);
+            if (isset($storage)) {
+                if (Storage::exists($storage)) {
+                    Storage::delete($storage);
+                }
             }
             return redirect()->back()->with('error', 'Gagal menyimpan data')->withInput();
         }
