@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
+use App\Http\Controllers\GeneralPPIDConttroller;
 use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
 use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
@@ -26,21 +27,10 @@ Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
 
 Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show'])->name('custom-page.show');
 
-Route::get('/profile', function () {
-    return view('frontend.ppid.profile');
-});
-
-Route::get('/visi-misi', function () {
-    return view('frontend.ppid.visi-misi');
-});
-
-Route::get('/tugas-fungsi', function () {
-    return view('frontend.ppid.tugas-dan-fungsi');
-});
-
-Route::get('/struktur-organisasi', function () {
-    return view('frontend.ppid.struktur');
-});
+Route::get('/profile', [GeneralPPIDConttroller::class, 'profile']);
+Route::get('/visi-misi', [GeneralPPIDConttroller::class, 'visiMisi']);
+Route::get('/tugas-fungsi', [GeneralPPIDConttroller::class, 'tugasFungsi']);
+Route::get('/struktur-organisasi', [GeneralPPIDConttroller::class, 'strukturOrganisasi']);
 
 Route::prefix('admin')->group(function () {
     Auth::routes([
