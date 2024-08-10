@@ -8,7 +8,7 @@ use App\Models\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SetiapSaatController extends Controller
+class SertaMertaController extends Controller
 {
     public function index(Request $request)
         {
@@ -21,7 +21,7 @@ class SetiapSaatController extends Controller
                 $query->where('nama', 'like', '%' . $search . '%')
                     ->orWhere('group', 'like', '%' . $search . '%');
             })
-            ->where('golongan', 'setiap_saat')
+            ->where('golongan', 'serta_merta')
             ->orderBy('created_at', 'desc')
             ->orderBy('group', 'asc')
             ->paginate(10);
@@ -33,13 +33,13 @@ class SetiapSaatController extends Controller
             return $item;
         });
 
-        return view('setting-page.informasi-publik.setiap-saat.index', compact('items'));
+        return view('setting-page.informasi-publik.serta-merta.index', compact('items'));
     }
 
     public function create()
     {
-        $groups = InformasiPublikItems::where('golongan', 'setiap_saat')->pluck('group')->unique();
-        return view('setting-page.informasi-publik.setiap-saat.create', compact('groups'));
+        $groups = InformasiPublikItems::where('golongan', 'serta_merta')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.serta-merta.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -73,7 +73,7 @@ class SetiapSaatController extends Controller
                 'type' => $validate['type'] == 'content' ? 'page' : 'url',
                 'url' => $url ?? null,
                 'page_id' => $pageId,
-                'golongan' => 'setiap_saat',
+                'golongan' => 'serta_merta',
             ]);
 
             DB::commit();
@@ -83,14 +83,14 @@ class SetiapSaatController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil ditambahkan');
+        return redirect('/admin/informasi-publik/serta-merta')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $item = InformasiPublikItems::where('id', $id)->with('page')->first();
-        $groups = InformasiPublikItems::where('golongan', 'setiap_saat')->pluck('group')->unique();
-        return view('setting-page.informasi-publik.setiap-saat.edit', compact('item', 'groups'));
+        $groups = InformasiPublikItems::where('golongan', 'serta_merta')->pluck('group')->unique();
+        return view('setting-page.informasi-publik.serta-merta.edit', compact('item', 'groups'));
     }
 
     public function update(Request $request, $id)
@@ -142,7 +142,7 @@ class SetiapSaatController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil diubah');
+        return redirect('/admin/informasi-publik/serta-merta')->with('success', 'Data berhasil diubah');
     }
 
     public function destroy($id)
@@ -157,6 +157,6 @@ class SetiapSaatController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect('/admin/informasi-publik/setiap-saat')->with('success', 'Data berhasil dihapus');
+        return redirect('/admin/informasi-publik/serta-merta')->with('success', 'Data berhasil dihapus');
     }
 }

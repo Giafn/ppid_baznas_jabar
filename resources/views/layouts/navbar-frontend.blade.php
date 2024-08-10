@@ -63,10 +63,10 @@
                     <a class="dropdown-item" href="/informasi-publik/berkala">
                         Informasi Berkala
                     </a>
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" href="/informasi-publik/serta-merta">
                         Informasi Serta Merta
                     </a>
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" href="/informasi-publik/setiap-saat">
                         Informasi Setiap Saat
                     </a>
                 </div>

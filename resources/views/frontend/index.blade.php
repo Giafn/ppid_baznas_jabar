@@ -43,8 +43,8 @@
             @forelse ($aksesCepat as $item)
                 <a href="{{ $item->url }}" class="btn bg-green-primary" target="_blank">{{ $item->nama }}</a>
             @empty
-                <p>
-                    No data
+                <p class="text-center">
+                    Data Belum Tersedia
                 </p>
             @endforelse
         </div>
@@ -70,8 +70,8 @@
                     </div>
                 </div>
             @empty
-                <p>
-                    No data
+                <p class="text-center">
+                    Data Belum Tersedia
                 </p>
             @endforelse
         </div>
@@ -99,8 +99,8 @@
                   </div>
                 @empty
                   <div class="col-12">
-                      <div class="alert alert-warning" role="alert">
-                          No video found
+                      <div class="text-center" role="alert">
+                            Data Belum Tersedia
                       </div>
                   </div>
                 @endforelse
@@ -131,8 +131,8 @@
                             </div>
                         @empty
                             <div class="col-12">
-                                <div class="alert alert-warning" role="alert">
-                                    No data found
+                                <div class="text-center" role="alert">
+                                    Data Belum Tersedia
                                 </div>
                             </div>
                         @endforelse

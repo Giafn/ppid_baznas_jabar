@@ -96,7 +96,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ $item->url }}" target="_blank">
-                                        {{ $item->url }}
+                                        <i class="fas fa-external-link-alt"></i>
                                     </a>
                                 </td>
                                 <td>
@@ -106,6 +106,10 @@
                                         </a>
                                         <button class="btn bg-green-primary" onclick="openModalDelete('{{ $item->id }}')">
                                             Delete
+                                        </button>
+                                        {{-- copy url --}}
+                                        <button class="btn bg-green-primary" onclick="copyToClipboard('{{ $item->url }}')">
+                                            Copy URL
                                         </button>
                                     </div>
                                 </td>
@@ -165,5 +169,16 @@
     $('select[name="category_id"], select[name="type"]').on('change', function() {
         $('#formSearch').submit();
     });
+
+    // copy to clipboard
+    function copyToClipboard(text) {
+        var input = document.createElement('input');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        alert('URL copied to clipboard');
+    }
 </script>
 @endpush

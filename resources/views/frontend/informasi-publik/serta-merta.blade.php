@@ -5,7 +5,7 @@
     <div class="row justify-content-center my-5 px-2">
         <div class="col-md-10">
             <h3 class="text-center fw-bolder mb-3 text-green-primary">
-                Informasi Publik Berkala
+                Informasi Publik Serta Merta
             </h3>
             <div class="row">
                 @forelse ($groupedItems as $key => $items)
@@ -30,7 +30,7 @@
                     <div class="col-12 mb-4">
                         <h4 class="text-green">Data Belum Tersedia</h4>
                     </div>
-                @endforelse   
+                @endforelse
             </div>
         </div>
     </div>

@@ -147,7 +147,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('berkala/{id}', [BerkalaController::class, 'update']);
             Route::delete('berkala/{id}', [BerkalaController::class, 'destroy']);
 
-            // serta merta
+            Route::get('serta-merta', [SertaMertaController::class, 'index']);
+            Route::get('serta-merta/create', [SertaMertaController::class, 'create']);
+            Route::post('serta-merta', [SertaMertaController::class, 'store']);
+            Route::get('serta-merta/{id}/edit', [SertaMertaController::class, 'edit']);
+            Route::put('serta-merta/{id}', [SertaMertaController::class, 'update']);
+            Route::delete('serta-merta/{id}', [SertaMertaController::class, 'destroy']);
+
             Route::get('setiap-saat', [SetiapSaatController::class, 'index']);
             Route::get('setiap-saat/create', [SetiapSaatController::class, 'create']);
             Route::post('setiap-saat', [SetiapSaatController::class, 'store']);
