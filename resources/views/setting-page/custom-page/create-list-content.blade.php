@@ -349,7 +349,7 @@
             groupPindahSelect.append(`
                 <option value="list-item">Hapus dari group</option>
             `);
-        } else {
+        } else if (groups.length == 0) {
             groupPindahSelect.append(`
                 <option value="list-item" disabled>-- Tidak ada group --</option>
             `);

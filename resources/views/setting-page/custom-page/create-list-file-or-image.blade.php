@@ -487,9 +487,15 @@
         let groups = JSON.parse(sessionStorage.getItem('groups-create')) || [];
         let groupPindahSelect = $('#groupPindahSelect');
         groupPindahSelect.html('');
-        groupPindahSelect.append(`
-            <option value="list-item">Hapus dari group</option>
-        `);
+        if ($(`#${id}`).parent().parent().attr('id') !== 'list-item') {
+            groupPindahSelect.append(`
+                <option value="list-item">Hapus dari group</option>
+            `);
+        } else if (groups.length == 0) {
+            groupPindahSelect.append(`
+                <option value="list-item" disabled>-- Tidak ada group --</option>
+            `);
+        }
         groups.forEach(group => {
             groupPindahSelect.append(`
                 <option value="${group.id}">${group.label}</option>
