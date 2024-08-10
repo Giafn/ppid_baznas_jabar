@@ -7,7 +7,7 @@
             <h3 class="text-center fw-bolder mb-3 text-green-primary">
                 {{ ucwords($page->title) }}
             </h3>
-            <div class="content-wrapper">
+            <div class="content-wrapper ck-content">
                 {!! $page->content !!}
             </div>
         </div>

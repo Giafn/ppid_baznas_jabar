@@ -19,7 +19,9 @@
                     </div>
                 @endif
             </p>
-            {!! $page->content !!}
+            <div class="ck-content">
+                {!! $page->content !!}
+            </div>
         </div>
     </div>
 </div>

@@ -47,7 +47,7 @@
                     </div>
                 @endforeach
             </div>
-            <div>
+            <div class="ck-content">
                 {!! $page->content !!}
             </div>
         </div>

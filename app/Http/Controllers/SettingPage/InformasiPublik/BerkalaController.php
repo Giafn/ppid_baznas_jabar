@@ -26,6 +26,13 @@ class BerkalaController extends Controller
             ->orderBy('group', 'asc')
             ->paginate(10);
 
+        $items->map(function ($item) {
+            if ($item->type == 'page') {
+                $item->url = '/informasi-publik/' . $item->id . '/' . str_replace(' ', '-', $item->nama);
+            }
+            return $item;
+        });
+
         return view('setting-page.informasi-publik.berkala.index', compact('items'));
     }
 

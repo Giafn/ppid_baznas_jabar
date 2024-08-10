@@ -21,7 +21,9 @@
                     <img src="{{ $page->file_url }}" alt="baznas jabar" class="mx-auto" style="max-width: 80%">
                 @endif
             </p>
-            {!! $page->content !!}
+            <div class="ck-content">
+                {!! $page->content !!}
+            </div>
         </div>
     </div>
 </div>

@@ -24,13 +24,13 @@ class InformasiPublikController extends Controller
 
         $groupedItems = $items->groupBy('group');
 
-        return view('frontend.informasi-publik.berkala');
+        return view('frontend.informasi-publik.berkala', compact('groupedItems'));
     }
 
 
     public function view($id, $slug)
     {
-        $item = InformasiPublikItems::where('id', $id)->where('golongan', 'berkala')->with('page')->first();
+        $item = InformasiPublikItems::where('id', $id)->with('page')->first();
         if (!$item) {
             return abort(404);
         }
@@ -38,8 +38,8 @@ class InformasiPublikController extends Controller
             return redirect($this->generateUrl($item->id, str_replace(' ', '-', $item->nama)));
         }
 
-        $page = $item->page;
-
+        $item = $item->page;
+        // dd($page);
         return view('frontend.informasi-publik.show', compact('item'));
     }
 

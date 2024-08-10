@@ -34,7 +34,7 @@
                                     </button>
                                 </h2>
                                 <div id="colapse-{{ $item->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                    <div class="accordion-body ck-content">
                                         {!! $item->content !!}
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-3">
+            <div class="mt-3 ck-content">
                 {!! $page->content !!}
             </div>
         </div>

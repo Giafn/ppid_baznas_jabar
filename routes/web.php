@@ -43,6 +43,11 @@ Route::get('/formulir/{id}', [LayananInformasiController::class, 'formulir']);
 
 // informasi publik
 Route::get('informasi-publik/berkala', [InformasiPublikController::class, 'berkalaIndex']);
+Route::get('informasi-publik/setiap-saat', [InformasiPublikController::class, 'setiapSaatIndex']);
+Route::get('informasi-publik/serta-merta', [InformasiPublikController::class, 'sertaMertaIndex']);
+
+// view informasi publik
+Route::get('informasi-publik/{id}/{slug}', [InformasiPublikController::class, 'view']);
 
 Route::prefix('admin')->group(function () {
     Auth::routes([

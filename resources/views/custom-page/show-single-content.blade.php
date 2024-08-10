@@ -10,7 +10,9 @@
             <small>
                 <div class="text-center fw-bold mb-3">{{ $page->sub_title }}</div>
             </small>
-            {!! $page->content !!}
+            <div class="ck-content">
+                {!! $page->content !!}
+            </div>
         </div>
     </div>
 </div>

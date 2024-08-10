@@ -16,7 +16,9 @@
             <p class="text-center my-5">
                 <img src="{{ $data->image }}" alt="baznas jabar" class="mx-auto" style="max-width: 80%">
             </p>
-            {!! $data->content !!}
+            <div class="ck-content">
+                {!! $data->content !!}
+            </div>
         </div>
     </div>
 </div>
