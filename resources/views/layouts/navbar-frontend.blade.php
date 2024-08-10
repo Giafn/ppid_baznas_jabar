@@ -47,18 +47,10 @@
                 <ul class="dropdown-menu shadow">
                     <li class="dropend">
                         <a href="#" class="dropdown-item dropdown-toggle me-2" data-bs-toggle="dropdown">Formulir</a>
-                        <ul class="dropdown-menu shadow">
-                            <li><a class="dropdown-item" href=""> Permohonan Informasi</a></li>
-                            <li><a class="dropdown-item" href=""> Permohonan Kunjungan</a></li>
-                            <li><a class="dropdown-item" href=""> Pengajuan Keberatan</a></li>
-                            <li><a class="dropdown-item" href=""> Penilaian Layanan</a></li>
+                        <ul class="dropdown-menu shadow" id="formulirNavList">
                         </ul>
                     </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Rekomendasi Laz</a></li>
-                    <li><a class="dropdown-item" href="">Maklumat Pelayanan</a></li>
-                    <li><a class="dropdown-item" href="">Waktu Dan Biaya Layanan</a></li>
-                    <li><a class="dropdown-item" href="">Ramah Disabilitas</a></li>
+                    <li id="ListLayananNavDivider"><hr class="dropdown-divider"></li>
                 </ul>
             </li>
 

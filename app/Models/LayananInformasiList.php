@@ -22,6 +22,6 @@ class LayananInformasiList extends Model
     // relasi ke pages
     public function page()
     {
-        return $this->belongsTo(Pages::class, 'page_id');
+        return $this->belongsTo(CustomPage::class, 'page_id');
     }
 }

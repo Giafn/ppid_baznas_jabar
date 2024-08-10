@@ -100,5 +100,36 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     @stack('js')
+    <script>
+        // get items nav
+        // document ready
+        $(document).ready(function() {
+            // call ajax to /nav-items
+            $.ajax({
+                url: '/nav-items',
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    let formulirnav = response.formulir;
+                    let itemLayanan = response.item_layanans
+                    $.each(formulirnav, function(index, value) {
+                        $('#formulirNavList').append(`
+                            <li>
+                                <a class="dropdown-item" href="/formulir/${value.id}">${value.nama}</a>
+                            </li>
+                        `);
+                    });
+                    
+                    $.each(itemLayanan, function(index, value) {
+                        $('#ListLayananNavDivider').after(`
+                            <li>
+                                <a class="dropdown-item" href="${value.url}">${value.nama}</a>
+                            </li>
+                        `);
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

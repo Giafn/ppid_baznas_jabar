@@ -25,7 +25,6 @@ class AksesCepatController extends Controller
     public function edit($id)
     {
         $data = AksesCepats::with('page')->find($id);
-        // dd($data);
         return view('setting-page.landing-page.akses-cepat.edit', compact('data'));
     }
 
@@ -46,7 +45,7 @@ class AksesCepatController extends Controller
             ]);
         } else {
             $request->validate([
-                'page_id' => 'required|exists:custom_pages,id',
+                'page_id' => 'required|exists:custom_page,id',
             ]);
         }
         

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\GeneralPPIDConttroller;
+use App\Http\Controllers\ItemsOnNavbarController;
+use App\Http\Controllers\LayananInformasiController;
 use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
 use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
@@ -24,13 +26,19 @@ use App\Http\Controllers\UploadController;
 
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
+Route::get('/nav-items', [ItemsOnNavbarController::class, 'get']);
 
 Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show'])->name('custom-page.show');
+Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage']);
 
+// general ppid
 Route::get('/profile', [GeneralPPIDConttroller::class, 'profile']);
 Route::get('/visi-misi', [GeneralPPIDConttroller::class, 'visiMisi']);
 Route::get('/tugas-fungsi', [GeneralPPIDConttroller::class, 'tugasFungsi']);
 Route::get('/struktur-organisasi', [GeneralPPIDConttroller::class, 'strukturOrganisasi']);
+
+// formulir
+Route::get('/formulir/{id}', [LayananInformasiController::class, 'formulir']);
 
 Route::prefix('admin')->group(function () {
     Auth::routes([
@@ -40,17 +48,8 @@ Route::prefix('admin')->group(function () {
       ]);
 });
 
-// informasi frontend
-Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage']);
-
-
 Route::get('/home', function () {
     return redirect('/admin/home');
-});
-
-// testpage
-Route::get('/test', function () {
-    return view('frontend.test');
 });
 
 // group auth
