@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('akses_cepats', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('nama');
-            $table->enum('type', ['page', 'url']);
-            $table->string('url');
-            $table->foreignUuid('page_id')->nullable();
+        Schema::create('kantor_dan_layanan_ppid', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_kantor');
+            $table->string('alamat');
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('akses_cepats');
+        Schema::dropIfExists('kantor_dan_layanan_ppid');
     }
 };

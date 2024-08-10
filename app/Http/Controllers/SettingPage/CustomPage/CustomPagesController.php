@@ -547,4 +547,44 @@ class CustomPagesController extends Controller
             'url' => route('custom-page.show', [$page->id, Str::slug($page->title, '-')]),
         ]);
     }
+
+    // get item api
+    public function getItems(Request $request)
+    {
+        $validate = $request->validate([
+            'search' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:255',
+        ]);
+
+        $type = $request->type;
+        $search = $request->search;
+
+        $pages = CustomPage::when($search, function ($query) use ($search) {
+            $query->where('title', 'like', '%' . $search . '%');
+        })
+        ->when($type, function ($query) use ($type) {
+            $query->where('type_pages', $type);
+        })
+        ->with('category')
+        ->select('id', 'title', 'type_pages', 'category_page_id', 'created_at')
+        ->orderBy('created_at', 'desc')->take(10)->get();
+
+        // mapping type
+        $pages->map(function ($item) {
+            $item->type = $this->translateTypePage[$item->type_pages];
+            $item->url = route('custom-page.show', [$item->id, Str::slug($item->title, '-')]);
+            return $item;
+        });
+
+        return response()->json([
+            'data' => $pages,
+        ]);
+    }
+
+    public function getTypes()
+    {
+        return response()->json([
+            'data' => $this->translateTypePage,
+        ]);
+    }
 }

@@ -83,6 +83,11 @@ Route::group(['middleware' => 'auth'], function () {
     
             // route akses cepat setting
             Route::get('/akses-cepat-setting', [AksesCepatController::class, 'index']);
+            Route::get('/akses-cepat-setting/create', [AksesCepatController::class, 'create']);
+            Route::post('/akses-cepat-setting', [AksesCepatController::class, 'store']);
+            Route::get('/akses-cepat-setting/{id}/edit', [AksesCepatController::class, 'edit']);
+            Route::put('/akses-cepat-setting/{id}', [AksesCepatController::class, 'update']);
+            Route::delete('/akses-cepat-setting/{id}', [AksesCepatController::class, 'delete']);
 
             // route informasi setting
             Route::get('/informasi-setting', [InformasiController::class, 'index']);
@@ -161,6 +166,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/edit', [CustomPagesController::class, 'edit']);
             Route::put('{id}', [CustomPagesController::class, 'update']);
             Route::delete('{id}', [CustomPagesController::class, 'destroy']);
+            // api
+            Route::get('get', [CustomPagesController::class, 'getItems']);
+            Route::get('get-types', [CustomPagesController::class, 'getTypes']);
         });
 
     });

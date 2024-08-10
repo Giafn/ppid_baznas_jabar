@@ -40,12 +40,13 @@
             Akses cepat
         </h3>
         <div class="p-md-3 mb-2 d-flex align-items-center justify-content-center gap-2 flex-wrap">
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Webiste Baznas Pusat</a>
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Layanan Pembayaran Zakat</a>
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Publikasi Baznas</a>
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Pemberitahuan</a>
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Baznas Jawa Barat</a>
-            <a href="https://baznas.go.id/" class="btn btn-block bg-green-primary" role="button" aria-pressed="true">Laz Jawa Barat</a>
+            @forelse ($aksesCepat as $item)
+                <a href="{{ $item->url }}" class="btn bg-green-primary" target="_blank">{{ $item->nama }}</a>
+            @empty
+                <p>
+                    No data
+                </p>
+            @endforelse
         </div>
     </div>
 </div>
@@ -88,7 +89,7 @@
                   <div class="col-md-6 p-2">
                     {!! $video->video_url !!}
                     <h3 class="mb-2">
-                      {{ $video->title }} - <small class="text-muted">{{ $video->description }}</small>
+                      {{ $video->title }}<small class="text-muted">{{ $video->description != '-' && $video->description ? ' - ' . $video->description : '' }}</small>
                     </h3>
                     @if (!$video->video_url)
                     <div class="w-100 d-flex align-items-center justify-content-center m-2" style="height: 315px; border-radius: 10px; background-color: #f0f0f0">

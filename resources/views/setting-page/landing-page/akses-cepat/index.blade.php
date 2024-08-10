@@ -24,9 +24,9 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <button class="btn bg-green-primary" data-toggle="modal" data-target="#modalAdd">
+                <a class="btn bg-green-primary" href="/admin/landing-page-setting/akses-cepat-setting/create">
                     Add New Button
-                </button>
+                </a>
             </div>
             <div class="col-12">
                 <div class="table-responsive">
@@ -40,14 +40,55 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($data as $item)
+                                <tr>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->type }}</td>
+                                    <td>
+                                        <a href="{{ $item->url }}" target="_blank">{{ $item->url }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/landing-page-setting/akses-cepat-setting/{{ $item->id }}/edit" class="btn bg-green-primary">Edit</a>
+                                        <button onclick="openModalDelete(`{{ $item->id }}`)" class="btn bg-red-primary">Delete</button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Data not found</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <div class="mt-2 d-flex justify-content-center">
-            {{-- {{ $sliders->links() }} --}}
+            {{ $data->links() }}
         </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="modalDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDeleteLabel">Delete Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this data?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-red-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn bg-green-primary">Yes</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
@@ -57,21 +98,10 @@
 
 @push('scripts')
 <script>
-    function openModalEdit(id, url, posting) {
-        console.log(id, url, posting);
-        $('#modalEdit').modal('show');
-        $('#modalEditForm').attr('action', '/admin/landing-page-setting/slider-setting/' + id);
-        $('#url_edit').val(url);
-        
-        // convert date to yyyy-mm-dd
-        posting = new Date(posting);
-        posting = posting.toISOString().split('T')[0];
-        $('#posting_edit').val(posting);
-    }
 
     function openModalDelete(id) {
         $('#modalDelete').modal('show');
-        $('#modalDeleteForm').attr('action', '/admin/landing-page-setting/slider-setting/' + id);
+        $('#modalDeleteForm').attr('action', '/admin/landing-page-setting/akses-cepat-setting/' + id);
     }
 </script>
 @endpush
