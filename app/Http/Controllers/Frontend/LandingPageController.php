@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Models\AksesCepats;
 use App\Models\Berita;
+use App\Models\KantorLayanan;
 use App\Models\SlideLanding;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class LandingPageController extends Controller
 
         $aksesCepat = AksesCepats::all();
 
-        return view('frontend.index', compact('sliders', 'informasi', 'videos', 'aksesCepat'));
+        $kantorLayanan = KantorLayanan::all();
+
+        return view('frontend.index', compact('sliders', 'informasi', 'videos', 'aksesCepat', 'kantorLayanan'));
     }
 }

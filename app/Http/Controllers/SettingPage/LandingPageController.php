@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
 use App\Models\AksesCepats;
 use App\Models\Berita;
+use App\Models\KantorLayanan;
 use App\Models\SlideLanding;
 use App\Models\Video;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class LandingPageController extends Controller
 {
@@ -34,7 +32,8 @@ class LandingPageController extends Controller
         $videos = Video::orderBy('created_at', 'desc')->limit(4)->get();
 
         $aksesCepat = AksesCepats::all();
+        $kantorLayanan = KantorLayanan::all();
 
-        return view('setting-page.landing-page.index', compact('sliders', 'informasi', 'videos', 'aksesCepat'));
+        return view('setting-page.landing-page.index', compact('sliders', 'informasi', 'videos', 'aksesCepat', 'kantorLayanan'));
     }
 }

@@ -149,12 +149,20 @@
                         <div class="col-md-3 d-flex justify-content-center p-2">
                             <img src="{{ asset('image/icon.png') }}" alt="baznas jabar" height="200" class="mx-auto">
                         </div>
-                        <div class="p-2 col-md-3">
-                            <h5 class="fw-bold">Baznas Jawa Barat</h5>
-                            <p>Jl. Soekarno Hatta No. 178, Cibeureum, Kota Tasikmalaya, Jawa Barat 46196</p>
-                            <b>Telp. (0265) 339 000</b>
-                            <p>Email: baznas@email.com</p>
-                        </div>
+                        @forelse ($kantorLayanan as $item)
+                            <div class="col-md-3 p-2">
+                                <h5 class="fw-bold">{{ $item->nama_kantor }}</h5>
+                                <p>{{ $item->alamat }}</p>
+                                <b>Telp. {{ $item->telepon }}</b>
+                                <p>Email: {{ $item->email }}</p>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-warning" role="alert">
+                                    No data found
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
