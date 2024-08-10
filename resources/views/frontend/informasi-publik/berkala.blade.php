@@ -9,11 +9,11 @@
             </h3>
             <div class="row">
                 @foreach ($groupedItems as $key => $items)
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-4">
                         <h4 class="text-green-primary">{{ $key }}</h4>
                         <div class="list-group">
                             @foreach ($items as $item)
-                                <a href="{{ $item->url }}" class="list-group-item list-group-item-action my-1 fs-5">
+                                <a href="{{ $item->url }}" class="list-group-item list-group-item-action fs-5">
                                     <div class="d-flex justify-content-between">
                                         <div class="flex-grow-1">
                                             {{ $item->nama }}
