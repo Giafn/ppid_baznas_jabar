@@ -140,7 +140,7 @@
                 <h3 class="text-green-primary fw-bold text-center">
                     Layanan Informasi Publik
                 </h3>
-                <a href="" class="btn bg-green-primary">Edit Items</a>
+                <a href="/admin/landing-page-setting/kantor-layanan" class="btn bg-green-primary">Edit Items</a>
             </div>
 
             <div class="p-3 mb-2 row align-items-center justify-content-center">

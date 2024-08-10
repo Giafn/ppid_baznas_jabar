@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingPage\InformasiPublik\SertaMertaController;
 use App\Http\Controllers\SettingPage\InformasiPublik\SetiapSaatController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
 use App\Http\Controllers\SettingPage\LandingPage\InformasiController;
+use App\Http\Controllers\SettingPage\LandingPage\KantorLayananController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
@@ -103,6 +104,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('/video-setting/{id}', [VideoController::class, 'delete']);
             Route::put('/video-setting/{id}', [VideoController::class, 'update']);
 
+            // route kantor layanan setting
+            Route::get('/kantor-layanan', [KantorLayananController::class, 'index']);
+            Route::post('/kantor-layanan', [KantorLayananController::class, 'store']);
+            Route::put('/kantor-layanan/{id}', [KantorLayananController::class, 'update']);
+            Route::delete('/kantor-layanan/{id}', [KantorLayananController::class, 'delete']);
         });
 
         Route::prefix('general')->group(function () {
