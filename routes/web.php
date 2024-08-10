@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\GeneralPPIDConttroller;
+use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\ItemsOnNavbarController;
 use App\Http\Controllers\LayananInformasiController;
 use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
@@ -39,6 +40,9 @@ Route::get('/struktur-organisasi', [GeneralPPIDConttroller::class, 'strukturOrga
 
 // formulir
 Route::get('/formulir/{id}', [LayananInformasiController::class, 'formulir']);
+
+// informasi publik
+Route::get('informasi-publik/berkala', [InformasiPublikController::class, 'berkalaIndex']);
 
 Route::prefix('admin')->group(function () {
     Auth::routes([

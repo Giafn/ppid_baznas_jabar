@@ -34,8 +34,14 @@
                     <div class="mb-3">
                         <label for="group" class="form-label">Group</label>
                         <select class="form-select" id="group" name="group" required>
+                            @php
+                                $isFirst = true;
+                            @endphp
                             @foreach ($groups as $group)
-                                <option value="{{ $group }}" {{ old('group') == $group ? 'selected' : '' }}>{{ $group }}</option>
+                                <option value="{{ $group }}" {{ old('group') == $group || ( !old('group') && $isFirst )? 'selected' : '' }}>{{ $group }}</option>
+                                @php
+                                    $isFirst = false;
+                                @endphp
                             @endforeach
                         </select>
                         <input type="text" class="form-control {{ old('newGroup') ? '' : 'd-none' }}" id="newGroupInput" name="group" value="{{ old('group') }}" placeholder="Nama Group Baru">
@@ -96,12 +102,17 @@
 
     $('#newGroup').on('change', function() {
         if ($(this).is(':checked')) {
+            $('#newGroupInput').attr('name', 'group');
+            $('#group').attr('name', '');
             $('#newGroupInput').removeClass('d-none');
             $('#group').addClass('d-none');
         } else {
+            $('#newGroupInput').attr('name', '');
+            $('#group').attr('name', 'group');
             $('#newGroupInput').addClass('d-none');
             $('#group').removeClass('d-none');
         }
+        console.log($('#newGroupInput').attr('name'));
     });
 
     // Ensure the correct initial state
@@ -110,6 +121,9 @@
             $('#newGroupInput').removeClass('d-none');
             $('#group').hide();
         }
+
+        // trigger change to set initial state
+        $('#newGroup').change();
     });
 
     // onchange group isi input group

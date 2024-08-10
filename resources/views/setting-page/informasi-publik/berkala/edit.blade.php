@@ -92,9 +92,13 @@
         if ($(this).is(':checked')) {
             $('#newGroupInput').removeClass('d-none');
             $('#group').addClass('d-none');
+            $('#newGroupInput').attr('name', 'group');
+            $('#group').attr('name', '');
         } else {
             $('#newGroupInput').addClass('d-none');
             $('#group').removeClass('d-none');
+            $('#newGroupInput').attr('name', '');
+            $('#group').attr('name', 'group');
         }
     });
 
@@ -103,7 +107,12 @@
         if ($('#newGroup').is(':checked')) {
             $('#newGroupInput').removeClass('d-none');
             $('#group').addClass('d-none');
+            $('#newGroupInput').attr('name', 'group');
+            $('#group').attr('name', '');
         }
+
+        // trigger change group isi input group
+        $('#newGroup').trigger('change');
     });
 
     // onchange group isi input group
