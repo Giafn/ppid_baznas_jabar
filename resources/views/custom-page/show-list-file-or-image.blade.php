@@ -10,8 +10,10 @@
             <small>
                 <div class="text-center fw-bold mb-3">{{ $page->sub_title }}</div>
             </small>
-            <div class="ck-content my-3">
-                {!! $page->content !!}
+            <div class="my-3 w-100 row">
+                <div class="ck-content col-12">
+                    {!! $page->content !!}
+                </div>
             </div>
             <div class="row justify-content-center">
                 @php
