@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('berita', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->text('content');
+            $table->longtext('content');
             $table->string('image');
             $table->string('slug')->nullable();
             $table->timestamp('posting_at');

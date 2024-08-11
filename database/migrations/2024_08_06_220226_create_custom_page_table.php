@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('category_page_id')->nullable()->index();
             $table->string('title');
             $table->string('sub_title')->nullable();
-            $table->text('content')->nullable();
+            $table->longtext('content')->nullable();
             $table->string('type_pages');//'single_file_or_images', 'list_file_or_image', 'content', 'list_content', 'video'
             $table->string('file_url')->nullable();
             $table->text('additional_content')->nullable();

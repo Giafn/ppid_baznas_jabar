@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->text('content');
+            $table->longtext('content');
             $table->boolean('show_on_setting')->default(false);
             $table->timestamp('posting_at');
             $table->timestamps();

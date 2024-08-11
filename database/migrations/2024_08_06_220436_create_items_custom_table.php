@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('desc')->nullable();
             $table->string('type');//'image', 'file'
             $table->string('url')->nullable();
-            $table->text('content')->nullable();
+            $table->longtext('content')->nullable();
             $table->timestamps();
         });
     }

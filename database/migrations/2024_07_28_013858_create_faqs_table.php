@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('pertanyaan');
-            $table->text('content_jawaban');
+            $table->longtext('content_jawaban');
             $table->timestamp('posting_at');
             $table->timestamps();
         });
