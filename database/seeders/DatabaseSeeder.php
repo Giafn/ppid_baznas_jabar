@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 GeneralDataSeeder::class,
+                SettingSeeder::class,
             ]
         );
     }
