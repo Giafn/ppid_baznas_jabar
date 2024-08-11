@@ -89,30 +89,9 @@
                     Laporan
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="laporanNavList">
                     <a class="dropdown-item" href="">
                         Laporan Keuangan
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Laporan Keu Bulanan
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Laporan Kinerja
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Laporan Pengelolaan Zakat
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Statistik Zakat Nasional
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Laporan Layanan Informasi
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Layanan Visitasi
-                    </a>
-                    <a class="dropdown-item" href="">
-                        Laporan Survey Kepuasan
                     </a>
                 </div>
             </li>

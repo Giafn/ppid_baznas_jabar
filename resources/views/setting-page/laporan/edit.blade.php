@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Akses Cepat Setting - Create')
+@section('title', 'Laporan Setting - Edit')
 
 @php
     $itemBc = [
@@ -9,11 +9,11 @@
             'url' => '/admin/home',
         ],
         [
-            'name' =>'Items Layanan Informasi',
-            'url' => '/admin/layanan-informasi/list',
+            'name' =>'Laporan Setting',
+            'url' => '/admin/laporan',
         ],
         [
-            'name' =>'Create',
+            'name' =>'Edit',
             'url' => '',
         ]
     ];
@@ -24,29 +24,30 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/layanan-informasi/list" method="POST">
+                <form action="/admin/laporan/{{ $data->id }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
-                        <label for="title" class="form-label">Judul Layanan</label>
-                        <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') }}">
+                        <label for="title" class="form-label">Nama Laporan</label>
+                        <input type="text" class="form-control" id="title" name="title" required value="{{ old('title') ?? $data->nama }}">
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
                         <select class="form-select" id="type" name="type" required>
-                            <option value="url" {{ old('type') == 'url' ? 'selected' : '' }}>Url</option>
-                            <option value="halaman" {{ old('type') == 'halaman' ? 'selected' : '' }}>Halaman</option>
+                            <option value="url" {{ old('type') == 'url' || $data->type == 'url' ? 'selected' : '' }}>Url</option>
+                            <option value="halaman" {{ old('type') == 'halaman' || $data->type == 'page' ? 'selected' : '' }}>Halaman</option>
                         </select>
                     </div>
-                    <div class="mb-3 {{ old('type') != 'halaman' ? '' : 'd-none' }}" id="urlInput">
+                    <div class="mb-3 {{ old('type') != 'url' ? ($data->type == 'url' ? '' : 'd-none') : "" }}" id="urlInput">
                         <label for="url" class="form-label">Url</label>
-                        <input type="text" class="form-control" id="url" name="url" value="{{ old('url') }}">
+                        <input type="text" class="form-control" id="url" name="url" value="{{ old('url') ?? $data->url }}">
                     </div>
-                    <div class="mb-3 {{ old('type') == 'halaman' ? '' : 'd-none' }}" id="halamanInput">
+                    <div class="mb-3 {{ old('type') == 'halaman' || $data->type == 'page' ? '' : 'd-none' }}" id="halamanInput">
                         {{-- search pages berdasarkan nama dan type page --}}
                         <div class="row">
                             <div class="col-xl-7 py-1">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari halaman" id="searchPage" name="searchPage" value="{{ old('searchPage') }}">
+                                    <input type="text" class="form-control" placeholder="Cari halaman" id="searchPage" name="searchPage" value="{{ old('searchPage') ?? $data->nama }}">
                                     <button class="btn bg-green-primary" type="button" id="searchPageBtn">Cari</button>
                                 </div>
                             </div>
@@ -65,8 +66,8 @@
                             
                             
                         </div>
-                        <input type="hidden" name="page_id" id="pageId" value="{{ old('page_id') }}">
-                        <input type="hidden" name="url_page" id="urlPage" value="{{ old('url_page') }}">
+                        <input type="hidden" name="page_id" id="pageId" value="{{ old('page_id') ?? $data->page_id }}">
+                        <input type="hidden" name="url_page" id="urlPage" value="{{ old('url_page') ?? $data->url }}">
                     </div>
 
                     <button type="submit" class="btn bg-green-primary">Submit</button>
@@ -110,7 +111,7 @@
 
     // document ready get api
     $(document).ready(function() {
-        let search = '{{ old('searchPage') ?? '' }}'
+        let search = '{{ old('searchPage') ?? ($data->page ? $data->page->title : '') }}'
         let typePage = '{{ old('typePage') ?? '' }}'
         let kategori = '{{ old('kategoriPage') ?? '' }}'
 
@@ -154,7 +155,7 @@
         getPages(search, typePage, kategori);
     });
 
-    $(document).on('change', '#kategoriPage', function() {
+        $(document).on('change', '#kategoriPage', function() {
         let search = $('#searchPage').val();
         let typePage = $('#typePage').val();
         let kategori = $(this).val();
@@ -200,8 +201,7 @@
     });
 
     function getPages(search = null, typePage = null, kategori = null) {
-        sessionStorage.setItem('search-page-akses-cepat', search);
-        sessionStorage.setItem('typePage-akses-cepat', typePage);
+        console.log(search, typePage, kategori);
         $.ajax({
             url: '/admin/custom-page/get',
             type: 'GET',

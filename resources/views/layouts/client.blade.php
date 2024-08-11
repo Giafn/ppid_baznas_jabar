@@ -122,6 +122,7 @@
                     let formulirnav = response.formulir;
                     let itemLayanan = response.item_layanans
                     let regulasiNav = response.regulasi;
+                    let laporanNav = response.laporan;
                     $.each(formulirnav, function(index, value) {
                         isActived = urlNow.includes('formulir/' + value.id);
                         $('#formulirNavList').append(`
@@ -144,6 +145,16 @@
                     $.each(regulasiNav, function(index, value) {
                         isActived = urlNow.includes(value.url);
                         $('#regulasiNavList').append(`
+                            <li>
+                                <a class="dropdown-item ${isActived ? 'bg-green-primary' : ''}" href="${value.url}">${value.nama}</a>
+                            </li>
+                        `);
+                    });
+
+                    // laporanNavList
+                    $.each(laporanNav, function(index, value) {
+                        isActived = urlNow.includes(value.url);
+                        $('#laporanNavList').append(`
                             <li>
                                 <a class="dropdown-item ${isActived ? 'bg-green-primary' : ''}" href="${value.url}">${value.nama}</a>
                             </li>

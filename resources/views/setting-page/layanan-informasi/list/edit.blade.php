@@ -239,15 +239,7 @@
                         </div>
                     `);
 
-                    if (data.length == 10) {
-                        $('#halamanDiv').append(`
-                            <div class="col-12 py-1">
-                                <div class="alert alert-info" role="alert">
-                                    Data lebih dari 10, silahkan gunakan fitur search untuk mencari halaman yang diinginkan
-                                </div>
-                            </div>
-                        `);
-                    }
+                    
 
                     if (selectedId == item.id) {
                         $(`#page-${item.id}`).css('opacity', '1');
@@ -257,6 +249,15 @@
                         $(`#page-${item.id}`).css('font-weight', 'normal');
                     }
                 });
+                if (data.length == 10) {
+                    $('#halamanDiv').append(`
+                        <div class="col-12 py-1">
+                            <div class="alert alert-info" role="alert">
+                                Data lebih dari 10, silahkan gunakan fitur search untuk mencari halaman yang diinginkan
+                            </div>
+                        </div>
+                    `);
+                }
             }
         });
     }

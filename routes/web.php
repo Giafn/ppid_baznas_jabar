@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingPage\LandingPage\KantorLayananController;
 use App\Http\Controllers\SettingPage\LandingPage\SliderController;
 use App\Http\Controllers\SettingPage\LandingPage\VideoController;
 use App\Http\Controllers\SettingPage\LandingPageController;
+use App\Http\Controllers\SettingPage\LaporanController;
 use App\Http\Controllers\SettingPage\LayananInformasi\FormulirController;
 use App\Http\Controllers\SettingPage\LayananInformasi\ItemsController;
 use App\Http\Controllers\SettingPage\RegulasiController;
@@ -190,6 +191,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/edit', [RegulasiController::class, 'edit']);
             Route::put('{id}', [RegulasiController::class, 'update']);
             Route::delete('{id}', [RegulasiController::class, 'destroy']);
+        });
+
+        // laporan
+        Route::prefix('laporan')->group(function () {
+            Route::get('/', [LaporanController::class, 'index']);
+            Route::get('create', [LaporanController::class, 'create']);
+            Route::post('/', [LaporanController::class, 'store']);
+            Route::get('{id}/edit', [LaporanController::class, 'edit']);
+            Route::put('{id}', [LaporanController::class, 'update']);
+            Route::delete('{id}', [LaporanController::class, 'destroy']);
         });
 
     });
