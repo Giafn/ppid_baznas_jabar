@@ -50,9 +50,11 @@
                                 </td>
                                 <td>{{ $item->nama }}</td>
                                 <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    <a href="{{ $item->google_form_url }}" target="_blank">{{ $item->google_form_url }}</a>
+                                    <a href="{{ $item->google_form_url }}" target="_blank">
+                                        <icon class="fas fa-external-link-alt"></icon>
+                                    </a>
                                 </td>
-                                <td><a href="{{ $item->form_file_url }}" target="_blank">Lihat</a></td>
+                                <td><a href="{{ $item->form_file_url }}" target="_blank"><icon class="fas fa-external-link-alt"></icon></a></td>
                                 <td>
                                     <a href="/admin/layanan-informasi/formulir/{{ $item->id }}/edit" class="btn bg-green-primary">
                                         Edit

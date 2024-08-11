@@ -50,7 +50,11 @@
                                 </td>
                                 <td>{{ $item->group }}</td>
                                 <td>{{ $item->nama }}</td>
-                                <td><a href="{{ $item->url }}" target="_blank">Lihat</a></td>
+                                <td>
+                                    <a href="{{ $item->url }}" target="_blank">
+                                        <icon class="fas fa-external-link-alt"></icon>
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="/admin/informasi-publik/berkala/{{ $item->id }}/edit" class="btn bg-green-primary">
                                         Edit

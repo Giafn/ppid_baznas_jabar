@@ -45,7 +45,9 @@
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->type }}</td>
                                     <td>
-                                        <a href="{{ $item->url }}" target="_blank">{{ $item->url }}</a>
+                                        <a href="{{ $item->url }}" target="_blank">
+                                            <icon class="fas fa-external-link-alt"></icon>
+                                        </a>
                                     </td>
                                     <td>
                                         <a href="/admin/landing-page-setting/akses-cepat-setting/{{ $item->id }}/edit" class="btn bg-green-primary">Edit</a>
