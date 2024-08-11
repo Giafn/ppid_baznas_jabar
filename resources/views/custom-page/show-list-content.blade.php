@@ -10,6 +10,10 @@
             <small>
                 <div class="text-center fw-bold mb-3">{{ $page->sub_title }}</div>
             </small>
+
+            <div class="my-3 ck-content">
+                {!! $page->content !!}
+            </div>
             <div class="row justify-content-center">
                 @php
                     $tempGroup = '';   
@@ -42,9 +46,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-            <div class="mt-3 ck-content">
-                {!! $page->content !!}
             </div>
         </div>
     </div>
