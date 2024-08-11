@@ -118,7 +118,7 @@ return [
     // faq
     [
         'name' => 'FAQ',
-        'url' => 'admin/faq',
+        'url' => 'admin/faqs',
         'icon' => 'fas fa-question-circle',
         'code' => 'admin.faq',
     ],

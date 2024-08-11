@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemsOnNavbarController;
 use App\Http\Controllers\LayananInformasiController;
 use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
 use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
+use App\Http\Controllers\SettingPage\FaqsController;
 use App\Http\Controllers\SettingPage\General\ProfileController;
 use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\SettingPage\LayananInformasi\ItemsController;
 use App\Http\Controllers\SettingPage\RegulasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
-
+use App\Models\Faqs;
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
 Route::get('/nav-items', [ItemsOnNavbarController::class, 'get']);
@@ -202,6 +203,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('{id}', [LaporanController::class, 'update']);
             Route::delete('{id}', [LaporanController::class, 'destroy']);
         });
+
+        // faqs
+        Route::get('faqs', [FaqsController::class, 'index']);
+        Route::post('faqs', [FaqsController::class, 'store']);
+        Route::put('faqs/{id}', [FaqsController::class, 'update']);
+        Route::delete('faqs/{id}', [FaqsController::class, 'destroy']);
 
     });
 
