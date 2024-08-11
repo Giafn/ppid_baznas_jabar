@@ -13,10 +13,10 @@ class ItemsRequiredPerpageController extends Controller
 {
     public function get()
     {
-        $formulir = Formulir::select('id', 'nama')->get();
-        $itemsLayanan = LayananInformasiList::select('id', 'nama', 'url')->get();
-        $regulasi = Regulasi::select('id', 'nama', 'url')->get();
-        $laporan = LaporanList::select('id', 'nama', 'url')->get();
+        $formulir = Formulir::select('id', 'nama')->orderBy('created_at', 'asc')->get();
+        $itemsLayanan = LayananInformasiList::select('id', 'nama', 'url')->orderBy('created_at', 'asc')->get();'
+        $regulasi = Regulasi::select('id', 'nama', 'url')->orderBy('created_at', 'asc')->get();'
+        $laporan = LaporanList::select('id', 'nama', 'url')->orderBy('created_at', 'asc')->get();'
         $settings = Setting::where('key', 'informasi_kantor')->first();
         $infoKantor = json_decode($settings->value);
         $embedMap = Setting::where('key', 'embed_map')->first()->value;
