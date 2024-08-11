@@ -122,5 +122,13 @@ return [
         'icon' => 'fas fa-question-circle',
         'code' => 'admin.faq',
     ],
+    // setting
+    [
+        'name' => 'Setting',
+        'url' => '/admin/setting',
+        'icon' => 'fas fa-cogs',
+        'code' => 'admin.setting',
+    ],
+        
 
 ];

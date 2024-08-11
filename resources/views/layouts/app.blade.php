@@ -68,6 +68,11 @@
             color: black !important;
             background-color: rgba(255, 255, 255, 0.5) !important;
         }
+        #footer-frame iframe {
+            width: 100% !important;
+            height: 400px !important;
+            border-radius: 10px;
+        }
     </style>
     @stack('styles')
 </head>
@@ -110,7 +115,7 @@
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible" role="alert">
                            <div>
-                                <strong>Mohon Maaf!</strong> Terdapat kesalahan dalam inputan anda.
+                                <strong>Mohon Maaf!</strong> Terdapat kesalahan.
                                 <ol style="margin-bottom: 0px;">
                                     @foreach ($errors->all() as $error)
                                         <li style="list-style-type: disc; margin-left: 0px;">

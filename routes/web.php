@@ -3,8 +3,9 @@
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\GeneralPPIDConttroller;
 use App\Http\Controllers\InformasiPublikController;
-use App\Http\Controllers\ItemsOnNavbarController;
+use App\Http\Controllers\ItemsRequiredPerpageController;
 use App\Http\Controllers\LayananInformasiController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SettingPage\CustomPage\CustomPagesController;
 use App\Http\Controllers\SettingPage\CustomPage\KategoriPagesController;
 use App\Http\Controllers\SettingPage\FaqsController;
@@ -30,7 +31,7 @@ use App\Http\Controllers\UploadController;
 use App\Models\Faqs;
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
-Route::get('/nav-items', [ItemsOnNavbarController::class, 'get']);
+Route::get('/nav-items', [ItemsRequiredPerpageController::class, 'get']);
 
 Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show'])->name('custom-page.show');
 Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage']);
@@ -209,6 +210,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('faqs', [FaqsController::class, 'store']);
         Route::put('faqs/{id}', [FaqsController::class, 'update']);
         Route::delete('faqs/{id}', [FaqsController::class, 'destroy']);
+
+        // setting
+        Route::get('setting', [SettingController::class, 'index']);
+        Route::put('setting/update-credential', [SettingController::class, 'updateCredential']);
+        Route::put('setting/update-office', [SettingController::class, 'updateOffice']);
+        Route::put('setting/update-maps', [SettingController::class, 'updateMaps']);
 
     });
 

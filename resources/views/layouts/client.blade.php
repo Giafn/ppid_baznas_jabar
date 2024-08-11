@@ -88,10 +88,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="wrapper-text">
-                                    <h3 class="fw-bolder">PPID Baznas Jawa Barat</h3>
-                                    <p>Jl. Diponegoro No. 61, Bandung</p>
-                                    <p>Telepon: (022) 2033 2033</p>
-                                    <p>Email: test@gmail.com</p>
+                                    <h3 class="fw-bolder" id="namaKantorPPID"></h3>
+                                    <p id="alamatKantorPPID"></p>
+                                    <p>
+                                        Telepon: <span id="teleponKantorPPID"></span>
+                                    </p>
+                                    <p>
+                                        Email: <span id="emailKantorPPID"></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +103,6 @@
                 </div>
     
                 <div class="col-md-6" id="footer-frame">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.501917260859!2d107.62071178543265!3d-6.949966275130898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7b3c42c14c7%3A0x389214b28df6157b!2sBAZNAS%20Provinsi%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1721652926499!5m2!1sid!2sid" width="600" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -160,6 +163,14 @@
                             </li>
                         `);
                     });
+
+                    let kantor = response.info_kantor;
+                    let embed_map = response.embed_map;
+                    $('#namaKantorPPID').text(kantor.nama_kantor);
+                    $('#alamatKantorPPID').text(kantor.alamat_kantor);
+                    $('#teleponKantorPPID').text(kantor.telepon_kantor);
+                    $('#emailKantorPPID').text(kantor.email_kantor);
+                    $('#footer-frame').append(embed_map);
                 }
             });
         });
