@@ -45,7 +45,7 @@
                                     </td>
                                     <td>
                                         <a href="/admin/laporan/{{ $item->id }}/edit" class="btn bg-green-primary">Edit</a>
-                                        <button onclick="openModalDelete(`{{ $item->id }}`)" class="btn bg-red-primary">Delete</button>
+                                        <button onclick="openModalDelete(`{{ $item->id }}`)" class="btn bg-green-primary">Delete</button>
                                     </td>
                                 </tr>
                             @empty
@@ -80,7 +80,7 @@
                     Are you sure want to delete this data?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-red-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn bg-green-primary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn bg-green-primary">Yes</button>
                 </div>
             </div>

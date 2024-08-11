@@ -90,9 +90,6 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="laporanNavList">
-                    <a class="dropdown-item" href="">
-                        Laporan Keuangan
-                    </a>
                 </div>
             </li>
             <li class="nav-item">
