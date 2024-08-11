@@ -412,9 +412,9 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#" onclick="editItem('${label}', '${keterangan}', '${url}', '${type}', '${randomIdWithUUID}')">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="editItem('${label}', '${keterangan}', '${url}', '${type}', '${idBaru}')">Edit</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="deleteItem(this)">Delete</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="pindahGroup('${randomIdWithUUID}')">Pindah Group</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="pindahGroup('${idBaru}')">Pindah Group</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -447,9 +447,9 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="#" onclick="editItem('${label}', '${keterangan}', '${url}', '${type}', '${randomIdWithUUID}')">Edit</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="editItem('${label}', '${keterangan}', '${url}', '${type}', '${idBaru}')">Edit</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="deleteItem(this)">Delete</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="pindahGroup('${randomIdWithUUID}')">Pindah Group</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="pindahGroup('${idBaru}')">Pindah Group</a></li>
                                     </ul>
                                 </div>
                             </div>
