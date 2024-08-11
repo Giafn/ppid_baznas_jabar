@@ -13,7 +13,7 @@
                         <h4 class="text-green-primary">{{ $key }}</h4>
                         <div class="row">
                             @foreach ($items as $item)
-                                <div class="col-md-6">
+                                <div class="col-md-6 py-2">
                                     <a href="{{ $item->url }}" class="btn bg-green-primary fs-5 d-block">
                                         <div class="d-flex justify-content-between">
                                             <div class="flex-grow-1">
