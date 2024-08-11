@@ -25,7 +25,7 @@
                 </button>
                 <form action="/admin/faqs" method="GET">
                     <div class="input-group mt-2">
-                        <input type="text" class="form-control" placeholder="Cari Form" name="search" value="{{ request()->get('search') }}">
+                        <input type="text" class="form-control" placeholder="Cari" name="search" value="{{ request()->get('search') }}">
                         <button class="btn bg-green-primary" type="submit">Cari</button>
                     </div>
                 </form>
@@ -49,7 +49,9 @@
                                 </td>
                                 <td>{{ $item->pertanyaan }}</td>
                                 <td>
-                                    {{ $item->content_jawaban }}
+                                    <div class="text-truncate" style="max-width: 300px;">
+                                        {!! $item->content_jawaban !!}
+                                    </div>
                                 </td>
                                 <td>
                                     <button class="btn bg-green-primary" data-pertanyaan="{{ $item->pertanyaan }}" data-content_jawaban="{{ $item->content_jawaban }}" onclick="openModalEdit('{{ $item->id }}')" id="btnEdit-{{ $item->id }}">
@@ -78,7 +80,7 @@
 
 {{-- modal create --}}
 <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <form action="/admin/faqs" method="POST">
             @csrf
             <div class="modal-content">
@@ -107,7 +109,7 @@
 
 {{-- modal edit --}}
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <form id="modalEditForm" method="POST">
             @csrf
             @method('PUT')
@@ -162,23 +164,53 @@
 @endsection
 
 @push('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 @endpush
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
+    const summernoteSetting = {
+        height: 150,
+        callbacks: {
+            onImageUpload: function(files) {
+                // Prevent image upload
+                return false;
+            },
+            onMediaDelete: function(target) {
+                // Prevent media deletion
+                return false;
+            }
+        },
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link']]
+        ]
+    };
     function openModalDelete(id) {
         $('#modalDelete').modal('show');
         $('#modalDeleteForm').attr('action', '/admin/faqs/' + id);
     }
 
     function openModalEdit(id) {
+        $('#content_jawabanEdit').summernote('destroy');
         $('#modalEdit').modal('show');
         let pertanyaan = $('#btnEdit-' + id).data('pertanyaan');
         let content_jawaban = $('#btnEdit-' + id).data('content_jawaban');
         $('#modalEditForm').attr('action', '/admin/faqs/' + id);
         $('#pertanyaanEdit').val(pertanyaan);
         $('#content_jawabanEdit').val(content_jawaban);
-
+        $('#content_jawabanEdit').summernote(summernoteSetting);
     }
+    // document ready
+    $(document).ready(function() {
+        $('#content_jawaban').summernote(summernoteSetting);
+    });
 </script>
 @endpush
