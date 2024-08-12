@@ -93,7 +93,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('faq') ? 'fw-bold' : '' }}" href="">
+                <a class="nav-link {{ Request::is('faqs') ? 'fw-bold' : '' }}" href="/faqs">
                     FAQ
                 </a>
             </li>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FaqsController as ControllersFaqsController;
 use App\Http\Controllers\Frontend\LandingPageController as FrontendLandingPageController;
 use App\Http\Controllers\GeneralPPIDConttroller;
 use App\Http\Controllers\InformasiPublikController;
@@ -52,6 +53,9 @@ Route::get('informasi-publik/serta-merta', [InformasiPublikController::class, 's
 
 // view informasi publik
 Route::get('informasi-publik/{id}/{slug}', [InformasiPublikController::class, 'view']);
+
+// faqs
+Route::get('faqs', [ControllersFaqsController::class, 'index']);
 
 Route::prefix('admin')->group(function () {
     Auth::routes([
