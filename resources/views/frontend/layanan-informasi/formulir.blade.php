@@ -16,8 +16,14 @@
                     width="100%" height="700" id="previewForm" class=" mt-2"></iframe>
                 </div>
                 <div class="col-xl-5">
+                    <div class="alert alert-warning" role="alert">
+                        Jika Anda tidak dapat mengakses formulir di <span class="d-xl-inline d-none">Kiri</span><span class="d-xl-none d-inline">Atas</span>, Silahkan Klik Buka Form Dihalaman Baru ,atau download formulir PDF di bawah ini.
+                    </div>
+                    <a href="{{ $formulir->google_form_url }}" class="btn bg-green-primary w-100 mb-1" target="_blank">
+                        Buka Form Dihalaman Baru <i class="fas fa-external-link-alt ms-1"></i>
+                    </a>
                     <a href="{{ $formulir->form_file_url }}" class="btn bg-green-primary w-100 mb-1" download>
-                        Download Formulir
+                        Download Formulir PDF
                     </a>
                     <embed src="{{ $formulir->form_file_url }}" type="application/pdf" width="100%" height="500" id="previewForm" class=" mt-2">
                 </div>
