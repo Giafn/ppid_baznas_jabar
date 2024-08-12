@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-xl-5">
                     <div class="alert alert-warning" role="alert">
-                        Jika Anda tidak dapat mengakses formulir di <span class="d-xl-inline d-none">Kiri</span><span class="d-xl-none d-inline">Atas</span>, Silahkan Klik Buka Form Dihalaman Baru ,atau download formulir PDF di bawah ini.
+                        Jika Anda tidak dapat mengakses formulir di <span class="d-xl-inline d-none">Kiri</span><span class="d-xl-none d-inline">Atas</span>, Silahkan Klik Buka Form Dihalaman Baru.
                     </div>
                     <a href="{{ $formulir->google_form_url }}" class="btn bg-green-primary w-100 mb-1" target="_blank">
                         Buka Form Dihalaman Baru <i class="fas fa-external-link-alt ms-1"></i>
