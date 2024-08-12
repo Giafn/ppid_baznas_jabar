@@ -21,9 +21,6 @@
             $nowUrl = Request::url();
         @endphp
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('/') ? 'fw-bold' : '' }}" aria-current="page" href="/">Home</a>
-            </li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     PPID Baznas Jabar
