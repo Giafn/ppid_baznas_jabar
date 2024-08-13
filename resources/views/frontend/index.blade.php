@@ -8,7 +8,7 @@
             <a class="carousel-item {{ $key == 0 ? 'active' : '' }}" 
             href="{{ $slider->url }}" 
             target="_blank">
-            <div style="width: 100%; height: 700px; overflow: hidden;">
+            <div style="width: 100%; overflow: hidden;" class="autoheight">
                 <img src="{{ $slider->image_url }}" 
                     alt="{{ $slider->title ?? 'Slider Image' }}"
                     style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
@@ -159,9 +159,20 @@
         $(document).ready(function() {
             // buat carousel berjalan
             $('#bigCarousel').carousel({
-                interval: 10000
+                interval: 5000
             });
+            autoheight();
         });
+        /* ubah autoheigt sesuai dengan lebar layar perbandingan lebar*tinggl element = 10/3 jangan gunakan padding */
+        $(window).on('resize', function() {
+            autoheight();
+        });
+
+        function autoheight() {
+            var width = $(window).width();
+            var height = width * 3.7 / 10;
+            $('.autoheight').height(height);
+        }
     </script>
 @endpush
 

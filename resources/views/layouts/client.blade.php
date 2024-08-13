@@ -118,7 +118,6 @@
                 url: '/nav-items',
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
                     let urlNow = window.location.href;
                     let isActived = false;
 
