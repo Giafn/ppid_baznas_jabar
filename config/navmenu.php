@@ -108,6 +108,13 @@ return [
         'icon' => 'fas fa-book',
         'code' => 'admin.regulasi',
     ],
+    // tender
+    [
+        'name' => 'Tender',
+        'url' => 'admin/tender',
+        'icon' => 'fa-solid fa-handshake',
+        'code' => 'admin.tender',
+    ],
     // laporan
     [
         'name' => 'Laporan',

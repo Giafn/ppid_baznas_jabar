@@ -27,6 +27,8 @@ use App\Http\Controllers\SettingPage\LaporanController;
 use App\Http\Controllers\SettingPage\LayananInformasi\FormulirController;
 use App\Http\Controllers\SettingPage\LayananInformasi\ItemsController;
 use App\Http\Controllers\SettingPage\RegulasiController;
+use App\Http\Controllers\SettingPage\TenderController;
+use App\Http\Controllers\TenderController as ControllersTenderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Models\Faqs;
@@ -53,6 +55,10 @@ Route::get('informasi-publik/serta-merta', [InformasiPublikController::class, 's
 
 // view informasi publik
 Route::get('informasi-publik/{id}/{slug}', [InformasiPublikController::class, 'view']);
+
+// view tender
+Route::get('tender', [ControllersTenderController::class, 'index']);
+Route::get('tender/{id}', [ControllersTenderController::class, 'detail']);
 
 // faqs
 Route::get('faqs', [ControllersFaqsController::class, 'index']);
@@ -198,6 +204,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('{id}', [RegulasiController::class, 'update']);
             Route::delete('{id}', [RegulasiController::class, 'destroy']);
         });
+
+        // tender
+        Route::get('tender', [TenderController::class, 'index']);
+        Route::get('tender/{id}/edit', [TenderController::class, 'edit']);
+        Route::post('tender', [TenderController::class, 'store']);
+        Route::put('tender/{id}', [TenderController::class, 'update']);
+        Route::put('tender/{id}/status', [TenderController::class, 'updateStatus']);
+        Route::delete('tender/{id}', [TenderController::class, 'destroy']);
 
         // laporan
         Route::prefix('laporan')->group(function () {
