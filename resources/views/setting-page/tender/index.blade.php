@@ -104,7 +104,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" name="status">
+                        <select class="form-select" id="status" name="status" required>
                             <option value="1">Open</option>
                             <option value="0">Closed</option>
                         </select>
@@ -119,22 +119,22 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar">
+                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
                     </div>
                     <div class="mb-3">
                         <label for="url" class="form-label">Url</label>
-                        <input type="text" class="form-control" id="url" name="url">
+                        <input type="text" class="form-control" id="url" name="url" required>
                     </div>
                     {{-- tanggal mulai dan di tutup --}}
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-xl-6">
                                 <label for="tanggalMulai" class="form-label">Tanggal Mulai</label>
-                                <input type="date" class="form-control" id="tanggalMulai" name="tanggal_mulai">
+                                <input type="date" class="form-control" id="tanggalMulai" name="tanggal_mulai" required>
                             </div>
                             <div class="col-xl-6">
                                 <label for="tanggalTutup" class="form-label">Tanggal Tutup</label>
-                                <input type="date" class="form-control" id="tanggalTutup" name="tanggal_tutup">
+                                <input type="date" class="form-control" id="tanggalTutup" name="tanggal_tutup" required>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="statusEdit" class="form-label">Status</label>
-                        <select class="form-select" id="statusEdit" name="status">
+                        <select class="form-select" id="statusEdit" name="status" required>
                             <option value="1">Open</option>
                             <option value="0">Closed</option>
                         </select>
@@ -177,25 +177,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambarEdit" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambarEdit" name="gambar">
+                        <input type="file" class="form-control" id="gambarEdit" name="gambar" accept="image/*" required>
                         <div class="mt-2">
                             <img src="" alt="" id="gambarEditPreview" class="img-fluid">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="urlEdit" class="form-label">Url</label>
-                        <input type="text" class="form-control" id="urlEdit" name="url">
+                        <input type="text" class="form-control" id="urlEdit" name="url" required>
                     </div>
                     {{-- tanggal mulai dan di tutup --}}
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-xl-6">
                                 <label for="tanggalMulaiEdit" class="form-label">Tanggal Mulai</label>
-                                <input type="date" class="form-control" id="tanggalMulaiEdit" name="tanggal_mulai">
+                                <input type="date" class="form-control" id="tanggalMulaiEdit" name="tanggal_mulai" required>
                             </div>
                             <div class="col-xl-6">
                                 <label for="tanggalTutupEdit" class="form-label">Tanggal Tutup</label>
-                                <input type="date" class="form-control" id="tanggalTutupEdit" name="tanggal_tutup">
+                                <input type="date" class="form-control" id="tanggalTutupEdit" name="tanggal_tutup" required>
                             </div>
                         </div>
                     </div>
