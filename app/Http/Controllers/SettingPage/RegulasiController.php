@@ -104,7 +104,7 @@ class RegulasiController extends Controller
         return redirect('/admin/regulasi')->with('success', 'Data berhasil diubah');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             DB::beginTransaction();
