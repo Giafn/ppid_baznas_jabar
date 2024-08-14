@@ -25,7 +25,7 @@
                 </a>
                 <form action="/admin/informasi-publik/serta-merta" method="GET">
                     <div class="input-group mt-2">
-                        <input type="text" class="form-control" placeholder="Cari Form" name="search" value="{{ request()->get('search') }}">
+                        <input type="text" class="form-control" placeholder="Cari" name="search" value="{{ request()->get('search') }}">
                         <button class="btn bg-green-primary" type="submit">Cari</button>
                     </div>
                 </form>
