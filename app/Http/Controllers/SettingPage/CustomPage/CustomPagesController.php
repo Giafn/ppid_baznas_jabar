@@ -517,9 +517,9 @@ class CustomPagesController extends Controller
     {
         $page = CustomPage::findOrFail($id);
         $title = Str::slug($page->title, '-');
-        // if ($title != $dashedTitle) {
-        //     abort(404);
-        // }
+        if ($title != $dashedTitle) {
+            return redirect()->route('custom-page.show', [$id, $title]);
+        }
 
         if ($page->type_pages == 'single-file-or-image') {
             return view('custom-page.show-single-file-or-image', compact('page'));

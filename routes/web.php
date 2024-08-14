@@ -37,7 +37,7 @@ Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
 Route::get('/nav-items', [ItemsRequiredPerpageController::class, 'get']);
 
 Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show'])->name('custom-page.show');
-Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage']);
+Route::get('/informasi/{id}/{slug}', [InformasiController::class, 'showpage'])->name('informasi.show');
 
 // general ppid
 Route::get('/profile', [GeneralPPIDConttroller::class, 'profile']);

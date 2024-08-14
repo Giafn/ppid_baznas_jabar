@@ -153,7 +153,7 @@ class InformasiController extends Controller
     {
         $data = Berita::where('id', $id)->firstOrFail();
         if ($data->title != str_replace('-', ' ', $title)) {
-            abort(404);
+            return redirect()->route('informasi.show', ['id' => $id, 'title' => str_replace(' ', '-', $data->title)]);
         }
         return view('frontend.informasi.show', compact('data'));
     }
