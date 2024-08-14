@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Informasi Publik Serta Merta - Create')
+@section('title', 'Informasi Publik Setiap Saat - Create')
 
 @php
     $itemBc = [
@@ -9,12 +9,12 @@
             'url' => '/admin/home',
         ],
         [
-            'name' =>'Informasi Publik Serta Merta',
-            'url' => '/admin/informasi-publik/serta-merta',
+            'name' =>'Informasi Publik Setiap Saat',
+            'url' => '/admin/informasi-publik/setiap-saat',
         ],
         [
             'name' =>'Create',
-            'url' => '/admin/informasi-publik/serta-merta/create',
+            'url' => '/admin/informasi-publik/setiap-saat/create',
         ]
     ];
 @endphp
@@ -24,7 +24,7 @@
     <div class="card-body">
         <div class="row g-2">
             <div class="col-12 mb-2">
-                <form action="/admin/informasi-publik/serta-merta" method="POST" id="formWithEditor">
+                <form action="/admin/informasi-publik/setiap-saat" method="POST" id="formWithEditor">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul Informasi</label>
