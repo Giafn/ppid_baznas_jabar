@@ -63,12 +63,14 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/landing-page-setting/informasi-setting/{{ $item->id }}/edit" class="btn bg-green-primary">
-                                        Edit
-                                    </a>
-                                    <button onclick="openModalDelete('{{ $item->id }}')" class="btn bg-green-primary">
-                                        Delete
-                                    </button>
+                                    <div class="d-flex gap-1">
+                                        <a href="/admin/landing-page-setting/informasi-setting/{{ $item->id }}/edit" class="btn bg-green-primary">
+                                            Edit
+                                        </a>
+                                        <button onclick="openModalDelete('{{ $item->id }}')" class="btn bg-green-primary">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                             @empty
