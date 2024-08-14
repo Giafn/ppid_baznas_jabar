@@ -58,7 +58,9 @@
                                 <td>{{ $item->slug }}</td>
                                 <td>{{ date('d-m-Y H:i', strtotime($item->posting_at)) }}</td>
                                 <td class="text-break" style="max-width: 200px;">
-                                    {{ $item->url }}
+                                    <a href="{{ $item->url }}" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="/admin/landing-page-setting/informasi-setting/{{ $item->id }}/edit" class="btn bg-green-primary">
