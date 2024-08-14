@@ -60,13 +60,13 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/informasi-publik/berkala">
+                    <a class="dropdown-item {{ Request::is('informasi-publik/berkala') ? 'bg-green-primary' : '' }}" href="/informasi-publik/berkala">
                         Informasi Berkala
                     </a>
-                    <a class="dropdown-item" href="/informasi-publik/serta-merta">
+                    <a class="dropdown-item {{ Request::is('informasi-publik/serta-merta') ? 'bg-green-primary' : '' }}" href="/informasi-publik/serta-merta">
                         Informasi Serta Merta
                     </a>
-                    <a class="dropdown-item" href="/informasi-publik/setiap-saat">
+                    <a class="dropdown-item {{ Request::is('informasi-publik/setiap-saat') ? 'bg-green-primary' : '' }}" href="/informasi-publik/setiap-saat">
                         Informasi Setiap Saat
                     </a>
                 </div>
