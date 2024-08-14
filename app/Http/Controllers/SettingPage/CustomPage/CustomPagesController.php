@@ -46,6 +46,7 @@ class CustomPagesController extends Controller
             $query->where('type_pages', $type);
         })
         ->with('category')
+        ->orderBy('category_page_id', 'asc')
         ->orderBy('created_at', 'desc')->paginate(10);
 
         // mapping type
