@@ -152,8 +152,9 @@ class InformasiController extends Controller
     public function showpage($id, $title)
     {
         $data = Berita::where('id', $id)->firstOrFail();
-        if ($data->title != str_replace('-', ' ', $title)) {
-            return redirect()->route('informasi.show', ['id' => $id, 'slug' => str_replace(' ', '-', $data->title)]);
+        $dashedTitle = str_replace(' ', '-', $data->title);
+        if ($title != $dashedTitle) {
+            return redirect('/informasi/' . $id . '/' . $dashedTitle);
         }
         return view('frontend.informasi.show', compact('data'));
     }
