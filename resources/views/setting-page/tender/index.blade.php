@@ -177,7 +177,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambarEdit" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" id="gambarEdit" name="gambar" accept="image/*" required>
+                        <input type="file" class="form-control" id="gambarEdit" name="gambar" accept="image/*">
                         <div class="mt-2">
                             <img src="" alt="" id="gambarEditPreview" class="img-fluid">
                         </div>
