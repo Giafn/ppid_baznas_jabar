@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('general_content_lists', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama');
-            $table->foreignUuid('page_id')->constrained('pages', 'id');
+            $table->foreignUuid('page_id');
             $table->timestamps();
         });
     }

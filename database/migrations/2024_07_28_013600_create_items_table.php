@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('item_group_id')->constrained('items_groups', 'id');
+            $table->foreignUuid('item_group_id');
             $table->string('title');
             $table->string('sub_title');
             $table->text('mini_content');

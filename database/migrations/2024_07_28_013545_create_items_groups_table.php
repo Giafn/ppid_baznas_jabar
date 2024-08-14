@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('items_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('page_id')->constrained('pages', 'id');
+            $table->foreignUuid('page_id');
             $table->string('nama');
             $table->timestamps();
         });

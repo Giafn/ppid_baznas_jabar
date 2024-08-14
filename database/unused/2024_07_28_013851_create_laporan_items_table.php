@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporan_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('laporan_id')->constrained('laporans', 'id');
+            $table->foreignUuid('laporan_id');
             $table->string('title');
             $table->string('sub_title');
             $table->text('mini_content');

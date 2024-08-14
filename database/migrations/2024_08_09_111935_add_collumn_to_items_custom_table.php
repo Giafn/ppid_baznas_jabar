@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('items_custom', function (Blueprint $table) {
-            $table->foreignUuid('custom_page_id')->nullable()->constrained('custom_page')->onDelete('cascade')->after('id');
+            $table->foreignUuid('custom_page_id')->nullable()->after('id');
         });
     }
 
