@@ -14,18 +14,21 @@
             </small>
             <div class="row justify-content-center">
                 @forelse ($items as $item)
-                    <div class="col-12 py-1" {{ $item->status == 'open' ? '' : 'style= opacity:0.5' }}>
+                    @php
+                        $status = $item->status == 'open' ? (strtotime($item->tanggal_selesai) > strtotime(date('Y-m-d')) ? 'open' : 'closed') : 'closed';
+                    @endphp
+                    <div class="col-12 py-1" {{ $status == 'open' ? '' : 'style= opacity:0.5' }}>
                         <div class="p-3 shadow">
-                            <a {{ $item->status == 'open' ? 'href=' . $item->url  : '#' }} target="_blank">
+                            <a {{ $status == 'open' ? 'href=' . $item->url  : '#' }} target="_blank">
                                 <img src="{{ url( $item->gambar ) }}" class="img-fluid rounded" alt="{{ $item->nama }}">
                             </a>
                             <div class="mt-2 d-flex justify-content-between">
                                 <div>
-                                    <a {{ $item->status == 'open' ? 'href=""'  : '' }} class="fs-5 fw-bold text-green-primary {{ $item->status == 'open' ? 'detaiModalBtn' : '' }}" data-id="{{ $item->id }}">{{ $item->nama }}</a>
+                                    <a {{ $status == 'open' ? 'href=""'  : '' }} class="fs-5 fw-bold text-green-primary {{ $status == 'open' ? 'detaiModalBtn' : '' }}" data-id="{{ $item->id }}">{{ $item->nama }}</a>
                                     <h5 class="fw-bold text-green-primary">Dibuka Sampai : {{ date('d/m/Y', strtotime($item->tanggal_selesai)) }}</h5>
                                 </div>
                                 <div>
-                                    @if ($item->status == 'open')
+                                    @if ($status == 'open')
                                         <span class="badge bg-green-primary float-end me-2 fs-6">Open</span>
                                     @else
                                         <span class="badge bg-secondary float-end me-2 fs-6">Closed</span>
@@ -94,12 +97,7 @@
 @endsection
 
 @push('css')
-<style>
-    .page-item.active .page-link {
-        background-color: #0d6e09;
-        border-color: #0d6e09;
-    }
-</style>
+
 @endpush
 
 @push('js')

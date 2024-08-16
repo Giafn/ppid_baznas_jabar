@@ -18,11 +18,9 @@ class TenderController extends Controller
         $items = Tender::when($search, function ($query) use ($search) {
             $query->where('nama', 'like', '%' . $search . '%');
         })
-        ->where('tanggal_selesai', '>=', now())
         ->where('tanggal_mulai', '<=', now())
         ->orderBy('status', 'desc')
-        ->orderBy('tanggal_selesai', 'asc')
-        ->orderBy('created_at', 'desc')
+        ->orderBy('tanggal_selesai', 'desc')
         ->paginate(10);
         return view('tender.index', compact('items'));
     }
