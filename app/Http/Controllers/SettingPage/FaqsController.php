@@ -51,7 +51,7 @@ class FaqsController extends Controller
     {
         $request->validate([
             'pertanyaan' => 'required|string|max:255',
-            'content_jawaban' => 'nullable|string|max:255',
+            'content_jawaban' => 'nullable|string|max:65000',
         ]);
 
         try {
