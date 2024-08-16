@@ -75,7 +75,7 @@
                 </p>
             @endforelse
         </div>
-        @if ($informasi->count() > 2)
+        @if ($informasi->count() > 1)
         <div class="d-flex justify-content-center">
                 <a href="{{ route('berita') }}" class="btn bg-green-primary text-white">Lihat Semua</a>
         </div>
