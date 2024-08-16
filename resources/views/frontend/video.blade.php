@@ -7,7 +7,7 @@
             <h3 class="text-green-primary fw-bold text-center mb-5">
                 Video Baznas Jabar
             </h3>
-            <form action="{{ route('berita') }}" method="GET">
+            <form action="{{ route('video') }}" method="GET">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-8 col-lg-10 col-md-12">
