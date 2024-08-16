@@ -19,7 +19,7 @@
                 </div>
             </div>
         </form>
-        <div class="p-3 mb-2 d-flex align-items-center justify-content-center gap-3 flex-wrap">
+        <div class="p-3 mb-4 d-flex align-items-center justify-content-center gap-3 flex-wrap">
             @forelse ($informasi as $item)
                 <div class="card border-0 shadow" style="width: 30rem;">
                     <img src="{{ $item->image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover; object-position: center; width: 100%; height: 200px;">

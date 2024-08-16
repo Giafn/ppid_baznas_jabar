@@ -56,4 +56,18 @@ class LandingPageController extends Controller
 
         return view('frontend.berita', compact('informasi'));
     }
+
+    public function listVideo(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string',
+        ]);
+        $videos = Video::orderBy('created_at', 'desc')
+            ->when($request->search, function ($query, $search) {
+                return $query->where('title', 'like', "%$search%");
+            })
+            ->paginate(10);
+
+        return view('frontend.video', compact('videos'));
+    }
 }

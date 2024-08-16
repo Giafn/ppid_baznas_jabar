@@ -110,6 +110,11 @@
                   </div>
                 @endforelse
             </div>
+            @if ($videos->count() > 3)
+            <div class="d-flex justify-content-center">
+                <a href="{{ route('video') }}" class="btn bg-green-primary text-white">Lihat Semua</a>
+            </div>
+            @endif
         </div>
     </div>
 </div>
