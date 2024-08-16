@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('ppidbaznasjabar@2024'),
         ]);
 
-        $this->call(
-            [
-                GeneralDataSeeder::class,
-                SettingSeeder::class,
-            ]
-        );
+        // $this->call(
+        //     [
+        //         GeneralDataSeeder::class,
+        //         SettingSeeder::class,
+        //     ]
+        // );
     }
 }
