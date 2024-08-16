@@ -3,7 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="title" content="ppid.baznasjabar.org | PPID Baznas Provinsi Jawa Barat">
+    <meta name="description" content="PPID BAZNAS Jawa Barat">
+    <meta name="keywords" content="ppid, baznas, jawa barat">
+    <meta name="author" content="PPID BAZNAS Jawa Barat">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
