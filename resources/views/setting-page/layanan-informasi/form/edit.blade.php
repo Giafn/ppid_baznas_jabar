@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Formulir Setting - Create')
+@section('title', 'Formulir Setting - Edit')
 
 @php
     $itemBc = [
