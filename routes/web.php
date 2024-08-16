@@ -34,6 +34,7 @@ use App\Http\Controllers\UploadController;
 use App\Models\Faqs;
 
 Route::get('/', [FrontendLandingPageController::class, 'index'])->name('root');
+Route::get('/informasi', [FrontendLandingPageController::class, 'listBerita'])->name('berita');
 Route::get('/nav-items', [ItemsRequiredPerpageController::class, 'get']);
 
 Route::get('/page/{id}/{slug}', [CustomPagesController::class, 'show'])->name('custom-page.show');

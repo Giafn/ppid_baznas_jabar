@@ -74,6 +74,12 @@
             border-radius: 10px;
         }
     </style>
+    <style>
+        .page-item.active .page-link {
+            background-color: #0d6e09;
+            border-color: #0d6e09;
+        }
+    </style>
     @stack('styles')
 </head>
 

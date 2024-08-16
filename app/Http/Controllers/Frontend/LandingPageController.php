@@ -35,4 +35,25 @@ class LandingPageController extends Controller
 
         return view('frontend.index', compact('sliders', 'informasi', 'videos', 'aksesCepat', 'kantorLayanan'));
     }
+
+    public function listBerita(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string',
+        ]);
+
+        $informasi = Berita::orderBy('posting_at', 'desc')
+            ->where('posting_at', '<=', now())
+            ->when($request->search, function ($query, $search) {
+                return $query->where('title', 'like', "%$search%");
+            })
+            ->paginate(10);
+
+        $informasi->map(function ($item) {
+            $item->url = InformasiController::getUrlShow($item->id, $item->title);
+            return $item;
+        });
+
+        return view('frontend.berita', compact('informasi'));
+    }
 }

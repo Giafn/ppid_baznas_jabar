@@ -72,6 +72,12 @@
             background-color: #0d6e09 !important;
         }
     </style>
+    <style>
+        .page-item.active .page-link {
+            background-color: #0d6e09;
+            border-color: #0d6e09;
+        }
+    </style>
     @stack('css')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

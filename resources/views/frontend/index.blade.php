@@ -56,7 +56,7 @@
         <h3 class="text-green-primary fw-bold text-center">
             Informasi Terbaru
         </h3>
-        <div class="p-3 mb-2 d-flex align-items-center justify-content-center gap-3 flex-wrap">
+        <div class="p-3 mb-4 d-flex align-items-center justify-content-center gap-3 flex-wrap">
             @forelse ($informasi as $item)
                 <div class="card border-0 shadow" style="width: 30rem;">
                     <img src="{{ $item->image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover; object-position: center; width: 100%; height: 200px;">
@@ -75,6 +75,11 @@
                 </p>
             @endforelse
         </div>
+        @if ($informasi->count() > 2)
+        <div class="d-flex justify-content-center">
+                <a href="{{ route('berita') }}" class="btn bg-green-primary text-white">Lihat Semua</a>
+        </div>
+        @endif
     </div>
 </div>
 
