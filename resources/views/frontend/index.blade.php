@@ -169,7 +169,7 @@
         $(document).ready(function() {
             // buat carousel berjalan
             $('#bigCarousel').carousel({
-                interval: 2500
+                interval: 1800
             });
             autoheight();
         });

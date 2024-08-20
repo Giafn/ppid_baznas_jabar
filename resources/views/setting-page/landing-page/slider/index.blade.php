@@ -83,6 +83,7 @@
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control" id="image" name="image">
+                <small class="text-muted">Disaranan ukuran gambar rasio 16:7</small>
             </div>
             <div class="mb-3">
                 <label for="posting" class="form-label">Posting On</label>
@@ -117,6 +118,7 @@
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control" id="image_edit" name="image">
+                <small class="text-muted">Disaranan ukuran gambar rasio 16:7</small>
             </div>
             <div class="mb-3">
                 <label for="posting" class="form-label">Posting On</label>

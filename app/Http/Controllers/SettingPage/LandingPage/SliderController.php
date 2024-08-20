@@ -20,7 +20,7 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'url' => 'required|url',
+            'url' => 'nullable|url',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'posting' => 'required|date',
         ]);
@@ -36,7 +36,7 @@ class SliderController extends Controller
         try {
             DB::beginTransaction();
             $slide = new SlideLanding();
-            $slide->url = $request->url;
+            $slide->url = $request->url ?? '';
             $slide->image_url = '/storage/slider/' . $imageName;
             $slide->posting_at = $request->posting;
             $slide->save();
@@ -71,7 +71,7 @@ class SliderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'url' => 'required|url',
+            'url' => 'nullable|url',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'posting' => 'required|date',
         ]);
@@ -92,7 +92,7 @@ class SliderController extends Controller
 
             try {
                 DB::beginTransaction();
-                $slide->url = $request->url;
+                $slide->url = $request->url ?? '';
                 $slide->image_url = $imageName;
                 $slide->posting_at = $request->posting;
                 $slide->save();
