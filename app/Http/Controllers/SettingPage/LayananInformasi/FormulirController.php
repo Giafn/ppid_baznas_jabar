@@ -35,7 +35,7 @@ class FormulirController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
             'google_form_url' => 'required|string|max:255',
-            'form_file' => 'required|file|max:10240',
+            'form_file' => 'required|file|max:20480',
         ]);
 
         try {
@@ -81,7 +81,7 @@ class FormulirController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
             'google_form_url' => 'required|string|max:255',
-            'form_file' => 'nullable|file|max:10240',
+            'form_file' => 'nullable|file|max:20480',
         ]);
 
         try {

@@ -466,7 +466,7 @@ class CustomPagesController extends Controller
     private function additionalValidate($validate, $type)
     {
         if ($type == 'single-file-or-image') {
-            $validate['file'] = 'required|file|mimes:pdf,png,jpg,jpeg|max:10240';
+            $validate['file'] = 'required|file|mimes:pdf,png,jpg,jpeg|max:20480';
         } elseif ($type == 'single-video') {
             $validate['url'] = 'required|url';
         } elseif ($type == 'list-file-or-image') {
@@ -491,7 +491,7 @@ class CustomPagesController extends Controller
     private function additionalValidateUpdate($validate, $type)
     {
         if ($type == 'single-file-or-image') {
-            $validate['file'] = 'nullable|file|mimes:pdf,png,jpg,jpeg|max:10240';
+            $validate['file'] = 'nullable|file|mimes:pdf,png,jpg,jpeg|max:20480';
         } elseif ($type == 'single-video') {
             $validate['url'] = 'required|url';
         } elseif ($type == 'list-file-or-image') {
