@@ -84,7 +84,7 @@
             {{-- tender --}}
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('tender') ? 'fw-bold' : '' }}" href="/tender">
-                    Open Tender
+                    Tender Info
                 </a>
             </li>
 
