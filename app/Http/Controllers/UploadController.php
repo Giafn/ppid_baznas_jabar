@@ -12,7 +12,7 @@ class UploadController extends Controller
     {
         // Validasi file
         $request->validate([
-            'upload' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048'
+            'upload' => 'required|file|mimes:jpg,jpeg,png,gif|max:20480'
         ]);
 
         // Unggah file

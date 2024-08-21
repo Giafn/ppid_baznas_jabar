@@ -41,7 +41,7 @@ class InformasiController extends Controller
             'title' => 'required|max:255|string',
             'short_description' => 'required|max:255|string',
             'content' => 'required|min:10|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'publish_at' => 'required|date',
         ]);
 
@@ -86,7 +86,7 @@ class InformasiController extends Controller
             'title' => 'required|max:255|string',
             'short_description' => 'required|max:255|string',
             'content' => 'required|min:10|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'publish_at' => 'required|date',
         ]);
 
