@@ -14,7 +14,10 @@ class SettingController extends Controller
         $infoKantor = Setting::where('key', 'informasi_kantor')->first();
         $infoKantor = json_decode($infoKantor->value);
         $embedMap = Setting::where('key', 'embed_map')->first()->value;
-        return view('setting', compact('infoKantor', 'embedMap'));
+
+        $sosmed = Setting::where('key', 'sosial_media')->first()->value;
+        $sosmed = json_decode($sosmed);
+        return view('setting', compact('infoKantor', 'embedMap', 'sosmed'));
     }
 
     // update email / password
@@ -94,5 +97,34 @@ class SettingController extends Controller
             return redirect()->back()->with('error', 'Gagal mengubah data');
         }
     }
+
+    // update sosial media
+    public function updateSosmed(Request $request)
+    {
+        $request->validate([
+            'instagram' => 'nullable|url',
+            'facebook' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'whatsapp' => 'nullable|url',
+            'twitter' => 'nullable|url',
+        ]);
+
+        $sosmed = [
+            'instagram' => $request->instagram,
+            'facebook' => $request->facebook,
+            'youtube' => $request->youtube,
+            'whatsapp' => $request->whatsapp,
+            'twitter' => $request->twitter
+        ];
+        try {
+            Setting::where('key', 'sosial_media')->update([
+                'value' => json_encode($sosmed)
+            ]);
+            return redirect()->back()->with('success', 'Berhasil mengubah data');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengubah data');
+        }
+    }
+
 
 }

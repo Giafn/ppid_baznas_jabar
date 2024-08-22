@@ -236,6 +236,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('setting/update-credential', [SettingController::class, 'updateCredential']);
         Route::put('setting/update-office', [SettingController::class, 'updateOffice']);
         Route::put('setting/update-maps', [SettingController::class, 'updateMaps']);
+        Route::put('setting/update-social-media', [SettingController::class, 'updateSosmed']);
 
     });
 

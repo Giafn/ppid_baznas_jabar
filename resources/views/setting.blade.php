@@ -48,6 +48,39 @@
                         </div>
                     </form>
                 </div>
+                {{-- sosial media update instagram, facebook, youtube, whatsapp, twitter --}}
+                <div class="p-3 mt-3 rounded" style="border: 1px solid #e9ecef;">
+                    <h5 class="text-green-primary">Ubah Sosial Media <br><small>(*Kosongkan Bila Tidak Ingin Ditampilkan di footer webiste)</small></h5>
+                    <form action="/admin/setting/update-social-media" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <label for="instagram" class="form-label">Instagram</label>
+                                <input type="text" class="form-control" id="instagram" name="instagram" value="{{ old('instagram') ?? $sosmed->instagram }}">
+                            </div>
+                            <div class="col-12">
+                                <label for="facebook" class="form-label">Facebook</label>
+                                <input type="text" class="form-control" id="facebook" name="facebook" value="{{ old('facebook') ?? $sosmed->facebook }}">
+                            </div>
+                            <div class="col-12">
+                                <label for="youtube" class="form-label">Youtube</label>
+                                <input type="text" class="form-control" id="youtube" name="youtube" value="{{ old('youtube') ?? $sosmed->youtube }}">
+                            </div>
+                            <div class="col-12">
+                                <label for="whatsapp" class="form-label">Whatsapp</label>
+                                <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="{{ old('whatsapp') ?? $sosmed->whatsapp }}">
+                            </div>
+                            <div class="col-12">
+                                <label for="twitter" class="form-label">Twitter/X</label>
+                                <input type="text" class="form-control" id="twitter" name="twitter" value="{{ old('twitter') ?? $sosmed->twitter }}">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn bg-green-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="col-xl-7">
                 <div class="p-3 rounded" style="border: 1px solid #e9ecef;">

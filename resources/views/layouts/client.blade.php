@@ -100,15 +100,32 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="wrapper-text">
+                                <div class="wrapper-text mb-2">
                                     <h3 class="fw-bolder" id="namaKantorPPID"></h3>
                                     <p id="alamatKantorPPID"></p>
-                                    <p>
+                                    <span class="d-block">
                                         Telepon: <span id="teleponKantorPPID"></span>
-                                    </p>
-                                    <p>
+                                    </span>
+                                    <span class="d-block">
                                         Email: <span id="emailKantorPPID"></span>
-                                    </p>
+                                    </span>
+                                </div>
+                                <div class="wrapper-icon d-flex justify-content-start gap-2 mb-3">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="facebookSosmed">
+                                        <i class="fab fa-facebook fs-4"></i>
+                                    </a>
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="instagramSosmed">
+                                        <i class="fab fa-instagram fs-4"></i>
+                                    </a>
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="youtubeSosmed">
+                                        <i class="fab fa-youtube fs-4"></i>
+                                    </a>
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="whatsappSosmed">
+                                        <i class="fab fa-whatsapp fs-4"></i>
+                                    </a>
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="twitterSosmed">
+                                        <i class="fa-brands fa-x-twitter fs-4"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -183,6 +200,24 @@
                     $('#teleponKantorPPID').text(kantor.telepon_kantor);
                     $('#emailKantorPPID').text(kantor.email_kantor);
                     $('#footer-frame').append(embed_map);
+
+                    // social media
+                    let sosmed = response.sosmed;
+                    if (sosmed.facebook) {
+                        $('#facebookSosmed').attr('href', sosmed.facebook).removeClass('d-none');
+                    }
+                    if (sosmed.instagram) {
+                        $('#instagramSosmed').attr('href', sosmed.instagram).removeClass('d-none');
+                    }
+                    if (sosmed.youtube) {
+                        $('#youtubeSosmed').attr('href', sosmed.youtube).removeClass('d-none');
+                    }
+                    if (sosmed.whatsapp) {
+                        $('#whatsappSosmed').attr('href', sosmed.whatsapp).removeClass('d-none');
+                    }
+                    if (sosmed.twitter) {
+                        $('#twitterSosmed').attr('href', sosmed.twitter).removeClass('d-none');
+                    }
                 }
             });
         });

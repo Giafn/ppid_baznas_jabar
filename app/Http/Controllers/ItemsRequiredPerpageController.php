@@ -20,6 +20,8 @@ class ItemsRequiredPerpageController extends Controller
         $settings = Setting::where('key', 'informasi_kantor')->first();
         $infoKantor = json_decode($settings->value);
         $embedMap = Setting::where('key', 'embed_map')->first()->value;
+        $sosmed = Setting::where('key', 'sosial_media')->first()->value;
+        $sosmed = json_decode($sosmed);
 
         return response()->json([
             'formulir' => $formulir,
@@ -27,6 +29,7 @@ class ItemsRequiredPerpageController extends Controller
             'regulasi' => $regulasi,
             'laporan' => $laporan,
             'info_kantor' => $infoKantor,
+            'sosmed' => $sosmed,
             'embed_map' => $embedMap
         ]);
     }
