@@ -111,19 +111,19 @@
                                     </span>
                                 </div>
                                 <div class="wrapper-icon d-flex justify-content-start gap-2 mb-3">
-                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="facebookSosmed">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="facebookSosmed" target="_blank">
                                         <i class="fab fa-facebook fs-4"></i>
                                     </a>
-                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="instagramSosmed">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="instagramSosmed" target="_blank">
                                         <i class="fab fa-instagram fs-4"></i>
                                     </a>
-                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="youtubeSosmed">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="youtubeSosmed" target="_blank">
                                         <i class="fab fa-youtube fs-4"></i>
                                     </a>
-                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="whatsappSosmed">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="whatsappSosmed" target="_blank">
                                         <i class="fab fa-whatsapp fs-4"></i>
                                     </a>
-                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="twitterSosmed">
+                                    <a href="#" class="text-green-primary text-decoration-none d-flex justify-content-center align-items-center p-2 bg-white rounded-circle d-none" id="twitterSosmed" target="_blank">
                                         <i class="fa-brands fa-x-twitter fs-4"></i>
                                     </a>
                                 </div>
