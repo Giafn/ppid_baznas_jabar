@@ -100,7 +100,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="wrapper-text mb-2">
+                                <div class="wrapper-text mb-3">
                                     <h3 class="fw-bolder" id="namaKantorPPID"></h3>
                                     <p id="alamatKantorPPID"></p>
                                     <span class="d-block">
@@ -140,12 +140,9 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     @stack('js')
     <script>
-        // get items nav
-        // document ready
         $(document).ready(function() {
-            // call ajax to /nav-items
             $.ajax({
-                url: '/nav-items',
+                url: '/init-required-items',
                 type: 'GET',
                 success: function(response) {
                     let urlNow = window.location.href;
