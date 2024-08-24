@@ -79,7 +79,12 @@ return [
                 'name' => 'Setiap Saat',
                 'url' => 'admin/informasi-publik/setiap-saat',
                 'code' => 'admin.informasi-publik.setiap-saat'
-            ]
+            ],
+            [
+                'name' => 'Dikecualikan',
+                'url' => 'admin/informasi-publik/dikecualikan',
+                'code' => 'admin.informasi-publik.dikecualikan'
+            ],
         ]
     ],
     // custom page

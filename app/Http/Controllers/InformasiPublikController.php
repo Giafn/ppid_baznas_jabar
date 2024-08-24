@@ -65,6 +65,16 @@ class InformasiPublikController extends Controller
         return view('frontend.informasi-publik.serta-merta', compact('groupedItems'));
     }
 
+    public function dikecualikanIndex()
+    {
+        $items = InformasiPublikItems::where('golongan', 'kecualikan')
+        ->select('id', 'nama', 'url')
+        ->orderBy('created_at', 'desc')
+        ->orderBy('group', 'asc')
+        ->get();
+
+        return view('frontend.informasi-publik.dikecualikan', compact('items'));
+    }
 
     public function view($id, $slug)
     {

@@ -69,6 +69,9 @@
                     <a class="dropdown-item {{ Request::is('informasi-publik/setiap-saat') ? 'bg-green-primary' : '' }}" href="/informasi-publik/setiap-saat">
                         Informasi Setiap Saat
                     </a>
+                    <a class="dropdown-item {{ Request::is('informasi-publik/dikecualikan') ? 'bg-green-primary' : '' }}" href="/informasi-publik/dikecualikan">
+                        Informasi Dikecualikan
+                    </a>
                 </div>
             </li>
 

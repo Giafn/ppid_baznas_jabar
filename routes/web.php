@@ -15,6 +15,7 @@ use App\Http\Controllers\SettingPage\General\StrukturController;
 use App\Http\Controllers\SettingPage\General\TugasFungsiController;
 use App\Http\Controllers\SettingPage\General\VisiMisiController;
 use App\Http\Controllers\SettingPage\InformasiPublik\BerkalaController;
+use App\Http\Controllers\SettingPage\InformasiPublik\DikecualikanController;
 use App\Http\Controllers\SettingPage\InformasiPublik\SertaMertaController;
 use App\Http\Controllers\SettingPage\InformasiPublik\SetiapSaatController;
 use App\Http\Controllers\SettingPage\LandingPage\AksesCepatController;
@@ -54,6 +55,7 @@ Route::get('/formulir/{id}', [LayananInformasiController::class, 'formulir']);
 Route::get('informasi-publik/berkala', [InformasiPublikController::class, 'berkalaIndex']);
 Route::get('informasi-publik/setiap-saat', [InformasiPublikController::class, 'setiapSaatIndex']);
 Route::get('informasi-publik/serta-merta', [InformasiPublikController::class, 'sertaMertaIndex']);
+Route::get('informasi-publik/dikecualikan', [InformasiPublikController::class, 'dikecualikanIndex']);
 
 // view informasi publik
 Route::get('informasi-publik/{id}/{slug}', [InformasiPublikController::class, 'view']);
@@ -176,6 +178,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('setiap-saat/{id}/edit', [SetiapSaatController::class, 'edit']);
             Route::put('setiap-saat/{id}', [SetiapSaatController::class, 'update']);
             Route::delete('setiap-saat/{id}', [SetiapSaatController::class, 'destroy']);
+
+            // dikecualikan
+            Route::get('dikecualikan', [DikecualikanController::class, 'index']);
+            Route::post('dikecualikan', [DikecualikanController::class, 'store']);
+            Route::get('dikecualikan/{id}/edit', [DikecualikanController::class, 'edit']);
+            Route::put('dikecualikan/{id}', [DikecualikanController::class, 'update']);
+            Route::delete('dikecualikan/{id}', [DikecualikanController::class, 'destroy']);
         });
 
         Route::prefix('custom-page')->group(function () {
